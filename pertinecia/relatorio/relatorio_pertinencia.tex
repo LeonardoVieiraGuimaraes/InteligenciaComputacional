@@ -18,7 +18,7 @@
 Este relatório apresenta a implementação e análise de funções de pertinência, fuzzificação, operações fuzzy e relações fuzzy. As funções de pertinência são amplamente utilizadas em lógica fuzzy para representar graus de pertencimento de elementos a conjuntos fuzzy.
 
 \section{Funções de Pertinência}
-\subsection{Implementação de Funcões de Pertinência}
+\subsection{Implementação de Funções de Pertinência}
 
 As funções de pertinência implementadas incluem:
 
@@ -37,21 +37,7 @@ As funções de pertinência implementadas incluem:
     \item Retangular
 \end{itemize}
 
-Para a construção dos gráficos utilizando python utilizamos a função $plot_results$
-
-\begin{verbatim}
-def plot_results(x, y, params, type):
-    # Plotando a função
-    plt.figure(figsize=(8, 5))
-    plt.plot(x, y, label=f"{type.capitalize()} {params}")
-    plt.title(f"Função {type.capitalize()}")
-    plt.xlabel("x")
-    plt.ylabel("Grau de Pertinência")
-    plt.legend()
-    plt.grid()
-    plt.savefig(f'{output_dir}/{type}.png')
-    plt.show()
-\end{verbatim}
+Para a construção dos gráficos utilizando Python, utilizamos a função $plot_results$
     
 \subsubsection{Função Triangular}
 A função triangular é definida por três parâmetros $(a, b, c)$, onde:
@@ -69,27 +55,6 @@ A fórmula é dada por:
 0, & \text{caso contrário.}
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def triangular(x, a, b, c):
-    if a <= x < b:
-        return (x - a) / (b - a)
-    elif b <= x < c:
-        return (c - x) / (c - b)
-    else:
-        return 0
-
-# Exemplo de plotagem para a função triangular
-a, b, c = 5, 10, 15  # Parâmetros da função triangular
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [triangular(val, a, b, c) for val in x]
-
-# Plotando a função triangular
-plot_results(x, y, [a, b, c], "triangular")
-
-\end{verbatim}
 
 \begin{figure}[H]
     \centering
@@ -113,29 +78,6 @@ A fórmula é:
 0, & \text{caso contrário.}
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def trapezoidal(x, a, b, c, d):
-    if a <= x < b:
-        return (x - a) / (b - a)
-    elif b <= x <= c:
-        return 1
-    elif c < x <= d:
-        return (d - x) / (d - c)
-    else:
-        return 0
-
-# Exemplo de plotagem para a função trapezoidal
-a, b, c, d = 5, 10, 15, 20  # Parâmetros da função trapezoidal
-x = np.linspace(0, 25, 100)  # Valores de x no intervalo [0, 25]
-
-# Calcula os graus de pertinência
-y = [trapezoidal(val, a, b, c, d) for val in x]
-
-# Plotando a função trapezoidal
-plot_results(x, y, [a, b, c, d], "trapezoidal")
-
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/trapezoidal.png}
@@ -152,23 +94,6 @@ A fórmula é:
 \[
 \mu(x) = e^{-\frac{1}{2} \left( \frac{x - c}{\sigma} \right)^2}.
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def gaussian(x, c, sigma):
-    return np.exp(-0.5 * ((x - c) / sigma) ** 2)
-
-
-# Exemplo de uso
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-c = 10  # Centro da curva (onde a pertinência é máxima)
-sigma = 3  # Largura da curva
-
-# Calcula os graus de pertinência
-y = [gaussian(val, c, sigma) for val in x]
-
-# Plotando a função gaussiana
-plot_results(x, y, [c, sigma], "gaussian")
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/gaussian.png}
@@ -185,21 +110,6 @@ A fórmula é:
 \[
 \mu(x) = \frac{1}{1 + e^{-a(x - c)}}.
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def sigmoidal(x, a, c):
-    return 1 / (1 + np.exp(-a * (x - c)))
-
-# Exemplo de plotagem para a função sigmoidal
-a, c = 1, 10  # Parâmetros da função sigmoidal
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [sigmoidal(val, a, c) for val in x]
-
-# Plotando a função sigmoidal
-plot_results(x, y, [a, c], "sigmoidal")
-\end{verbatim}
 
 \begin{figure}[H]
     \centering
@@ -218,21 +128,6 @@ A fórmula é:
 \[
 \mu(x) = \frac{1}{1 + \left|\frac{x - c}{a}\right|^{2b}}.
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def bell_function(x, a, b, c):
-    return 1 / (1 + abs((x - c) / a) ** (2 * b))
-# Exemplo de plotagem para a função Bell
-a, b, c = 2, 4, 10  # Parâmetros da função Bell
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [bell_function(val, a, b, c) for val in x]
-
-# Plotando a função Bell
-plot_results(x, y, [a, b, c], "bell")
-
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/bell.png}
@@ -254,27 +149,6 @@ A fórmula é:
 1, & \text{se } x \geq b.
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def s_function(x, a, b):
-    if x <= a:
-        return 0
-    elif a < x < b:
-        return 2 * ((x - a) / (b - a)) ** 2
-    elif x >= b:
-        return 1
-
-# Exemplo de plotagem para a função S
-a, b = 5, 15  # Parâmetros da função S
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [s_function(val, a, b) for val in x]
-
-# Plotando a função S
-plot_results(x, y, [a, b], "s")
-
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/s.png}
@@ -296,28 +170,6 @@ A fórmula é:
 0, & \text{se } x \geq b.
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def z_function(x, a, b):
-    if x <= a:
-        return 1
-    elif a < x < b:
-        return 1 - 2 * ((x - a) / (b - a)) ** 2
-    else:
-        return 0
-        
-# Exemplo de plotagem para a função Z
-a, b = 5, 15  # Parâmetros da função Z
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [z_function(val, a, b) for val in x]
-
-# Plotando a função Z
-plot_results(x, y, [a, b], "z")
-
-
-\end{verbatim}
 
 \subsubsection{Função Cauchy}
 A função Cauchy é definida por dois parâmetros $(c, \gamma)$, onde:
@@ -329,22 +181,6 @@ A fórmula é:
 \[
 \mu(x) = \frac{1}{1 + \left(\frac{x - c}{\gamma}\right)^2}.
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def cauchy_function(x, c, gamma):
-    return 1 / (1 + ((x - c) / gamma) ** 2)
-
-# Exemplo de plotagem para a função Cauchy
-c, gamma = 10, 3  # Parâmetros da função Cauchy
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [cauchy_function(val, c, gamma) for val in x]
-
-# Plotando a função Cauchy
-plot_results(x, y, [c, gamma], "cauchy")
-
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/cauchy.png}
@@ -366,26 +202,6 @@ e^{-\frac{1}{2} \left( \frac{x - c}{\sigma_1} \right)^2}, & \text{se } x \leq c,
 e^{-\frac{1}{2} \left( \frac{x - c}{\sigma_2} \right)^2}, & \text{se } x > c.
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def double_gaussian(x, c, sigma1, sigma2):
-    if x <= c:
-        return np.exp(-0.5 * ((x - c) / sigma1) ** 2)
-    else:
-        return np.exp(-0.5 * ((x - c) / sigma2) ** 2)
-
-# Exemplo de plotagem para a função Gaussiana Dupla
-c1, sigma1 = 8, 2  # Parâmetros da primeira gaussiana
-c2, sigma2 = 14, 3  # Parâmetros da segunda gaussiana
-x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
-
-# Calcula os graus de pertinência
-y = [double_gaussian(val, c1, sigma1, c2, sigma2) for val in x]
-
-# Plotando a função Gaussiana Dupla
-plot_results(x, y, [c1, sigma1, c2, sigma2], "double_gaussian")
-
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/double_gaussian.png}
@@ -406,25 +222,6 @@ A fórmula é:
 0, & \text{caso contrário.}
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-def rectangular(x, a, b):
-    if a <= x <= b:
-        return 1
-    else:
-        return 0
-
-# Exemplo de plotagem para a função Retangular
-a, b = 3, 7  # Parâmetros da função Retangular
-x = np.linspace(0, 10, 100)  # Valores de x no intervalo [0, 10]
-
-# Calcula os graus de pertinência
-y = [rectangular_function(val, a, b) for val in x]
-
-# Plotando a função Retangular
-plot_results(x, y, [a, b], "rectangular")
-
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/rectangular.png}
@@ -445,26 +242,6 @@ A fórmula é:
 \log_b(x - a + 1), & \text{se } x > a.
 \end{cases}
 \]
-O código Python correspondente é:
-\begin{verbatim}
-import math
-
-def logarithmic_function(x, a, b):
-    if x <= a:
-        return 0
-    else:
-        return math.log(x - a + 1, b)
-
-# Exemplo de plotagem para a função Logarítmica
-a, b = 2, 1  # Parâmetros da função Logarítmica
-x = np.linspace(0.1, 10, 100)  # Valores de x no intervalo [0.1, 10] (evitando zero)
-
-# Calcula os graus de pertinência
-y = [logarithmic_function(val, a, b) for val in x]
-
-# Plotando a função Logarítmica
-plot_results(x, y, [a, b], "logarithmic")
-\end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/logarithmic.png}
@@ -473,592 +250,874 @@ plot_results(x, y, [a, b], "logarithmic")
 
 
 \subsection{Fuzzificação e Análise Comparativa}
+
 Para a fuzzificação, escolhemos uma variável de entrada com universo de discurso definido e particionamos o domínio em funções de pertinência uniformemente espaçadas. A seguir, apresentamos os resultados para duas amostras distintas.
 
-Para as variáveis de entrada definir um universo de estudo como segue, particionado esse domínio em quatro funções de pertinência uniformemente espaçadas. 
+Para as variáveis de entrada, definimos um universo de estudo como segue, particionando esse domínio em quatro funções de pertinência uniformemente espaçadas:
 
-\begin{itemize}
-    \item **Frio**: Representa temperaturas baixas, variando de $0$ a aproximadamente $25$ graus.
-    \item **Morno**: Temperatura intermediária, abrangendo valores entre $20$ e $50$ graus.
-    \item **Quente**: Engloba valores de temperatura entre $45$ e $75$ graus.
-    \item **Muito Quente**: Abrange temperaturas elevadas, variando de $70$ a $100$ graus.
-\end{itemize}
+\begin{table}[H]
+\centering
+\caption{Categorias de Temperatura e Intervalos}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo de Temperatura (°C)} \\ \hline
+Muito Frio            & $0$ a $20$                            \\ \hline
+Frio                  & $20$ a $40$                           \\ \hline
+Morno                 & $40$ a $60$                           \\ \hline
+Quente                & $60$ a $80$                           \\ \hline
+Muito Quente          & $80$ a $100$                          \\ \hline
+\end{tabular}
+\end{table}
 
-Para realizar o espaçamento fizemos o algoritmo que se segue onde retorna os parametros: 
+\subsection{Fuzzificação com Funções Triangulares}
 
+\subsection{Fuzzificação com Funções Triangulares}
 
-\begin{verbatim}
-def generate_params(X, types, n):
-    centers = np.linspace(X[0], X[1], n)  # Centros uniformemente distribuídos
-    step = (X[1] - X[0]) / (n - 1) if n > 1 else (X[1] - X[0])  # Espaçamento entre os centros
-    params = []
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-    for i, t in enumerate(types):
-        if t == 'gaussian':
-            sigma = step / 2  # Sigma proporcional ao espaçamento
-            params.append([centers[i], sigma])
-        elif t == 'triangular':
-            a = max(X[0], centers[i] - step)  # Início da base
-            b = centers[i]                   # Pico
-            c = min(X[1], centers[i] + step)  # Fim da base
-            params.append([a, b, c])
-        elif t == 'trapezoidal':
-            a = max(X[0], centers[i] - step)  # Início da base
-            b = max(X[0], centers[i] - step / 2)  # Início do topo
-            c = min(X[1], centers[i] + step / 2)  # Fim do topo
-            d = min(X[1], centers[i] + step)  # Fim da base
-            params.append([a, b, c, d])
-        elif t == 'sigmoidal':
-            a = 1  # Inclinação padrão
-            c = centers[i]  # Centro
-            params.append([a, c])
-        elif t == 'bell':
-            a = step / 2  # Largura do sino
-            b = 2  # Inclinação padrão
-            c = centers[i]  # Centro
-            params.append([a, b, c])
-        elif t == 'z':
-            a = max(X[0], centers[i] - step)  # Início do decaimento
-            b = centers[i]  # Fim do decaimento
-            params.append([a, b])
-        elif t == 's':
-            a = centers[i]  # Início do crescimento
-            b = min(X[1], centers[i] + step)  # Fim do crescimento
-            params.append([a, b])
-       
-        elif t == 'cauchy':
-            c = centers[i]  # Centro
-            gamma = step / 2  # Largura
-            params.append([c, gamma])
-        elif t == 'double_gaussian':
-            c1 = max(X[0], centers[i] - step / 2)  # Centro da primeira gaussiana
-            sigma1 = step / 4  # Largura da primeira gaussiana
-            c2 = min(X[1], centers[i] + step / 2)  # Centro da segunda gaussiana
-            sigma2 = step / 4  # Largura da segunda gaussiana
-            params.append([c1, sigma1, c2, sigma2])
-        elif t == 'retangular':
-            a = max(X[0], centers[i] - step / 2)  # Início do intervalo
-            b = min(X[1], centers[i] + step / 2)  # Fim do intervalo
-            params.append([a, b])
-        elif t == 'linear':  # Adicionando a função linear
-            a = max(X[0], centers[i] - step)  # Início da base
-            b = min(X[1], centers[i] + step)  # Fim da base
-            params.append([a, b])
-        else:
-            raise ValueError(f"Tipo de função de pertinência'{t}' não suportado!")
-    
-    return params
-\end{verbatim}
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0, 25.0]$        & $[0, 0]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 25.0, 50.0]$       & $[0.99, 0.0]$              \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 50.0, 75.0]$      & $[0.01, 0.01]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 75.0, 100.0]$     & $[0.0, 0.99]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[0, 0]$                   \\ \hline
+\end{tabular}
+\end{table}
 
-
-Outra função e para calcular o graus de pertinência para cada atributo, nesse algortmo esolhemos as funções de pertinência relacionadas a seção 2. 
-
-\begin{verbatim}
-### Função Membership
-def calculate_membership(dominio, types, params):
-    x = np.linspace(dominio[0], dominio[1], 100)  # Gera os valores de x no domínio
-    results = []
-    for func_type, func_params in zip(types, params):
-        
-        # Calcula os graus de pertinência com base no tipo de função
-        if func_type == 'linear':
-            results.append([linear_function(val, *func_params) for val in x])  
-        elif func_type == 'triangular':
-            results.append([triangular(val, *func_params) for val in x])
-        elif func_type == 'trapezoidal':
-            results.append([trapezoidal(val, *func_params) for val in x])
-        elif func_type == 'gaussian':
-            results.append([gaussian(val, *func_params) for val in x])
-        elif func_type == 'sigmoidal':
-            results.append([sigmoidal(val, *func_params) for val in x])
-        elif func_type == 'z':
-            results.append([z_function(val, *func_params) for val in x])
-        elif func_type == 's':
-            results.append([s_function(val, *func_params) for val in x])
-        elif func_type == 'pi':
-            results.append([pi_function(val, *func_params) for val in x])
-        elif func_type == 'bell':
-            results.append([bell_function(val, *func_params) for val in x])
-        elif func_type == 'singleton':
-            results.append([singleton_function(val, *func_params) for val in x])
-        elif func_type == 'cauchy':
-            results.append([cauchy_function(val, *func_params) for val in x])
-        elif func_type == 'double_gaussian':
-            results.append([double_gaussian(val, *func_params) for val in x])
-        elif func_type == 'retangular':
-            results.append([rectangular_function(val, *func_params) for val in x])
-        elif func_type == 'logaritmica':
-            results.append([logarithmic_function(val, *func_params) for val in x])
-        else:
-            raise ValueError(f"Tipo de função desconhecido: {func_type}")
-
-    return x, results
-\end{verbatim}
-
-
-Para a lotagem dos graficos usamos a função 
-\begin{verbatim}
-def plot_membership_with_samples(x, results, labels, samples, title, activations):
-    plt.figure(figsize=(10, 6))
-    for j, sample in enumerate(samples):
-            # Adiciona uma linha vertical para cada amostra
-            random_color = np.random.rand(3,)
-            plt.axvline(sample, color=random_color, linestyle='--', alpha=0.7, label=f"Sample: {sample}")
-    for i, result in enumerate(results):
-        # Plota a função de pertinência com o rótulo correspondente
-        plt.plot(x, result, label=f"{labels[i]}")
-        for j, sample in enumerate(samples):
-           
-            # Pega o grau de ativação correspondente
-            activation = activations[i][j]
-            # Adiciona um ponto no gráfico para destacar a ativação
-            random_color = np.random.rand(3,)
-            plt.scatter(sample, activation, color=random_color, 
-                        label=f"Sample {sample}: {activation:.2f}")
-
-    # Configurações do gráfico
-    plt.title(title)
-    plt.xlabel("x")
-    plt.ylabel("Grau de Pertinência")
-    plt.legend(loc="upper right", bbox_to_anchor=(1.3, 1), title="Funções Fuzzy")
-    plt.grid()
-    plt.tight_layout()
-    plt.savefig(f'{output_dir}/{title.replace("- ", "").lower().replace(" ", "_")}_fuzzificado.png')  # Salva o gráfico
-    plt.show()
-\end{verbatim}
-
-Por fim construir a função fuzificação 
-\begin{verbatim}
-    def fuzzificacao(n, type, dominio, samples, labels, liguistica):
-    # Número de funções de pertinência para cada atributo
-    types = [type] * n
-
-    # Geração dos parâmetros para cada tipo de função
-    params = generate_params(dominio, types, n)
-
-    for i in range(n):
-        v = dominio[1] - dominio[0]  # Tamanho do intervalo
-        p = v / n  # Espaçamento correto entre os pontos
-        intervalo = [round(dominio[0] + p * i, 2), round(dominio[0] + p * (i + 1), 2)]
-        parametros_formatados = [float(round(val, 2)) for val in params[i]]
-
-
-        print(f'{labels[i]}: {liguistica} - {intervalo} - Parâmetros: {parametros_formatados}')
-    # Cálculo dos graus de pertinência para cada atributo
-    x, results = calculate_membership(dominio, types, params)
-    # Cálculo do grau de ativação para cada amostra
-    activations = []
-    for i, result in enumerate(results):
-        sample_activations = []
-        for sample in samples:
-            # Encontra o índice mais próximo do valor da amostra no domínio
-            idx = np.abs(x - sample).argmin()
-            activation = result[idx]
-            sample_activations.append(activation)
-        activations.append(sample_activations)
-
-    # Imprime as ativações calculadas com melhor formatação
-    print(f"\nAtivações para o tipo {type}:")
-    print(f"Samples: {samples}")
-    for i, sample_activations in enumerate(activations):
-         # Arredonda os valores para duas casas decimais
-        rounded_activations = np.round(sample_activations, 2)
-        print(f"{labels[i]}: {rounded_activations.tolist()}")
-
-    # Plotagem das funções de pertinência para o atributo com as amostras
-    plot_membership_with_samples(
-        x, results, labels, samples, f"Funções de Pertinência - {type}", activations
-    )
-
-\end{verbatim}
-
-com todas as função feitas definir o exemplo: 
-
-\begin{verbatim}
-    # Definição do universo de discurso
-    dominio = (0, 100)  # Intervalo do universo de discurso
-    samples = [25, 75]  # Amostras para fuzzificação
-    n = 5
-    linguistica = 'temperatura'
-    funcao_pertinecia = [
-        'triangular', 'trapezoidal', 'gaussian', 'sigmoidal', 'bell', 's', 'z', 'cauchy', 'double_gaussian', 'retangular', 'linear'
-    ]
-    
-    labels = ['Muito Firo', 'Frio', 'Morno', 'Quente', 'Muito quente']
-    
-    for type in funcao_pertinecia:
-        
-        fuzzificacao(n, type  , dominio, samples, [labels[i] for i in range(n)], linguistica)
-    
-    
-\end{verbatim}
-
-dominio = (0, 100) 
-samples = [25, 75]
-
-
-\subsubsection{Função Triangular}
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 0.0, 25.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 25.0, 50.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 50.0, 75.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 75.0, 100.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 100.0, 100.0]
-
-Ativações para o tipo triangular:
-Samples: [25, 75]
-Muito Firo: [0, 0]
-Frio: [0.99, 0.0]
-Morno: [0.01, 0.01]
-Quente: [0.0, 0.99]
-Muito quente: [0, 0]
-
+A seguir, apresentamos o gráfico das funções de pertinência triangulares e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_fuzzificado.png}
-    \caption{Funções de pertinência triangulares e graus de ativação.}
+    \caption{Funções de Pertinência Triangulares para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsubsection{Função Trapezoidal}
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 0.0, 12.5, 25.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 12.5, 37.5, 50.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 37.5, 62.5, 75.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 62.5, 87.5, 100.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 87.5, 100.0, 100.0]
+\subsection{Fuzzificação com Funções Trapezoidais}
 
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
+
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}               & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0, 12.5, 25.0]$         & $[0, 0]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 12.5, 37.5, 50.0]$        & $[1, 0]$                   \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 37.5, 62.5, 75.0]$       & $[0.02, 0.02]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 62.5, 87.5, 100.0]$      & $[0, 1]$                   \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 87.5, 100.0, 100.0]$     & $[0, 0]$                   \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência trapezoidais e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_trapezoidal_fuzzificado.png}
-    \caption{Funções de pertinência trapezoidais e graus de ativação.}
+    \caption{Funções de Pertinência Trapezoidais para a variável \textbf{Temperatura}.}
 \end{figure}
 
-Ativações para o tipo trapezoidal:
-Samples: [25, 75]
-Muito Firo: [0, 0]
-Frio: [1, 0]
-Morno: [0.02, 0.02]
-Quente: [0, 1]
-Muito quente: [0, 0]
 
-\subsubsection{Função Gaussiana}
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 12.5]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 12.5]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 12.5]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 12.5]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 12.5]
+\subsection{Fuzzificação com Funções Gaussianas}
+
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
+
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 12.5]$             & $[0.13, 0.0]$              \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[25.0, 12.5]$            & $[1.0, 0.0]$               \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[50.0, 12.5]$            & $[0.14, 0.14]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[75.0, 12.5]$            & $[0.0, 1.0]$               \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[100.0, 12.5]$           & $[0.0, 0.13]$              \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência gaussianas e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_gaussian_fuzzificado.png}
-    \caption{Funções de pertinência gaussianas e graus de ativação.}
+    \caption{Funções de Pertinência Gaussianas para a variável \textbf{Temperatura}.}
 \end{figure}
 
-Samples: [25, 75]
-Muito Firo: [0.13, 0.0]
-Frio: [1.0, 0.0]
-Morno: [0.14, 0.14]
-Quente: [0.0, 1.0]
-Muito quente: [0.0, 0.13]
+\subsection{Fuzzificação com Funções Sigmoidais}
 
-\subsubsection{Função Sigmoidal}
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [1.0, 0.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [1.0, 25.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [1.0, 50.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [1.0, 75.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [1.0, 100.0]
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[1.0, 0.0]$              & $[1.0, 1.0]$               \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[1.0, 25.0]$             & $[0.56, 1.0]$             \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[1.0, 50.0]$             & $[0.0, 1.0]$              \\ \hline
+Quente                & $[60.0, 80.0]$         & $[1.0, 75.0]$             & $[0.0, 0.44]$             \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[1.0, 100.0]$            & $[0.0, 0.0]$              \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência sigmoidais e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_sigmoidal_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência Sigmoidais para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
 
-Ativações para o tipo sigmoidal:
-Samples: [25, 75]
-Muito Firo: [1.0, 1.0]
-Frio: [0.56, 1.0]
-Morno: [0.0, 1.0]
-Quente: [0.0, 0.44]
-Muito quente: [0.0, 0.0]
+\subsection{Fuzzificação com Funções Bell}
 
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-\subsubsection{Função Bell}
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[12.5, 2.0, 0.0]$        & $[0.06, 0.0]$              \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[12.5, 2.0, 25.0]$       & $[1.0, 0.0]$               \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[12.5, 2.0, 50.0]$       & $[0.06, 0.06]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[12.5, 2.0, 75.0]$       & $[0.0, 1.0]$               \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[12.5, 2.0, 100.0]$      & $[0.0, 0.06]$              \\ \hline
+\end{tabular}
+\end{table}
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [12.5, 2.0, 0.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [12.5, 2.0, 25.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [12.5, 2.0, 50.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [12.5, 2.0, 75.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [12.5, 2.0, 100.0]
+A seguir, apresentamos o gráfico das funções de pertinência Bell e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_bell_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência Bell para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
 
-Ativações para o tipo bell:
-Samples: [25, 75]
-Muito Firo: [0.06, 0.0]
-Frio: [1.0, 0.0]
-Morno: [0.06, 0.06]
-Quente: [0.0, 1.0]
-Muito quente: [0.0, 0.06]
+\subsection{Fuzzificação com Funções S}
 
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-\subsubsection{Função S}
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 25.0]$             & $[1, 1]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[25.0, 50.0]$            & $[0.0, 1.0]$               \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[50.0, 75.0]$            & $[0.0, 1.96]$              \\ \hline
+Quente                & $[60.0, 80.0]$         & $[75.0, 100.0]$           & $[0, 0]$                   \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[100.0, 100.0]$          & $[0, 0]$                   \\ \hline
+\end{tabular}
+\end{table}
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 25.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 50.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 75.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 100.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 100.0]
-
-
-Quente: [0, 0]
-Muito quente: [0, 0]
+A seguir, apresentamos o gráfico das funções de pertinência S e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_s_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência S para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
 
-Ativações para o tipo s:
-Samples: [25, 75]
-Muito Firo: [1, 1]
-Frio: [0.0, 1.0]
-Morno: [0.0, 1.96]
+\subsection{Fuzzificação com Funções Z}
 
-\subsubsection{Função S}
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 25.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 50.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 75.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 100.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 100.0]
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0]$              & $[0, 0]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 25.0]$             & $[0, 0]$                   \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 50.0]$            & $[1.0, 0.0]$               \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 75.0]$            & $[1.0, -0.96]$             \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0]$           & $[1, 1]$                   \\ \hline
+\end{tabular}
+\end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_s_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
-\end{figure}
-Ativações para o tipo gaussian:
-
-Ativações para o tipo s:
-Samples: [25, 75]
-Muito Firo: [1, 1]
-Frio: [0.0, 1.0]
-Morno: [0.0, 1.96]
-Quente: [0, 0]
-Muito quente: [0, 0]
-
-\subsubsection{Função Z}
-
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 0.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 25.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 50.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 75.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 100.0]
+A seguir, apresentamos o gráfico das funções de pertinência Z e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_z_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência Z para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
 
-Ativações para o tipo z:
-Samples: [25, 75]
-Muito Firo: [0, 0]
-Frio: [0, 0]
-Morno: [1.0, 0.0]
-Quente: [1.0, -0.96]
-Muito quente: [1, 1]
+\subsection{Fuzzificação com Funções Pi}
 
-\subsubsection{Função Cauchy}
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 12.5]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 12.5]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 12.5]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 12.5]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 12.5]
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0, 25.0]$        & $[0, 0]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 25.0, 50.0]$       & $[1.0, 0.0]$               \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 50.0, 75.0]$      & $[0.0, -0.96]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 75.0, 100.0]$     & $[0.0, 1.96]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[0, 0]$                   \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência Pi e suas ativações:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_pi_fuzzificado.png}
+    \caption{Funções de Pertinência Pi para a variável \textbf{Temperatura}.}
+\end{figure}
+
+\subsection{Fuzzificação com Funções Singleton}
+
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
+
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0]$                   & $[0, 0]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[25.0]$                  & $[0, 0]$                   \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[50.0]$                  & $[0, 0]$                   \\ \hline
+Quente                & $[60.0, 80.0]$         & $[75.0]$                  & $[0, 0]$                   \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[100.0]$                 & $[0, 0]$                   \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência Singleton e suas ativações:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_singleton_fuzzificado.png}
+    \caption{Funções de Pertinência Singleton para a variável \textbf{Temperatura}.}
+\end{figure}
+\subsection{Fuzzificação com Funções Cauchy}
+
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
+
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações (Cauchy)}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 12.5]$             & $[0.2, 0.03]$              \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[25.0, 12.5]$            & $[1.0, 0.06]$              \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[50.0, 12.5]$            & $[0.2, 0.2]$               \\ \hline
+Quente                & $[60.0, 80.0]$         & $[75.0, 12.5]$            & $[0.06, 1.0]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[100.0, 12.5]$           & $[0.03, 0.2]$              \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência Cauchy e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_cauchy_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência Cauchy para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
 
-Ativações para o tipo cauchy:
-Samples: [25, 75]
-Muito Firo: [0.2, 0.03]
-Frio: [1.0, 0.06]
-Morno: [0.2, 0.2]
-Quente: [0.06, 1.0]
-Muito quente: [0.03, 0.2]
+\subsection{Fuzzificação com Funções Double Gaussian}
 
-\subsubsection{Função Gaussiana Dupla}
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 6.25, 12.5, 6.25]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [12.5, 6.25, 37.5, 6.25]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [37.5, 6.25, 62.5, 6.25]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [62.5, 6.25, 87.5, 6.25]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [87.5, 6.25, 100.0, 6.25]
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações (Double Gaussian)}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}               & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 6.25, 12.5, 6.25]$         & $[0.12, 0.0]$              \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[12.5, 6.25, 37.5, 6.25]$        & $[0.15, 0.0]$              \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[37.5, 6.25, 62.5, 6.25]$        & $[0.15, 0.15]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[62.5, 6.25, 87.5, 6.25]$        & $[0.0, 0.15]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[87.5, 6.25, 100.0, 6.25]$       & $[0.0, 0.12]$              \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência Double Gaussian e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_double_gaussian_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência Double Gaussian para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
 
-Ativações para o tipo double gaussian:
-Samples: [25, 75]
-Muito Firo: [0.12, 0.0]
-Frio: [0.15, 0.0]
-Morno: [0.15, 0.15]
-Quente: [0.0, 0.15]
-Muito quente: [0.0, 0.12]
+\subsection{Fuzzificação com Funções Logarítmicas}
 
-\subsubsection{Função Retangular}
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 12.5]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [12.5, 37.5]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [37.5, 62.5]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [62.5, 87.5]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [87.5, 100.0]
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações (Logarítmica)}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[2.0, 1.0]$              & $[1, 1]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[2.0, 1.0]$              & $[1, 1]$                   \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[2.0, 1.0]$              & $[1, 1]$                   \\ \hline
+Quente                & $[60.0, 80.0]$         & $[2.0, 1.0]$              & $[1, 1]$                   \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[2.0, 1.0]$              & $[1, 1]$                   \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência Logarítmicas e suas ativações:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_logaritmica_fuzzificado.png}
+    \caption{Funções de Pertinência Logarítmicas para a variável \textbf{Temperatura}.}
+\end{figure}
+
+\subsection{Fuzzificação com Funções Retangulares}
+
+Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
+
+\begin{table}[H]
+\centering
+\caption{Conjuntos Fuzzy, Intervalos, Parâmetros e Ativações (Retangular)}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 12.5]$             & $[0, 0]$                   \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[12.5, 37.5]$            & $[1, 0]$                   \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[37.5, 62.5]$            & $[0, 0]$                   \\ \hline
+Quente                & $[60.0, 80.0]$         & $[62.5, 87.5]$            & $[0, 1]$                   \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[87.5, 100.0]$           & $[0, 0]$                   \\ \hline
+\end{tabular}
+\end{table}
+
+A seguir, apresentamos o gráfico das funções de pertinência Retangulares e suas ativações:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_retangular_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \caption{Funções de Pertinência Retangulares para a variável \textbf{Temperatura}.}
 \end{figure}
-Ativações para o tipo gaussian:
+\section{Análise Comparativa das Funções de Pertinência}
 
-Ativações para o tipo retangular:
-Samples: [25, 75]
-Muito Firo: [0, 0]
-Frio: [1, 0]
-Morno: [0, 0]
-Quente: [0, 1]
-Muito quente: [0, 0]
+Nesta seção, analisamos os resultados obtidos para as diferentes funções de pertinência aplicadas à variável linguística \textbf{Temperatura}. A análise considera como o grau de ativação varia entre as funções e identifica quais apresentam maior suavidade ou sensibilidade às variações no domínio.
 
-\subsubsection{Função Linear}
+\subsection{Variação do Grau de Ativação}
 
-Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 25.0]
-Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 50.0]
-Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 75.0]
-Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 100.0]
-Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 100.0]
+Os resultados mostram que o grau de ativação varia de forma distinta entre as funções de pertinência:
+
+\begin{itemize}
+    \item \textbf{Funções Gaussianas}: Apresentam transições suaves e contínuas, com ativação máxima (1.0) para as categorias \textit{Fria} e \textit{Quente} nas amostras 25 e 75, respectivamente. As categorias adjacentes (\textit{Muita Fria} e \textit{Morno}) exibem ativações moderadas (0.13 e 0.14), indicando boa sensibilidade às variações no domínio.
+
+    \item \textbf{Funções Sigmoidais}: Demonstram transições suaves e assimétricas. A categoria \textit{Muita Fria} apresenta ativação constante (1.0) para ambas as amostras, enquanto a categoria \textit{Fria} exibe uma ativação moderada (0.56) na amostra 25 e máxima (1.0) na amostra 75. As categorias \textit{Morno} e \textit{Quente} apresentam ativações crescentes, refletindo alta sensibilidade em torno dos pontos centrais.
+
+    \item \textbf{Funções Bell}: Apresentam características semelhantes às gaussianas, mas com maior controle sobre a largura e inclinação. A categoria \textit{Fria} atinge ativação máxima (1.0) na amostra 25, enquanto as categorias adjacentes (\textit{Muita Fria} e \textit{Morno}) exibem ativações moderadas (0.06). Na amostra 75, a categoria \textit{Quente} apresenta ativação máxima (1.0), enquanto as categorias adjacentes exibem ativações baixas.
+
+    \item \textbf{Funções S}: Apresentam transições suaves e crescentes. A categoria \textit{Muita Fria} exibe ativação constante (1.0) para ambas as amostras, enquanto a categoria \textit{Fria} apresenta ativação máxima (1.0) na amostra 75. A categoria \textit{Morno} exibe a maior ativação (1.96) na amostra 75, indicando alta sensibilidade em regiões de transição.
+
+    \item \textbf{Funções Z}: Apresentam transições suaves e decrescentes. A categoria \textit{Morno} exibe ativação máxima (1.0) na amostra 25, enquanto a categoria \textit{Quente} apresenta ativação negativa (-0.96) na amostra 75, refletindo a natureza decrescente da função.
+
+    \item \textbf{Funções Pi}: Combinam as características das funções S e Z, apresentando transições suaves em ambas as extremidades. A categoria \textit{Fria} exibe ativação máxima (1.0) na amostra 25, enquanto a categoria \textit{Quente} apresenta ativação elevada (1.96) na amostra 75.
+
+    \item \textbf{Funções Singleton}: Apresentam ativações discretas, com valores nulos para todas as categorias e amostras. Isso reflete a ausência de transições, sendo adequadas apenas para modelar pontos específicos no domínio.
+
+    \item \textbf{Funções Cauchy}: Apresentam transições suaves, com caudas mais longas em comparação às gaussianas. A categoria \textit{Fria} exibe ativação máxima (1.0) na amostra 25, enquanto as categorias adjacentes (\textit{Muita Fria} e \textit{Morno}) apresentam ativações moderadas (0.2). Na amostra 75, a categoria \textit{Quente} exibe ativação máxima (1.0).
+
+    \item \textbf{Funções Double Gaussian}: Apresentam duas regiões de ativação controladas por parâmetros independentes. As categorias \textit{Fria} e \textit{Morno} exibem ativações moderadas (0.15) na amostra 25, enquanto a categoria \textit{Quente} apresenta ativação moderada (0.15) na amostra 75.
+
+    \item \textbf{Funções Logarítmicas}: Apresentam ativações constantes (1.0) para todas as categorias e amostras, indicando baixa sensibilidade às variações no domínio.
+
+    \item \textbf{Funções Retangulares}: Apresentam regiões planas com ativação constante (1.0) e transições abruptas nas bordas. A categoria \textit{Fria} exibe ativação máxima (1.0) na amostra 25, enquanto a categoria \textit{Quente} apresenta ativação máxima (1.0) na amostra 75.
+\end{itemize}
+
+\subsection{Suavidade e Sensibilidade}
+
+A suavidade e a sensibilidade às variações no domínio variam significativamente entre as funções:
+
+\begin{itemize}
+    \item \textbf{Maior Suavidade}: As funções Gaussianas, Sigmoidais, Bell e Cauchy apresentam as transições mais suaves, sendo ideais para modelar mudanças graduais no grau de ativação.
+    \item \textbf{Maior Sensibilidade}: As funções S e Pi demonstram alta sensibilidade em regiões de transição, enquanto as funções Gaussianas e Sigmoidais apresentam sensibilidade moderada.
+    \item \textbf{Menor Suavidade e Sensibilidade}: As funções Retangulares e Singleton apresentam transições abruptas ou ausência de transição, sendo menos adequadas para modelar mudanças contínuas.
+\end{itemize}
+
+\subsection{Conclusão}
+
+Os resultados mostram que as funções Gaussianas, Sigmoidais, Bell e Cauchy são as mais adequadas para modelar transições suaves e graduais. As funções S e Pi são úteis em cenários que exigem alta sensibilidade em regiões de transição. Por outro lado, as funções Retangulares e Singleton são mais indicadas para modelar intervalos bem definidos ou pontos discretos. A escolha da função de pertinência ideal depende do contexto da aplicação e das características desejadas para o sistema fuzzy.
+
+
+\section{Operações Básicas no Contexto Fuzzy}
+
+\section{Introdução}
+
+\section{Introdução}
+
+A lógica fuzzy estende a lógica clássica, permitindo lidar com incertezas ao atribuir graus de pertinência contínuos no intervalo $[0, 1]$. Este trabalho explora operações fuzzy fundamentais, como complemento (Zadeh, Sugeno, Yager), união (máximo, soma probabilística, soma limitada, soma drástica) e interseção (mínimo, produto, produto limitado, produto drástico). Utilizamos conjuntos fuzzy definidos por funções de pertinência (triangular, trapezoidal, gaussiana, etc.) para realizar análises gráficas e textuais comparativas, destacando as características e aplicações práticas de cada operador.
+
+\subsection{Complemento}
+
+As operações de complemento são utilizadas para calcular o grau de não-pertinência de um elemento a um conjunto fuzzy. Abaixo, apresentamos as fórmulas para os operadores de complemento Zadeh, Sugeno e Yager.
+
+\subsubsection{Zadeh}
+O complemento de Zadeh é definido como:
+\[
+\mu_{\text{Zadeh}}(x) = 1 - \mu(x)
+\]
+
+\subsubsection{Sugeno}
+O complemento de Sugeno é definido como:
+\[
+\mu_{\text{Sugeno}}(x) = \frac{1 - \mu(x)}{1 + \lambda \cdot \mu(x)}
+\]
+onde $\lambda \geq 0$ é um parâmetro que controla a suavidade do complemento.
+
+\subsubsection{Yager}
+O complemento de Yager é definido como:
+\[
+\mu_{\text{Yager}}(x) = \left(1 - \mu(x)^w\right)^{\frac{1}{w}}
+\]
+onde $w > 0$ é um parâmetro que ajusta a forma do complemento.
+
+\subsection{Complemento - Operador Zadeh}
+
+Os resultados para o operador de complemento Zadeh aplicado às funções de pertinência triangulares são apresentados na tabela abaixo. As ativações foram calculadas para as amostras \textbf{25} e \textbf{75}.
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Zadeh com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0, 25.0]$        & $[1.0, 1.0]$               \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 25.0, 50.0]$       & $[0.01, 1.0]$              \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 50.0, 75.0]$      & $[0.99, 0.99]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 75.0, 100.0]$     & $[1.0, 0.01]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[1.0, 1.0]$               \\ \hline
+\end{tabular}
+\end{table}
+
+A figura abaixo apresenta o gráfico das funções de pertinência triangulares e seus complementos calculados utilizando o operador de Zadeh.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_linear_fuzzificado.png}
-    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_operador_complemento_triangular_zadeh_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e seus complementos (Zadeh).}
+    \label{fig:complemento_zadeh_triangular}
 \end{figure}
-Ativações para o tipo gaussian:
+Os resultados das ativações para os operadores de complemento Sugeno e Yager aplicados às funções de pertinência triangulares são apresentados nas tabelas abaixo. As ativações foram calculadas para as amostras \textbf{25} e \textbf{75}.
 
-Ativações para o tipo linear:
-Samples: [25, 75]
-Muito Firo: [1, 1]
-Frio: [0.51, 1.0]
-Morno: [0.01, 0.99]
-Quente: [0.0, 0.49]
-Muito quente: [0, 0]
+\subsubsection{Operador Sugeno}
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Sugeno com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0, 25.0]$        & $[1.0, 1.0]$               \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 25.0, 50.0]$       & $[0.01, 1.0]$              \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 50.0, 75.0]$      & $[0.98, 0.98]$             \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 75.0, 100.0]$     & $[1.0, 0.01]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[1.0, 1.0]$               \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_operador_complemento_triangular_sugeno_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e seus complementos (Sugeno).}
+    \label{fig:complemento_sugeno_triangular}
+\end{figure}
+
+\subsubsection{Operador Yager}
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Yager com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Muita Fria            & $[0.0, 20.0]$          & $[0.0, 0.0, 25.0]$        & $[1.0, 1.0]$               \\ \hline
+Fria                  & $[20.0, 40.0]$         & $[0.0, 25.0, 50.0]$       & $[0.14, 1.0]$              \\ \hline
+Morno                 & $[40.0, 60.0]$         & $[25.0, 50.0, 75.0]$      & $[1.0, 1.0]$               \\ \hline
+Quente                & $[60.0, 80.0]$         & $[50.0, 75.0, 100.0]$     & $[1.0, 0.14]$              \\ \hline
+Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[1.0, 1.0]$               \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_operador_complemento_triangular_yager_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e seus complementos (Yager).}
+    \label{fig:complemento_yager_triangular}
+\end{figure}
+
+\subsection{Resultados para o Tipo Triangular com Operadores de União (t-conormas)}
+
+Os resultados das ativações para os operadores de união (t-conormas) aplicados às funções de pertinência triangulares são apresentados nas tabelas abaixo. As ativações foram calculadas para as amostras \textbf{25} e \textbf{75}.
+
+\subsubsection{Operador Máximo}
+
+A união pelo operador máximo é definida como:
+\[
+\mu_{\text{Máximo}}(x) = \max(\mu_1(x), \mu_2(x))
+\]
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Máximo com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0.24, 0.0]$              \\ \hline
+Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
+Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
+Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
+\textbf{União (Máximo)} & -                     & -                         & $[0.76, 0.0]$             \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_união_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e suas uniões (Máximo).}
+    \label{fig:uniao_maximo_triangular}
+\end{figure}
+
+\subsubsection{Operador Soma Probabilística}
+
+A união pelo operador soma probabilística é definida como:
+\[
+\mu_{\text{Soma Probabilística}}(x) = \mu_1(x) + \mu_2(x) - \mu_1(x) \cdot \mu_2(x)
+\]
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Soma Probabilística com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0.24, 0.0]$              \\ \hline
+Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
+Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
+Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
+\textbf{União (Soma Probabilística)} & -       & -                         & $[0.82, 0.0]$             \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Operador Soma Limitada}
+
+A união pelo operador soma limitada é definida como:
+\[
+\mu_{\text{Soma Limitada}}(x) = \min(1, \mu_1(x) + \mu_2(x))
+\]
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Soma Limitada com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0.24, 0.0]$              \\ \hline
+Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
+Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
+Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
+\textbf{União (Soma Limitada)} & -            & -                         & $[1.0, 0.0]$             \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_união_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e suas uniões (Soma Limitada).}
+    \label{fig:uniao_soma_limitada_triangular}
+\end{figure}
+
+\subsubsection{Operador União (Soma Drástica)}
+
+A união pelo operador soma drástica é definida como:
+\[
+\mu_{\text{Soma Drástica}}(x) =
+\begin{cases}
+\max(\mu_1(x), \mu_2(x)), & \text{se } \min(\mu_1(x), \mu_2(x)) > 0, \\
+0, & \text{caso contrário.}
+\end{cases}
+\]
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador União (Soma Drástica) com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0.24, 0.0]$              \\ \hline
+Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
+Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
+Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
+\textbf{União (Soma Drástica)} & -            & -                         & $[0.76, 0.0]$             \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_união_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e suas uniões (Soma Drástica).}
+    \label{fig:uniao_soma_drastica_triangular}
+\end{figure}
+\subsubsection{Operador Produto Drástico}
+
+A interseção pelo operador produto drástico é definida como:
+\[
+\mu_{\text{Produto Drástico}}(x) =
+\begin{cases}
+\max(\mu_1(x), \mu_2(x)), & \text{se } \min(\mu_1(x), \mu_2(x)) > 0, \\
+0, & \text{caso contrário.}
+\end{cases}
+\]
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Produto Drástico com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0.24, 0.0]$              \\ \hline
+Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
+Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
+Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
+\textbf{Interseção (Produto Drástico)} & -     & -                         & $[0.0, 0.0]$              \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_interseção_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e suas interseções (Produto Drástico).}
+    \label{fig:intersecao_produto_drastico_triangular}
+\end{figure}
+
+\subsubsection{Operador Produto Drástico}
+
+A interseção pelo operador produto drástico é definida como:
+\[
+\mu_{\text{Produto Drástico}}(x) =
+\begin{cases}
+\max(\mu_1(x), \mu_2(x)), & \text{se } \min(\mu_1(x), \mu_2(x)) > 0, \\
+0, & \text{caso contrário.}
+\end{cases}
+\]
+
+\begin{table}[H]
+\centering
+\caption{Ativações para o Operador Produto Drástico com Funções Triangulares}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Categoria}    & \textbf{Intervalo (°C)} & \textbf{Parâmetros}       & \textbf{Ativações [25, 75]} \\ \hline
+Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0.24, 0.0]$              \\ \hline
+Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
+Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
+Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
+\textbf{Interseção (Produto Drástico)} & -     & -                         & $[0.0, 0.0]$              \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_interseção_fuzzificado.png}
+    \caption{Funções de pertinência triangulares e suas interseções (Produto Drástico).}
+    \label{fig:intersecao_produto_drastico_triangular}
+\end{figure}
+\section{Conclusão}
+
+Os operadores de complemento analisados apresentam características distintas que os tornam adequados para diferentes aplicações:
+
+\begin{itemize}
+    \item \textbf{Zadeh}: Simples e direto, ideal para aplicações gerais onde não há necessidade de ajustes adicionais na suavidade do complemento.
+    \item \textbf{Sugeno}: Permite ajuste de suavidade por meio do parâmetro $\lambda$, sendo mais flexível e adaptável a diferentes cenários.
+    \item \textbf{Yager}: Oferece maior controle sobre a forma do complemento por meio do parâmetro $w$, sendo útil em cenários específicos que exigem maior personalização.
+\end{itemize}
+
+A escolha do operador de complemento deve considerar o contexto da aplicação e os requisitos específicos do sistema fuzzy.
+
+\section{Matriz de Relação Fuzzy}
+
+Nesta seção, implementamos uma função para calcular a matriz de relação fuzzy entre dois conjuntos fuzzy utilizando diferentes operadores t-norma e s-norma. Os conjuntos fuzzy utilizados representam categorias de temperatura (\textit{Fria}, \textit{Morno}, \textit{Quente}, \textit{Muito Quente}) com os seguintes graus de pertinência:
+
+\begin{itemize}
+    \item Conjunto A (\textit{Temperatura 1}): $[0.24, 0.76, 0.0, 0.0]$
+    \item Conjunto B (\textit{Temperatura 2}): $[0.0, 0.0, 0.76, 0.24]$
+\end{itemize}
+
+\subsection{Definição dos Operadores}
+
+Os operadores utilizados para calcular a matriz de relação fuzzy são:
+
+\begin{itemize}
+    \item \textbf{t-Norma (Mínimo)}:
+    \[
+    \mu_{\text{Mínimo}}(x, y) = \min(\mu_A(x), \mu_B(y))
+    \]
+
+    \item \textbf{t-Norma (Produto)}:
+    \[
+    \mu_{\text{Produto}}(x, y) = \mu_A(x) \cdot \mu_B(y)
+    \]
+
+    \item \textbf{s-Norma (Máximo)}:
+    \[
+    \mu_{\text{Máximo}}(x, y) = \max(\mu_A(x), \mu_B(y))
+    \]
+
+    \item \textbf{s-Norma (Soma Probabilística)}:
+    \[
+    \mu_{\text{Soma Probabilística}}(x, y) = \mu_A(x) + \mu_B(y) - \mu_A(x) \cdot \mu_B(y)
+    \]
+\end{itemize}
+
+\subsection{Resultados}
+
+As matrizes de relação fuzzy calculadas para os operadores acima são apresentadas a seguir:
+
+\subsubsection{t-Norma (Mínimo)}
+\[
+R_{\text{Mínimo}} =
+\begin{bmatrix}
+0.00 & 0.00 & 0.24 & 0.24 \\
+0.00 & 0.00 & 0.76 & 0.24 \\
+0.00 & 0.00 & 0.00 & 0.00 \\
+0.00 & 0.00 & 0.00 & 0.00
+\end{bmatrix}
+\]
+
+\subsubsection{t-Norma (Produto)}
+\[
+R_{\text{Produto}} =
+\begin{bmatrix}
+0.00 & 0.00 & 0.18 & 0.06 \\
+0.00 & 0.00 & 0.58 & 0.18 \\
+0.00 & 0.00 & 0.00 & 0.00 \\
+0.00 & 0.00 & 0.00 & 0.00
+\end{bmatrix}
+\]
+
+\subsubsection{s-Norma (Máximo)}
+\[
+R_{\text{Máximo}} =
+\begin{bmatrix}
+0.24 & 0.24 & 0.76 & 0.24 \\
+0.76 & 0.76 & 0.76 & 0.76 \\
+0.76 & 0.76 & 0.76 & 0.76 \\
+0.24 & 0.24 & 0.76 & 0.24
+\end{bmatrix}
+\]
+
+\subsubsection{s-Norma (Soma Probabilística)}
+\[
+R_{\text{Soma Probabilística}} =
+\begin{bmatrix}
+0.24 & 0.24 & 0.79 & 0.42 \\
+0.76 & 0.76 & 0.94 & 0.82 \\
+0.76 & 0.76 & 0.76 & 0.76 \\
+0.24 & 0.24 & 0.79 & 0.42
+\end{bmatrix}
+\]
+
+\subsection{Análise Comparativa}
+
+\begin{itemize}
+    \item \textbf{t-Norma (Mínimo)}: Gera valores mais conservadores, refletindo a interseção mais restritiva entre os conjuntos fuzzy.
+    \item \textbf{t-Norma (Produto)}: Permite suavização, gerando valores intermediários que refletem a interação proporcional entre os conjuntos.
+    \item \textbf{s-Norma (Máximo)}: Destaca a união dos conjuntos, sempre puxando para o maior grau de pertinência.
+    \item \textbf{s-Norma (Soma Probabilística)}: Reflete a união com suavização, garantindo que o resultado não ultrapasse 1.
+\end{itemize}
 
 
+\section{Composição de Relações Fuzzy}
 
-\section{Operações Fuzzy}
+Nesta seção, implementamos as funções para calcular a composição de relações fuzzy utilizando os operadores Máximo-Mínimo, Mínimo-Máximo e Máximo-Produto. Os conjuntos fuzzy utilizados representam categorias de temperatura (\textit{Fria}, \textit{Morno}, \textit{Quente}, \textit{Muito Quente}) com os seguintes graus de pertinência:
 
-\subsection{Complemento, União e Interseção}
+\begin{itemize}
+    \item Conjunto A (\textit{Temperatura 1}): $[0.24, 0.76, 0.0, 0.0]$
+    \item Conjunto B (\textit{Temperatura 2}): $[0.0, 0.0, 0.76, 0.24]$
+\end{itemize}
 
-\subsubsection{Complemento:}
+\subsection{Definição dos Operadores}
 
-Zadeh
-\begin{verbatim}    
-    def complemento_zadeh(u):
-    return 1 - np.array(u)
-\end{verbatim}
+Os operadores utilizados para calcular a composição de relações fuzzy são:
 
-Sugeno:
-\begin{verbatim}    
-    def complemento_sugeno(u, lamb=0.5):
-    return (1 - u) / (1 + lamb * u)
-\end{verbatim}
+\begin{itemize}
+    \item \textbf{Máximo-Mínimo}:
+    \[
+    \mu_R(x, z) = \max_y \min(\mu_A(x, y), \mu_B(y, z))
+    \]
 
+    \item \textbf{Mínimo-Máximo}:
+    \[
+    \mu_R(x, z) = \min_y \max(\mu_A(x, y), \mu_B(y, z))
+    \]
 
-Yager:
-\begin{verbatim}    
-    def complemento_yager(u, w=2):
-    return (1 - u**w)**(1/w)
-\end{verbatim}
+    \item \textbf{Máximo-Produto}:
+    \[
+    \mu_R(x, z) = \max_y (\mu_A(x, y) \cdot \mu_B(y, z))
+    \]
+\end{itemize}
 
-\subsubsection{União (t-conormas):}
-Máximo
-\begin{verbatim}    
-    def complemento_yager(u, w=2):
-    return (1 - u**w)**(1/w)
-\end{verbatim}
+\subsection{Resultados}
 
-Soma Probabilística
-\begin{verbatim}
-def uniao_soma_probabilistica(u1, u2):
-    return u1 + u2 - u1 * u2
-\end{verbatim}
+As matrizes de composição fuzzy calculadas para os operadores acima são apresentadas a seguir:
 
+\subsubsection{Máximo-Mínimo}
+\[
+R_{\text{Máximo-Mínimo}} =
+\begin{bmatrix}
+0.24 & 0.24 & 0.24 & 0.24 \\
+0.76 & 0.76 & 0.76 & 0.24 \\
+0.00 & 0.00 & 0.00 & 0.00 \\
+0.00 & 0.00 & 0.00 & 0.00
+\end{bmatrix}
+\]
 
-Soma Limitada
-\begin{verbatim}
-def uniao_soma_limitada(u1, u2):
-    return np.minimum(1, u1 + u2)
-\end{verbatim}
+\subsubsection{Mínimo-Máximo}
+\[
+R_{\text{Mínimo-Máximo}} =
+\begin{bmatrix}
+0.24 & 0.24 & 0.76 & 0.76 \\
+0.76 & 0.76 & 0.76 & 0.76 \\
+0.76 & 0.76 & 0.76 & 0.76 \\
+0.24 & 0.24 & 0.76 & 0.76
+\end{bmatrix}
+\]
 
-Soma Drástica
-\begin{verbatim}
-def uniao_soma_drastica(u1, u2):
-    return np.where((u1 == 0) & (u2 == 0), 0, np.maximum(u1, u2))
-\end{verbatim}
+\subsubsection{Máximo-Produto}
+\[
+R_{\text{Máximo-Produto}} =
+\begin{bmatrix}
+0.00 & 0.00 & 0.18 & 0.06 \\
+0.00 & 0.00 & 0.58 & 0.18 \\
+0.00 & 0.00 & 0.00 & 0.00 \\
+0.00 & 0.00 & 0.00 & 0.00
+\end{bmatrix}
+\]
 
+\subsection{Análise Comparativa}
 
-
-\subsubsection{Interseção (t-conormas)}
-Mínimo
-\begin{verbatim}
-def intersecao_minimo(u1, u2):
-    return np.minimum(u1, u2)
-\end{verbatim}
-
-Produto
-\begin{verbatim}
-def intersecao_produto(u1, u2):
-    return u1 * u2
-\end{verbatim}
-
-
-Produto Limitado
-\begin{verbatim}
-def intersecao_produto_limitado(u1, u2):
-    return np.maximum(0, u1 + u2 - 1)
-\end{verbatim}
-
-Produto Drástico
-\begin{verbatim}
-def intersecao_produto_drastico(u1, u2):
-    return np.where((u1 == 1) & (u2 == 1), np.minimum(u1, u2), 0)
-\end{verbatim}
-
-\subsection{Relaçõess Fuzzy}
+\begin{itemize}
+    \item \textbf{Máximo-Mínimo}: Reflete a interseção mais conservadora entre os conjuntos fuzzy, destacando os menores graus de pertinência.
+    \item \textbf{Mínimo-Máximo}: Reflete a união mais conservadora entre os conjuntos fuzzy, destacando os maiores graus de pertinência.
+    \item \textbf{Máximo-Produto}: Permite suavização, considerando o produto dos graus de pertinência, gerando valores intermediários.
+\end{itemize}
 
 
-
-Este relatório apresentou a definição, particionamento e análise de funções de pertinência para a variável temperatura ambiente. A análise gráfica e textual destacou as diferenças entre os tipos de funções, evidenciando suas características e aplicações.
 
 
 
