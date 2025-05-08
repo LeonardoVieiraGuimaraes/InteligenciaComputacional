@@ -19,8 +19,40 @@ Este relatório apresenta a implementação e análise de funções de pertinên
 
 \section{Funções de Pertinência}
 \subsection{Implementação de Funcões de Pertinência}
+
 As funções de pertinência implementadas incluem:
 
+
+\begin{itemize}
+    \item Triangular
+    \item Trapezoidal
+    \item Gaussiana
+    \item Sigmoidal
+    \item Sinoidal (Bell)
+    \item Função S
+    \item Função Z
+    \item Cauchy
+    \item Gaussiana Dupla
+    \item Logarítmica
+    \item Retangular
+\end{itemize}
+
+Para a construção dos gráficos utilizando python utilizamos a função $plot_results$
+
+\begin{verbatim}
+def plot_results(x, y, params, type):
+    # Plotando a função
+    plt.figure(figsize=(8, 5))
+    plt.plot(x, y, label=f"{type.capitalize()} {params}")
+    plt.title(f"Função {type.capitalize()}")
+    plt.xlabel("x")
+    plt.ylabel("Grau de Pertinência")
+    plt.legend()
+    plt.grid()
+    plt.savefig(f'{output_dir}/{type}.png')
+    plt.show()
+\end{verbatim}
+    
 \subsubsection{Função Triangular}
 A função triangular é definida por três parâmetros $(a, b, c)$, onde:
 \begin{itemize}
@@ -46,7 +78,19 @@ def triangular(x, a, b, c):
         return (c - x) / (c - b)
     else:
         return 0
+
+# Exemplo de plotagem para a função triangular
+a, b, c = 5, 10, 15  # Parâmetros da função triangular
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [triangular(val, a, b, c) for val in x]
+
+# Plotando a função triangular
+plot_results(x, y, [a, b, c], "triangular")
+
 \end{verbatim}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/triangular.png}
@@ -80,6 +124,17 @@ def trapezoidal(x, a, b, c, d):
         return (d - x) / (d - c)
     else:
         return 0
+
+# Exemplo de plotagem para a função trapezoidal
+a, b, c, d = 5, 10, 15, 20  # Parâmetros da função trapezoidal
+x = np.linspace(0, 25, 100)  # Valores de x no intervalo [0, 25]
+
+# Calcula os graus de pertinência
+y = [trapezoidal(val, a, b, c, d) for val in x]
+
+# Plotando a função trapezoidal
+plot_results(x, y, [a, b, c, d], "trapezoidal")
+
 \end{verbatim}
 \begin{figure}[H]
     \centering
@@ -101,6 +156,18 @@ O código Python correspondente é:
 \begin{verbatim}
 def gaussian(x, c, sigma):
     return np.exp(-0.5 * ((x - c) / sigma) ** 2)
+
+
+# Exemplo de uso
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+c = 10  # Centro da curva (onde a pertinência é máxima)
+sigma = 3  # Largura da curva
+
+# Calcula os graus de pertinência
+y = [gaussian(val, c, sigma) for val in x]
+
+# Plotando a função gaussiana
+plot_results(x, y, [c, sigma], "gaussian")
 \end{verbatim}
 \begin{figure}[H]
     \centering
@@ -122,7 +189,18 @@ O código Python correspondente é:
 \begin{verbatim}
 def sigmoidal(x, a, c):
     return 1 / (1 + np.exp(-a * (x - c)))
+
+# Exemplo de plotagem para a função sigmoidal
+a, c = 1, 10  # Parâmetros da função sigmoidal
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [sigmoidal(val, a, c) for val in x]
+
+# Plotando a função sigmoidal
+plot_results(x, y, [a, c], "sigmoidal")
 \end{verbatim}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/sigmoidal.png}
@@ -144,6 +222,16 @@ O código Python correspondente é:
 \begin{verbatim}
 def bell_function(x, a, b, c):
     return 1 / (1 + abs((x - c) / a) ** (2 * b))
+# Exemplo de plotagem para a função Bell
+a, b, c = 2, 4, 10  # Parâmetros da função Bell
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [bell_function(val, a, b, c) for val in x]
+
+# Plotando a função Bell
+plot_results(x, y, [a, b, c], "bell")
+
 \end{verbatim}
 \begin{figure}[H]
     \centering
@@ -175,6 +263,17 @@ def s_function(x, a, b):
         return 2 * ((x - a) / (b - a)) ** 2
     elif x >= b:
         return 1
+
+# Exemplo de plotagem para a função S
+a, b = 5, 15  # Parâmetros da função S
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [s_function(val, a, b) for val in x]
+
+# Plotando a função S
+plot_results(x, y, [a, b], "s")
+
 \end{verbatim}
 \begin{figure}[H]
     \centering
@@ -206,6 +305,18 @@ def z_function(x, a, b):
         return 1 - 2 * ((x - a) / (b - a)) ** 2
     else:
         return 0
+        
+# Exemplo de plotagem para a função Z
+a, b = 5, 15  # Parâmetros da função Z
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [z_function(val, a, b) for val in x]
+
+# Plotando a função Z
+plot_results(x, y, [a, b], "z")
+
+
 \end{verbatim}
 
 \subsubsection{Função Cauchy}
@@ -222,6 +333,17 @@ O código Python correspondente é:
 \begin{verbatim}
 def cauchy_function(x, c, gamma):
     return 1 / (1 + ((x - c) / gamma) ** 2)
+
+# Exemplo de plotagem para a função Cauchy
+c, gamma = 10, 3  # Parâmetros da função Cauchy
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [cauchy_function(val, c, gamma) for val in x]
+
+# Plotando a função Cauchy
+plot_results(x, y, [c, gamma], "cauchy")
+
 \end{verbatim}
 \begin{figure}[H]
     \centering
@@ -251,11 +373,62 @@ def double_gaussian(x, c, sigma1, sigma2):
         return np.exp(-0.5 * ((x - c) / sigma1) ** 2)
     else:
         return np.exp(-0.5 * ((x - c) / sigma2) ** 2)
+
+# Exemplo de plotagem para a função Gaussiana Dupla
+c1, sigma1 = 8, 2  # Parâmetros da primeira gaussiana
+c2, sigma2 = 14, 3  # Parâmetros da segunda gaussiana
+x = np.linspace(0, 20, 100)  # Valores de x no intervalo [0, 20]
+
+# Calcula os graus de pertinência
+y = [double_gaussian(val, c1, sigma1, c2, sigma2) for val in x]
+
+# Plotando a função Gaussiana Dupla
+plot_results(x, y, [c1, sigma1, c2, sigma2], "double_gaussian")
+
 \end{verbatim}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/double_gaussian.png}
     \caption{Exemplo de função Gaussiana Dupla com $c=10$, $\sigma_1=3$, $\sigma_2=5$.}
+\end{figure}
+
+\subsubsection{Função Retangular}
+A função Retangular é definida por dois parâmetros $(a, b)$, onde:
+\begin{itemize}
+    \item $a$ é o início do intervalo onde a pertinência é 1;
+    \item $b$ é o final do intervalo onde a pertinência é 1.
+\end{itemize}
+A fórmula é:
+\[
+\mu(x) =
+\begin{cases}
+1, & \text{se } a \leq x \leq b, \\
+0, & \text{caso contrário.}
+\end{cases}
+\]
+O código Python correspondente é:
+\begin{verbatim}
+def rectangular(x, a, b):
+    if a <= x <= b:
+        return 1
+    else:
+        return 0
+
+# Exemplo de plotagem para a função Retangular
+a, b = 3, 7  # Parâmetros da função Retangular
+x = np.linspace(0, 10, 100)  # Valores de x no intervalo [0, 10]
+
+# Calcula os graus de pertinência
+y = [rectangular_function(val, a, b) for val in x]
+
+# Plotando a função Retangular
+plot_results(x, y, [a, b], "rectangular")
+
+\end{verbatim}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/rectangular.png}
+    \caption{Exemplo de função Retangular com $a=10$, $b=20$.}
 \end{figure}
 
 \subsubsection{Função Logarítmica}
@@ -281,6 +454,16 @@ def logarithmic_function(x, a, b):
         return 0
     else:
         return math.log(x - a + 1, b)
+
+# Exemplo de plotagem para a função Logarítmica
+a, b = 2, 1  # Parâmetros da função Logarítmica
+x = np.linspace(0.1, 10, 100)  # Valores de x no intervalo [0.1, 10] (evitando zero)
+
+# Calcula os graus de pertinência
+y = [logarithmic_function(val, a, b) for val in x]
+
+# Plotando a função Logarítmica
+plot_results(x, y, [a, b], "logarithmic")
 \end{verbatim}
 \begin{figure}[H]
     \centering
@@ -288,122 +471,593 @@ def logarithmic_function(x, a, b):
     \caption{Exemplo de função Logarítmica com $a=5$, $b=2$.}
 \end{figure}
 
-\subsubsection{Função Retangular}
-A função Retangular é definida por dois parâmetros $(a, b)$, onde:
-\begin{itemize}
-    \item $a$ é o início do intervalo onde a pertinência é 1;
-    \item $b$ é o final do intervalo onde a pertinência é 1.
-\end{itemize}
-A fórmula é:
-\[
-\mu(x) =
-\begin{cases}
-1, & \text{se } a \leq x \leq b, \\
-0, & \text{caso contrário.}
-\end{cases}
-\]
-O código Python correspondente é:
-\begin{verbatim}
-def rectangular(x, a, b):
-    if a <= x <= b:
-        return 1
-    else:
-        return 0
-\end{verbatim}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/rectangular.png}
-    \caption{Exemplo de função Retangular com $a=10$, $b=20$.}
-\end{figure}
 
 \subsection{Fuzzificação e Análise Comparativa}
 Para a fuzzificação, escolhemos uma variável de entrada com universo de discurso definido e particionamos o domínio em funções de pertinência uniformemente espaçadas. A seguir, apresentamos os resultados para duas amostras distintas.
 
-Este relatório apresenta a definição de funções de pertinência fuzzy, a fuzzificação de amostras e a análise gráfica e textual dos resultados. As funções de pertinência analisadas incluem as funções triangular, trapezoidal, gaussiana e sigmoidal.
+Para as variáveis de entrada definir um universo de estudo como segue, particionado esse domínio em quatro funções de pertinência uniformemente espaçadas. 
 
-\section{Definição do Universo de Discurso}
-A variável de entrada escolhida é a \textbf{temperatura ambiente}, com o universo de discurso definido como $[0, 40]$ graus Celsius.
+\begin{itemize}
+    \item **Frio**: Representa temperaturas baixas, variando de $0$ a aproximadamente $25$ graus.
+    \item **Morno**: Temperatura intermediária, abrangendo valores entre $20$ e $50$ graus.
+    \item **Quente**: Engloba valores de temperatura entre $45$ e $75$ graus.
+    \item **Muito Quente**: Abrange temperaturas elevadas, variando de $70$ a $100$ graus.
+\end{itemize}
 
-\section{Particionamento do Domínio}
-O domínio foi particionado em quatro funções de pertinência uniformemente espaçadas para cada tipo de função. Os parâmetros utilizados são descritos abaixo:
+Para realizar o espaçamento fizemos o algoritmo que se segue onde retorna os parametros: 
 
-\subsection{Função Triangular}
-\[
-\mu_{\text{triangular}}(x; a, b, c) =
-\begin{cases}
-0, & x \leq a \text{ ou } x \geq c, \\
-\frac{x - a}{b - a}, & a < x \leq b, \\
-\frac{c - x}{c - b}, & b < x < c.
-\end{cases}
-\]
-Parâmetros: $a = 0$, $b = 10$, $c = 20$; $a = 10$, $b = 20$, $c = 30$; $a = 20$, $b = 30$, $c = 40$.
 
-\subsection{Função Trapezoidal}
-\[
-\mu_{\text{trapezoidal}}(x; a, b, c, d) =
-\begin{cases}
-0, & x \leq a \text{ ou } x \geq d, \\
-\frac{x - a}{b - a}, & a < x \leq b, \\
-1, & b < x \leq c, \\
-\frac{d - x}{d - c}, & c < x < d.
-\end{cases}
-\]
-Parâmetros: $a = 0$, $b = 5$, $c = 15$, $d = 20$; $a = 10$, $b = 15$, $c = 25$, $d = 30$; $a = 20$, $b = 25$, $c = 35$, $d = 40$.
+\begin{verbatim}
+def generate_params(X, types, n):
+    centers = np.linspace(X[0], X[1], n)  # Centros uniformemente distribuídos
+    step = (X[1] - X[0]) / (n - 1) if n > 1 else (X[1] - X[0])  # Espaçamento entre os centros
+    params = []
 
-\subsection{Função Gaussiana}
-\[
-\mu_{\text{gaussiana}}(x; c, \sigma) = \exp\left(-\frac{(x - c)^2}{2\sigma^2}\right)
-\]
-Parâmetros: $c = 10$, $\sigma = 5$; $c = 20$, $\sigma = 5$; $c = 30$, $\sigma = 5$.
+    for i, t in enumerate(types):
+        if t == 'gaussian':
+            sigma = step / 2  # Sigma proporcional ao espaçamento
+            params.append([centers[i], sigma])
+        elif t == 'triangular':
+            a = max(X[0], centers[i] - step)  # Início da base
+            b = centers[i]                   # Pico
+            c = min(X[1], centers[i] + step)  # Fim da base
+            params.append([a, b, c])
+        elif t == 'trapezoidal':
+            a = max(X[0], centers[i] - step)  # Início da base
+            b = max(X[0], centers[i] - step / 2)  # Início do topo
+            c = min(X[1], centers[i] + step / 2)  # Fim do topo
+            d = min(X[1], centers[i] + step)  # Fim da base
+            params.append([a, b, c, d])
+        elif t == 'sigmoidal':
+            a = 1  # Inclinação padrão
+            c = centers[i]  # Centro
+            params.append([a, c])
+        elif t == 'bell':
+            a = step / 2  # Largura do sino
+            b = 2  # Inclinação padrão
+            c = centers[i]  # Centro
+            params.append([a, b, c])
+        elif t == 'z':
+            a = max(X[0], centers[i] - step)  # Início do decaimento
+            b = centers[i]  # Fim do decaimento
+            params.append([a, b])
+        elif t == 's':
+            a = centers[i]  # Início do crescimento
+            b = min(X[1], centers[i] + step)  # Fim do crescimento
+            params.append([a, b])
+       
+        elif t == 'cauchy':
+            c = centers[i]  # Centro
+            gamma = step / 2  # Largura
+            params.append([c, gamma])
+        elif t == 'double_gaussian':
+            c1 = max(X[0], centers[i] - step / 2)  # Centro da primeira gaussiana
+            sigma1 = step / 4  # Largura da primeira gaussiana
+            c2 = min(X[1], centers[i] + step / 2)  # Centro da segunda gaussiana
+            sigma2 = step / 4  # Largura da segunda gaussiana
+            params.append([c1, sigma1, c2, sigma2])
+        elif t == 'retangular':
+            a = max(X[0], centers[i] - step / 2)  # Início do intervalo
+            b = min(X[1], centers[i] + step / 2)  # Fim do intervalo
+            params.append([a, b])
+        elif t == 'linear':  # Adicionando a função linear
+            a = max(X[0], centers[i] - step)  # Início da base
+            b = min(X[1], centers[i] + step)  # Fim da base
+            params.append([a, b])
+        else:
+            raise ValueError(f"Tipo de função de pertinência'{t}' não suportado!")
+    
+    return params
+\end{verbatim}
 
-\subsection{Função Sigmoidal}
-\[
-\mu_{\text{sigmoidal}}(x; a, c) = \frac{1}{1 + e^{-a(x - c)}}
-\]
-Parâmetros: $a = 1$, $c = 10$; $a = 1$, $c = 20$; $a = 1$, $c = 30$.
 
-\section{Fuzzificação de Amostras}
-As amostras escolhidas para fuzzificação foram $x = 15$ e $x = 25$. Os graus de ativação para cada função de pertinência foram calculados e apresentados nos gráficos a seguir.
+Outra função e para calcular o graus de pertinência para cada atributo, nesse algortmo esolhemos as funções de pertinência relacionadas a seção 2. 
 
-\section{Resultados Gráficos}
-Os gráficos abaixo mostram o universo de discurso, as funções de pertinência e os graus de ativação das amostras.
+\begin{verbatim}
+### Função Membership
+def calculate_membership(dominio, types, params):
+    x = np.linspace(dominio[0], dominio[1], 100)  # Gera os valores de x no domínio
+    results = []
+    for func_type, func_params in zip(types, params):
+        
+        # Calcula os graus de pertinência com base no tipo de função
+        if func_type == 'linear':
+            results.append([linear_function(val, *func_params) for val in x])  
+        elif func_type == 'triangular':
+            results.append([triangular(val, *func_params) for val in x])
+        elif func_type == 'trapezoidal':
+            results.append([trapezoidal(val, *func_params) for val in x])
+        elif func_type == 'gaussian':
+            results.append([gaussian(val, *func_params) for val in x])
+        elif func_type == 'sigmoidal':
+            results.append([sigmoidal(val, *func_params) for val in x])
+        elif func_type == 'z':
+            results.append([z_function(val, *func_params) for val in x])
+        elif func_type == 's':
+            results.append([s_function(val, *func_params) for val in x])
+        elif func_type == 'pi':
+            results.append([pi_function(val, *func_params) for val in x])
+        elif func_type == 'bell':
+            results.append([bell_function(val, *func_params) for val in x])
+        elif func_type == 'singleton':
+            results.append([singleton_function(val, *func_params) for val in x])
+        elif func_type == 'cauchy':
+            results.append([cauchy_function(val, *func_params) for val in x])
+        elif func_type == 'double_gaussian':
+            results.append([double_gaussian(val, *func_params) for val in x])
+        elif func_type == 'retangular':
+            results.append([rectangular_function(val, *func_params) for val in x])
+        elif func_type == 'logaritmica':
+            results.append([logarithmic_function(val, *func_params) for val in x])
+        else:
+            raise ValueError(f"Tipo de função desconhecido: {func_type}")
 
-\subsection{Função Triangular}
+    return x, results
+\end{verbatim}
+
+
+Para a lotagem dos graficos usamos a função 
+\begin{verbatim}
+def plot_membership_with_samples(x, results, labels, samples, title, activations):
+    plt.figure(figsize=(10, 6))
+    for j, sample in enumerate(samples):
+            # Adiciona uma linha vertical para cada amostra
+            random_color = np.random.rand(3,)
+            plt.axvline(sample, color=random_color, linestyle='--', alpha=0.7, label=f"Sample: {sample}")
+    for i, result in enumerate(results):
+        # Plota a função de pertinência com o rótulo correspondente
+        plt.plot(x, result, label=f"{labels[i]}")
+        for j, sample in enumerate(samples):
+           
+            # Pega o grau de ativação correspondente
+            activation = activations[i][j]
+            # Adiciona um ponto no gráfico para destacar a ativação
+            random_color = np.random.rand(3,)
+            plt.scatter(sample, activation, color=random_color, 
+                        label=f"Sample {sample}: {activation:.2f}")
+
+    # Configurações do gráfico
+    plt.title(title)
+    plt.xlabel("x")
+    plt.ylabel("Grau de Pertinência")
+    plt.legend(loc="upper right", bbox_to_anchor=(1.3, 1), title="Funções Fuzzy")
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(f'{output_dir}/{title.replace("- ", "").lower().replace(" ", "_")}_fuzzificado.png')  # Salva o gráfico
+    plt.show()
+\end{verbatim}
+
+Por fim construir a função fuzificação 
+\begin{verbatim}
+    def fuzzificacao(n, type, dominio, samples, labels, liguistica):
+    # Número de funções de pertinência para cada atributo
+    types = [type] * n
+
+    # Geração dos parâmetros para cada tipo de função
+    params = generate_params(dominio, types, n)
+
+    for i in range(n):
+        v = dominio[1] - dominio[0]  # Tamanho do intervalo
+        p = v / n  # Espaçamento correto entre os pontos
+        intervalo = [round(dominio[0] + p * i, 2), round(dominio[0] + p * (i + 1), 2)]
+        parametros_formatados = [float(round(val, 2)) for val in params[i]]
+
+
+        print(f'{labels[i]}: {liguistica} - {intervalo} - Parâmetros: {parametros_formatados}')
+    # Cálculo dos graus de pertinência para cada atributo
+    x, results = calculate_membership(dominio, types, params)
+    # Cálculo do grau de ativação para cada amostra
+    activations = []
+    for i, result in enumerate(results):
+        sample_activations = []
+        for sample in samples:
+            # Encontra o índice mais próximo do valor da amostra no domínio
+            idx = np.abs(x - sample).argmin()
+            activation = result[idx]
+            sample_activations.append(activation)
+        activations.append(sample_activations)
+
+    # Imprime as ativações calculadas com melhor formatação
+    print(f"\nAtivações para o tipo {type}:")
+    print(f"Samples: {samples}")
+    for i, sample_activations in enumerate(activations):
+         # Arredonda os valores para duas casas decimais
+        rounded_activations = np.round(sample_activations, 2)
+        print(f"{labels[i]}: {rounded_activations.tolist()}")
+
+    # Plotagem das funções de pertinência para o atributo com as amostras
+    plot_membership_with_samples(
+        x, results, labels, samples, f"Funções de Pertinência - {type}", activations
+    )
+
+\end{verbatim}
+
+com todas as função feitas definir o exemplo: 
+
+\begin{verbatim}
+    # Definição do universo de discurso
+    dominio = (0, 100)  # Intervalo do universo de discurso
+    samples = [25, 75]  # Amostras para fuzzificação
+    n = 5
+    linguistica = 'temperatura'
+    funcao_pertinecia = [
+        'triangular', 'trapezoidal', 'gaussian', 'sigmoidal', 'bell', 's', 'z', 'cauchy', 'double_gaussian', 'retangular', 'linear'
+    ]
+    
+    labels = ['Muito Firo', 'Frio', 'Morno', 'Quente', 'Muito quente']
+    
+    for type in funcao_pertinecia:
+        
+        fuzzificacao(n, type  , dominio, samples, [labels[i] for i in range(n)], linguistica)
+    
+    
+\end{verbatim}
+
+dominio = (0, 100) 
+samples = [25, 75]
+
+
+\subsubsection{Função Triangular}
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 0.0, 25.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 25.0, 50.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 50.0, 75.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 75.0, 100.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 100.0, 100.0]
+
+Ativações para o tipo triangular:
+Samples: [25, 75]
+Muito Firo: [0, 0]
+Frio: [0.99, 0.0]
+Morno: [0.01, 0.01]
+Quente: [0.0, 0.99]
+Muito quente: [0, 0]
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_triangular_fuzzificado.png}
     \caption{Funções de pertinência triangulares e graus de ativação.}
 \end{figure}
 
-\subsection{Função Trapezoidal}
+\subsubsection{Função Trapezoidal}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 0.0, 12.5, 25.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 12.5, 37.5, 50.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 37.5, 62.5, 75.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 62.5, 87.5, 100.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 87.5, 100.0, 100.0]
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_trapezoidal_fuzzificado.png}
     \caption{Funções de pertinência trapezoidais e graus de ativação.}
 \end{figure}
 
-\subsection{Função Gaussiana}
+Ativações para o tipo trapezoidal:
+Samples: [25, 75]
+Muito Firo: [0, 0]
+Frio: [1, 0]
+Morno: [0.02, 0.02]
+Quente: [0, 1]
+Muito quente: [0, 0]
+
+\subsubsection{Função Gaussiana}
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 12.5]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 12.5]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 12.5]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 12.5]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 12.5]
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_gaussian_fuzzificado.png}
     \caption{Funções de pertinência gaussianas e graus de ativação.}
 \end{figure}
 
-\subsection{Função Sigmoidal}
+Samples: [25, 75]
+Muito Firo: [0.13, 0.0]
+Frio: [1.0, 0.0]
+Morno: [0.14, 0.14]
+Quente: [0.0, 1.0]
+Muito quente: [0.0, 0.13]
+
+\subsubsection{Função Sigmoidal}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [1.0, 0.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [1.0, 25.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [1.0, 50.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [1.0, 75.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [1.0, 100.0]
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_sigmoidal_fuzzificado.png}
     \caption{Funções de pertinência sigmoidais e graus de ativação.}
 \end{figure}
+Ativações para o tipo gaussian:
 
-\section{Análise Comparativa}
-\begin{itemize}
-    \item As funções triangulares e trapezoidais apresentam transições mais abruptas entre os graus de pertinência, enquanto as funções gaussianas e sigmoidais possuem transições mais suaves.
-    \item As funções gaussianas são mais sensíveis a variações próximas ao centro, enquanto as funções sigmoidais apresentam maior suavidade em todo o domínio.
-    \item As funções trapezoidais são úteis para representar intervalos com pertinência máxima constante, enquanto as funções triangulares são mais adequadas para transições lineares.
-\end{itemize}
+Ativações para o tipo sigmoidal:
+Samples: [25, 75]
+Muito Firo: [1.0, 1.0]
+Frio: [0.56, 1.0]
+Morno: [0.0, 1.0]
+Quente: [0.0, 0.44]
+Muito quente: [0.0, 0.0]
 
-\section{Conclusão}
+
+\subsubsection{Função Bell}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [12.5, 2.0, 0.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [12.5, 2.0, 25.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [12.5, 2.0, 50.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [12.5, 2.0, 75.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [12.5, 2.0, 100.0]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_bell_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo bell:
+Samples: [25, 75]
+Muito Firo: [0.06, 0.0]
+Frio: [1.0, 0.0]
+Morno: [0.06, 0.06]
+Quente: [0.0, 1.0]
+Muito quente: [0.0, 0.06]
+
+
+\subsubsection{Função S}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 25.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 50.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 75.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 100.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 100.0]
+
+
+Quente: [0, 0]
+Muito quente: [0, 0]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_s_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo s:
+Samples: [25, 75]
+Muito Firo: [1, 1]
+Frio: [0.0, 1.0]
+Morno: [0.0, 1.96]
+
+\subsubsection{Função S}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 25.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 50.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 75.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 100.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 100.0]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_s_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo s:
+Samples: [25, 75]
+Muito Firo: [1, 1]
+Frio: [0.0, 1.0]
+Morno: [0.0, 1.96]
+Quente: [0, 0]
+Muito quente: [0, 0]
+
+\subsubsection{Função Z}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 0.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 25.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 50.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 75.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 100.0]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_z_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo z:
+Samples: [25, 75]
+Muito Firo: [0, 0]
+Frio: [0, 0]
+Morno: [1.0, 0.0]
+Quente: [1.0, -0.96]
+Muito quente: [1, 1]
+
+\subsubsection{Função Cauchy}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 12.5]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [25.0, 12.5]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [50.0, 12.5]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [75.0, 12.5]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [100.0, 12.5]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_cauchy_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo cauchy:
+Samples: [25, 75]
+Muito Firo: [0.2, 0.03]
+Frio: [1.0, 0.06]
+Morno: [0.2, 0.2]
+Quente: [0.06, 1.0]
+Muito quente: [0.03, 0.2]
+
+\subsubsection{Função Gaussiana Dupla}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 6.25, 12.5, 6.25]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [12.5, 6.25, 37.5, 6.25]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [37.5, 6.25, 62.5, 6.25]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [62.5, 6.25, 87.5, 6.25]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [87.5, 6.25, 100.0, 6.25]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_double_gaussian_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo double gaussian:
+Samples: [25, 75]
+Muito Firo: [0.12, 0.0]
+Frio: [0.15, 0.0]
+Morno: [0.15, 0.15]
+Quente: [0.0, 0.15]
+Muito quente: [0.0, 0.12]
+
+\subsubsection{Função Retangular}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 12.5]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [12.5, 37.5]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [37.5, 62.5]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [62.5, 87.5]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [87.5, 100.0]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_retangular_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo retangular:
+Samples: [25, 75]
+Muito Firo: [0, 0]
+Frio: [1, 0]
+Morno: [0, 0]
+Quente: [0, 1]
+Muito quente: [0, 0]
+
+\subsubsection{Função Linear}
+
+Muito Firo: temperatura - [0.0, 20.0] - Parâmetros: [0.0, 25.0]
+Frio: temperatura - [20.0, 40.0] - Parâmetros: [0.0, 50.0]
+Morno: temperatura - [40.0, 60.0] - Parâmetros: [25.0, 75.0]
+Quente: temperatura - [60.0, 80.0] - Parâmetros: [50.0, 100.0]
+Muito quente: temperatura - [80.0, 100.0] - Parâmetros: [75.0, 100.0]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_linear_fuzzificado.png}
+    \caption{Funções de pertinência sigmoidais e graus de ativação.}
+\end{figure}
+Ativações para o tipo gaussian:
+
+Ativações para o tipo linear:
+Samples: [25, 75]
+Muito Firo: [1, 1]
+Frio: [0.51, 1.0]
+Morno: [0.01, 0.99]
+Quente: [0.0, 0.49]
+Muito quente: [0, 0]
+
+
+
+\section{Operações Fuzzy}
+
+\subsection{Complemento, União e Interseção}
+
+\subsubsection{Complemento:}
+
+Zadeh
+\begin{verbatim}    
+    def complemento_zadeh(u):
+    return 1 - np.array(u)
+\end{verbatim}
+
+Sugeno:
+\begin{verbatim}    
+    def complemento_sugeno(u, lamb=0.5):
+    return (1 - u) / (1 + lamb * u)
+\end{verbatim}
+
+
+Yager:
+\begin{verbatim}    
+    def complemento_yager(u, w=2):
+    return (1 - u**w)**(1/w)
+\end{verbatim}
+
+\subsubsection{União (t-conormas):}
+Máximo
+\begin{verbatim}    
+    def complemento_yager(u, w=2):
+    return (1 - u**w)**(1/w)
+\end{verbatim}
+
+Soma Probabilística
+\begin{verbatim}
+def uniao_soma_probabilistica(u1, u2):
+    return u1 + u2 - u1 * u2
+\end{verbatim}
+
+
+Soma Limitada
+\begin{verbatim}
+def uniao_soma_limitada(u1, u2):
+    return np.minimum(1, u1 + u2)
+\end{verbatim}
+
+Soma Drástica
+\begin{verbatim}
+def uniao_soma_drastica(u1, u2):
+    return np.where((u1 == 0) & (u2 == 0), 0, np.maximum(u1, u2))
+\end{verbatim}
+
+
+
+\subsubsection{Interseção (t-conormas)}
+Mínimo
+\begin{verbatim}
+def intersecao_minimo(u1, u2):
+    return np.minimum(u1, u2)
+\end{verbatim}
+
+Produto
+\begin{verbatim}
+def intersecao_produto(u1, u2):
+    return u1 * u2
+\end{verbatim}
+
+
+Produto Limitado
+\begin{verbatim}
+def intersecao_produto_limitado(u1, u2):
+    return np.maximum(0, u1 + u2 - 1)
+\end{verbatim}
+
+Produto Drástico
+\begin{verbatim}
+def intersecao_produto_drastico(u1, u2):
+    return np.where((u1 == 1) & (u2 == 1), np.minimum(u1, u2), 0)
+\end{verbatim}
+
+\subsection{Relaçõess Fuzzy}
+
+
+
 Este relatório apresentou a definição, particionamento e análise de funções de pertinência para a variável temperatura ambiente. A análise gráfica e textual destacou as diferenças entre os tipos de funções, evidenciando suas características e aplicações.
 
 
