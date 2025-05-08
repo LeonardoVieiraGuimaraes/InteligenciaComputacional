@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
-
+\usepackage{ragged2e}
 \title{Relatório sobre Conjuntos, Funções e Operadores Fuzzy}
 \author{Doutorado CEFET}
 \date{\today}
@@ -13,7 +13,7 @@
 \begin{document}
 
 \maketitle
-
+\justifying
 \section{Introdução}
 Este relatório apresenta a implementação e análise de funções de pertinência, fuzzificação, operações fuzzy e relações fuzzy. As funções de pertinência são amplamente utilizadas em lógica fuzzy para representar graus de pertencimento de elementos a conjuntos fuzzy.
 
@@ -23,19 +23,7 @@ Este relatório apresenta a implementação e análise de funções de pertinên
 As funções de pertinência implementadas incluem:
 
 
-\begin{itemize}
-    \item Triangular
-    \item Trapezoidal
-    \item Gaussiana
-    \item Sigmoidal
-    \item Sinoidal (Bell)
-    \item Função S
-    \item Função Z
-    \item Cauchy
-    \item Gaussiana Dupla
-    \item Logarítmica
-    \item Retangular
-\end{itemize}
+As funções de pertinência implementadas incluem as formas Triangular, Trapezoidal, Gaussiana, Sigmoidal, Sinoidal (Bell), Função S, Função Z, Cauchy, Gaussiana Dupla, Logarítmica e Retangular. Cada uma dessas funções possui características específicas que as tornam adequadas para diferentes aplicações em lógica fuzzy, permitindo modelar graus de pertinência de forma contínua e adaptável às necessidades do sistema.
 
 Para a construção dos gráficos utilizando Python, utilizamos a função $plot_results$
     
@@ -60,6 +48,7 @@ A fórmula é dada por:
     \centering
     \includegraphics[width=0.8\textwidth]{img/triangular.png}
     \caption{Exemplo de função triangular com $a=5$, $b=10$, $c=15$.}
+    \label{fig:funcao_triangular}
 \end{figure}
 
 \subsubsection{Função Trapezoidal}
@@ -82,6 +71,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/trapezoidal.png}
     \caption{Exemplo de função trapezoidal com $a=5$, $b=10$, $c=15$, $d=20$.}
+    \label{fig:funcao_trapezoidal}
 \end{figure}
 
 \subsubsection{Função Gaussiana}
@@ -98,6 +88,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/gaussian.png}
     \caption{Exemplo de função gaussiana com $c=10$, $\sigma=3$.}
+    \label{fig:funcao_gaussiana}
 \end{figure}
 
 \subsubsection{Função Sigmoidal}
@@ -115,6 +106,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/sigmoidal.png}
     \caption{Exemplo de função sigmoidal com $a=1$, $c=10$.}
+    \label{fig:funcao_sigmoidal}
 \end{figure}
 
 \subsubsection{Função Sinoidal (Bell)}
@@ -132,6 +124,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/bell.png}
     \caption{Exemplo de função Bell com $a=2$, $b=4$, $c=10$.}
+    \label{fig:funcao_bell}
 \end{figure}
 
 \subsubsection{Função S}
@@ -153,6 +146,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/s.png}
     \caption{Exemplo de função S com $a=5$, $b=15$.}
+    \label{fig:funcao_s}
 \end{figure}
 
 \subsubsection{Função Z}
@@ -171,6 +165,13 @@ A fórmula é:
 \end{cases}
 \]
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/z.png}
+    \caption{Exemplo de função Z com $a=5$, $b=15$.}
+    \label{fig:funcao_z}
+\end{figure}
+
 \subsubsection{Função Cauchy}
 A função Cauchy é definida por dois parâmetros $(c, \gamma)$, onde:
 \begin{itemize}
@@ -185,6 +186,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/cauchy.png}
     \caption{Exemplo de função Cauchy com $c=10$, $\gamma=3$.}
+    \label{fig:funcao_cauchy}
 \end{figure}
 
 \subsubsection{Função Gaussiana Dupla}
@@ -206,6 +208,7 @@ e^{-\frac{1}{2} \left( \frac{x - c}{\sigma_2} \right)^2}, & \text{se } x > c.
     \centering
     \includegraphics[width=0.8\textwidth]{img/double_gaussian.png}
     \caption{Exemplo de função Gaussiana Dupla com $c=10$, $\sigma_1=3$, $\sigma_2=5$.}
+    \label{fig:funcao_gaussiana_dupla}
 \end{figure}
 
 \subsubsection{Função Retangular}
@@ -226,6 +229,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/rectangular.png}
     \caption{Exemplo de função Retangular com $a=10$, $b=20$.}
+    \label{fig:funcao_retangular}
 \end{figure}
 
 \subsubsection{Função Logarítmica}
@@ -246,6 +250,7 @@ A fórmula é:
     \centering
     \includegraphics[width=0.8\textwidth]{img/logarithmic.png}
     \caption{Exemplo de função Logarítmica com $a=5$, $b=2$.}
+    \label{fig:funcao_logaritmica}
 \end{figure}
 
 
@@ -253,11 +258,12 @@ A fórmula é:
 
 Para a fuzzificação, escolhemos uma variável de entrada com universo de discurso definido e particionamos o domínio em funções de pertinência uniformemente espaçadas. A seguir, apresentamos os resultados para duas amostras distintas.
 
-Para as variáveis de entrada, definimos um universo de estudo como segue, particionando esse domínio em quatro funções de pertinência uniformemente espaçadas:
+Para as variáveis de entrada, definimos um universo de estudo como segue, particionando esse domínio em cinco funções de pertinência uniformemente espaçadas:
 
 \begin{table}[H]
 \centering
 \caption{Categorias de Temperatura e Intervalos}
+\label{tab:categorias_temperatura}
 \begin{tabular}{|c|c|}
 \hline
 \textbf{Categoria}    & \textbf{Intervalo de Temperatura (°C)} \\ \hline
@@ -269,9 +275,7 @@ Muito Quente          & $80$ a $100$                          \\ \hline
 \end{tabular}
 \end{table}
 
-\subsection{Fuzzificação com Funções Triangulares}
-
-\subsection{Fuzzificação com Funções Triangulares}
+\subsubsection{Fuzzificação com Funções Triangulares}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -298,7 +302,7 @@ A seguir, apresentamos o gráfico das funções de pertinência triangulares e s
 \end{figure}
 
 
-\subsection{Fuzzificação com Funções Trapezoidais}
+\subsubsection{Fuzzificação com Funções Trapezoidais}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -325,7 +329,7 @@ A seguir, apresentamos o gráfico das funções de pertinência trapezoidais e s
 \end{figure}
 
 
-\subsection{Fuzzificação com Funções Gaussianas}
+\subsubsection{Fuzzificação com Funções Gaussianas}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -351,7 +355,7 @@ A seguir, apresentamos o gráfico das funções de pertinência gaussianas e sua
     \caption{Funções de Pertinência Gaussianas para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Sigmoidais}
+\subsubsection{Fuzzificação com Funções Sigmoidais}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -377,7 +381,7 @@ A seguir, apresentamos o gráfico das funções de pertinência sigmoidais e sua
     \caption{Funções de Pertinência Sigmoidais para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Bell}
+\subsubsection{Fuzzificação com Funções Bell}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -403,7 +407,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Bell e suas ativ
     \caption{Funções de Pertinência Bell para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções S}
+\subsubsection{Fuzzificação com Funções S}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -429,7 +433,7 @@ A seguir, apresentamos o gráfico das funções de pertinência S e suas ativaç
     \caption{Funções de Pertinência S para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Z}
+\subsubsection{Fuzzificação com Funções Z}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -455,7 +459,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Z e suas ativaç
     \caption{Funções de Pertinência Z para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Pi}
+\subsubsection{Fuzzificação com Funções Pi}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -481,7 +485,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Pi e suas ativa�
     \caption{Funções de Pertinência Pi para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Singleton}
+\subsubsection{Fuzzificação com Funções Singleton}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -506,7 +510,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Singleton e suas
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_singleton_fuzzificado.png}
     \caption{Funções de Pertinência Singleton para a variável \textbf{Temperatura}.}
 \end{figure}
-\subsection{Fuzzificação com Funções Cauchy}
+\subsubsection{Fuzzificação com Funções Cauchy}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -532,7 +536,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Cauchy e suas at
     \caption{Funções de Pertinência Cauchy para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Double Gaussian}
+\subsubsection{Fuzzificação com Funções Double Gaussian}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -558,7 +562,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Double Gaussian 
     \caption{Funções de Pertinência Double Gaussian para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Logarítmicas}
+\subsubsection{Fuzzificação com Funções Logarítmicas}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -584,7 +588,7 @@ A seguir, apresentamos o gráfico das funções de pertinência Logarítmicas e 
     \caption{Funções de Pertinência Logarítmicas para a variável \textbf{Temperatura}.}
 \end{figure}
 
-\subsection{Fuzzificação com Funções Retangulares}
+\subsubsection{Fuzzificação com Funções Retangulares}
 
 Para a variável linguística \textbf{Temperatura}, foram definidos cinco conjuntos fuzzy com os seguintes intervalos e parâmetros, além das ativações calculadas para as amostras \textbf{25} e \textbf{75}:
 
@@ -609,12 +613,11 @@ A seguir, apresentamos o gráfico das funções de pertinência Retangulares e s
     \includegraphics[width=0.8\textwidth]{img/funções_de_pertinência_retangular_fuzzificado.png}
     \caption{Funções de Pertinência Retangulares para a variável \textbf{Temperatura}.}
 \end{figure}
-\section{Análise Comparativa das Funções de Pertinência}
 
+
+
+\subsection{Conclusão}
 Nesta seção, analisamos os resultados obtidos para as diferentes funções de pertinência aplicadas à variável linguística \textbf{Temperatura}. A análise considera como o grau de ativação varia entre as funções e identifica quais apresentam maior suavidade ou sensibilidade às variações no domínio.
-
-\subsection{Variação do Grau de Ativação}
-
 Os resultados mostram que o grau de ativação varia de forma distinta entre as funções de pertinência:
 
 \begin{itemize}
@@ -641,8 +644,6 @@ Os resultados mostram que o grau de ativação varia de forma distinta entre as 
     \item \textbf{Funções Retangulares}: Apresentam regiões planas com ativação constante (1.0) e transições abruptas nas bordas. A categoria \textit{Fria} exibe ativação máxima (1.0) na amostra 25, enquanto a categoria \textit{Quente} apresenta ativação máxima (1.0) na amostra 75.
 \end{itemize}
 
-\subsection{Suavidade e Sensibilidade}
-
 A suavidade e a sensibilidade às variações no domínio variam significativamente entre as funções:
 
 \begin{itemize}
@@ -651,44 +652,30 @@ A suavidade e a sensibilidade às variações no domínio variam significativame
     \item \textbf{Menor Suavidade e Sensibilidade}: As funções Retangulares e Singleton apresentam transições abruptas ou ausência de transição, sendo menos adequadas para modelar mudanças contínuas.
 \end{itemize}
 
-\subsection{Conclusão}
-
 Os resultados mostram que as funções Gaussianas, Sigmoidais, Bell e Cauchy são as mais adequadas para modelar transições suaves e graduais. As funções S e Pi são úteis em cenários que exigem alta sensibilidade em regiões de transição. Por outro lado, as funções Retangulares e Singleton são mais indicadas para modelar intervalos bem definidos ou pontos discretos. A escolha da função de pertinência ideal depende do contexto da aplicação e das características desejadas para o sistema fuzzy.
 
 
-\section{Operações Básicas no Contexto Fuzzy}
+\section{Operações Fuzzy}
 
-\section{Introdução}
+As operações fuzzy são fundamentais para manipular conjuntos fuzzy e modelar incertezas em sistemas baseados em lógica fuzzy. Elas incluem complemento, união (t-conormas) e interseção (t-normas), permitindo combinar ou modificar graus de pertinência. Essas operações são amplamente utilizadas em aplicações práticas, como controle fuzzy, tomada de decisão e sistemas especialistas.
 
-\section{Introdução}
+\subsection{Complemento, União e Interseção}
 
-A lógica fuzzy estende a lógica clássica, permitindo lidar com incertezas ao atribuir graus de pertinência contínuos no intervalo $[0, 1]$. Este trabalho explora operações fuzzy fundamentais, como complemento (Zadeh, Sugeno, Yager), união (máximo, soma probabilística, soma limitada, soma drástica) e interseção (mínimo, produto, produto limitado, produto drástico). Utilizamos conjuntos fuzzy definidos por funções de pertinência (triangular, trapezoidal, gaussiana, etc.) para realizar análises gráficas e textuais comparativas, destacando as características e aplicações práticas de cada operador.
+A lógica fuzzy estende a lógica clássica, permitindo lidar com incertezas ao atribuir graus de pertinência contínuos no intervalo $[0, 1]$. Agora vamos explora operações fuzzy fundamentais, como complemento (Zadeh, Sugeno, Yager), união (máximo, soma probabilística, soma limitada, soma drástica) e interseção (mínimo, produto, produto limitado, produto drástico). Utilizamos conjuntos fuzzy definidos por funções de pertinência (triangular, trapezoidal, gaussiana, etc.) para realizar análises gráficas e textuais comparativas, destacando as características e aplicações práticas de cada operador.
 
-\subsection{Complemento}
+
+
+\subsubsection{Complemento}
 
 As operações de complemento são utilizadas para calcular o grau de não-pertinência de um elemento a um conjunto fuzzy. Abaixo, apresentamos as fórmulas para os operadores de complemento Zadeh, Sugeno e Yager.
 
-\subsubsection{Zadeh}
+
+\paragraph{Operador Zadeh}
+
 O complemento de Zadeh é definido como:
 \[
 \mu_{\text{Zadeh}}(x) = 1 - \mu(x)
 \]
-
-\subsubsection{Sugeno}
-O complemento de Sugeno é definido como:
-\[
-\mu_{\text{Sugeno}}(x) = \frac{1 - \mu(x)}{1 + \lambda \cdot \mu(x)}
-\]
-onde $\lambda \geq 0$ é um parâmetro que controla a suavidade do complemento.
-
-\subsubsection{Yager}
-O complemento de Yager é definido como:
-\[
-\mu_{\text{Yager}}(x) = \left(1 - \mu(x)^w\right)^{\frac{1}{w}}
-\]
-onde $w > 0$ é um parâmetro que ajusta a forma do complemento.
-
-\subsection{Complemento - Operador Zadeh}
 
 Os resultados para o operador de complemento Zadeh aplicado às funções de pertinência triangulares são apresentados na tabela abaixo. As ativações foram calculadas para as amostras \textbf{25} e \textbf{75}.
 
@@ -716,8 +703,13 @@ A figura abaixo apresenta o gráfico das funções de pertinência triangulares 
 \end{figure}
 Os resultados das ativações para os operadores de complemento Sugeno e Yager aplicados às funções de pertinência triangulares são apresentados nas tabelas abaixo. As ativações foram calculadas para as amostras \textbf{25} e \textbf{75}.
 
-\subsubsection{Operador Sugeno}
+\paragraph{Operador Sugeno}
 
+O complemento de Sugeno é definido como:
+\[
+\mu_{\text{Sugeno}}(x) = \frac{1 - \mu(x)}{1 + \lambda \cdot \mu(x)}
+\]
+onde $\lambda \geq 0$ é um parâmetro que controla a suavidade do complemento.
 \begin{table}[H]
 \centering
 \caption{Ativações para o Operador Sugeno com Funções Triangulares}
@@ -739,7 +731,13 @@ Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[1
     \label{fig:complemento_sugeno_triangular}
 \end{figure}
 
-\subsubsection{Operador Yager}
+\paragraph{Operador Yager}
+
+O complemento de Yager é definido como:
+\[
+\mu_{\text{Yager}}(x) = \left(1 - \mu(x)^w\right)^{\frac{1}{w}}
+\]
+onde $w > 0$ é um parâmetro que ajusta a forma do complemento.
 
 \begin{table}[H]
 \centering
@@ -762,11 +760,11 @@ Muito Quente          & $[80.0, 100.0]$        & $[75.0, 100.0, 100.0]$    & $[1
     \label{fig:complemento_yager_triangular}
 \end{figure}
 
-\subsection{Resultados para o Tipo Triangular com Operadores de União (t-conormas)}
+\subsection{União (t-conormas)}
 
 Os resultados das ativações para os operadores de união (t-conormas) aplicados às funções de pertinência triangulares são apresentados nas tabelas abaixo. As ativações foram calculadas para as amostras \textbf{25} e \textbf{75}.
 
-\subsubsection{Operador Máximo}
+\paragraph{Operador Máximo}
 
 A união pelo operador máximo é definida como:
 \[
@@ -783,7 +781,7 @@ Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0
 Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
 Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
 Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
-\textbf{União (Máximo)} & -                     & -                         & $[0.76, 0.0]$             \\ \hline
+\textbf{Máximo} & -                     & -                         & $[0.76, 0.0]$             \\ \hline
 \end{tabular}
 \end{table}
 
@@ -794,7 +792,7 @@ Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0
     \label{fig:uniao_maximo_triangular}
 \end{figure}
 
-\subsubsection{Operador Soma Probabilística}
+\paragraph{Operador Soma Probabilística}
 
 A união pelo operador soma probabilística é definida como:
 \[
@@ -811,11 +809,11 @@ Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0
 Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
 Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
 Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
-\textbf{União (Soma Probabilística)} & -       & -                         & $[0.82, 0.0]$             \\ \hline
+\textbf{Soma Probabilística} & -       & -                         & $[0.82, 0.0]$             \\ \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{Operador Soma Limitada}
+\paragraph{Operador Soma Limitada}
 
 A união pelo operador soma limitada é definida como:
 \[
@@ -832,7 +830,7 @@ Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0
 Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
 Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
 Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
-\textbf{União (Soma Limitada)} & -            & -                         & $[1.0, 0.0]$             \\ \hline
+\textbf{Soma Limitada} & -            & -                         & $[1.0, 0.0]$             \\ \hline
 \end{tabular}
 \end{table}
 
@@ -843,7 +841,7 @@ Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0
     \label{fig:uniao_soma_limitada_triangular}
 \end{figure}
 
-\subsubsection{Operador União (Soma Drástica)}
+\paragraph{Operador Soma Drástica}
 
 A união pelo operador soma drástica é definida como:
 \[
@@ -864,7 +862,7 @@ Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0
 Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
 Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
 Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
-\textbf{União (Soma Drástica)} & -            & -                         & $[0.76, 0.0]$             \\ \hline
+\textbf{Soma Drástica} & -            & -                         & $[0.76, 0.0]$             \\ \hline
 \end{tabular}
 \end{table}
 
@@ -874,7 +872,10 @@ Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0
     \caption{Funções de pertinência triangulares e suas uniões (Soma Drástica).}
     \label{fig:uniao_soma_drastica_triangular}
 \end{figure}
-\subsubsection{Operador Produto Drástico}
+
+\subsection{Intersecão (t-normas):}
+
+\paragraph{Operador Produto Drástico}
 
 A interseção pelo operador produto drástico é definida como:
 \[
@@ -895,7 +896,7 @@ Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0
 Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
 Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
 Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
-\textbf{Interseção (Produto Drástico)} & -     & -                         & $[0.0, 0.0]$              \\ \hline
+\textbf{Produto Drástico} & -     & -                         & $[0.0, 0.0]$              \\ \hline
 \end{tabular}
 \end{table}
 
@@ -906,7 +907,7 @@ Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0
     \label{fig:intersecao_produto_drastico_triangular}
 \end{figure}
 
-\subsubsection{Operador Produto Drástico}
+\paragraph{Operador Produto Drástico}
 
 A interseção pelo operador produto drástico é definida como:
 \[
@@ -927,7 +928,7 @@ Fria                  & $[0.0, 25.0]$          & $[0.0, 0.0, 33.33]$       & $[0
 Morno                 & $[25.0, 50.0]$         & $[0.0, 33.33, 66.67]$     & $[0.76, 0.0]$              \\ \hline
 Quente                & $[50.0, 75.0]$         & $[33.33, 66.67, 100.0]$   & $[0.0, 0.76]$              \\ \hline
 Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0.0, 0.24]$              \\ \hline
-\textbf{Interseção (Produto Drástico)} & -     & -                         & $[0.0, 0.0]$              \\ \hline
+\textbf{Produto Drástico} & -     & -                         & $[0.0, 0.0]$              \\ \hline
 \end{tabular}
 \end{table}
 
@@ -937,7 +938,7 @@ Muito Quente          & $[75.0, 100.0]$        & $[66.67, 100.0, 100.0]$   & $[0
     \caption{Funções de pertinência triangulares e suas interseções (Produto Drástico).}
     \label{fig:intersecao_produto_drastico_triangular}
 \end{figure}
-\section{Conclusão}
+\subsubsection{Conclusão}
 
 Os operadores de complemento analisados apresentam características distintas que os tornam adequados para diferentes aplicações:
 
@@ -949,174 +950,235 @@ Os operadores de complemento analisados apresentam características distintas qu
 
 A escolha do operador de complemento deve considerar o contexto da aplicação e os requisitos específicos do sistema fuzzy.
 
-\section{Matriz de Relação Fuzzy}
+\subsection{Relação Fuzzy}
 
-Nesta seção, implementamos uma função para calcular a matriz de relação fuzzy entre dois conjuntos fuzzy utilizando diferentes operadores t-norma e s-norma. Os conjuntos fuzzy utilizados representam categorias de temperatura (\textit{Fria}, \textit{Morno}, \textit{Quente}, \textit{Muito Quente}) com os seguintes graus de pertinência:
-
-\begin{itemize}
-    \item Conjunto A (\textit{Temperatura 1}): $[0.24, 0.76, 0.0, 0.0]$
-    \item Conjunto B (\textit{Temperatura 2}): $[0.0, 0.0, 0.76, 0.24]$
-\end{itemize}
-
-\subsection{Definição dos Operadores}
-
-Os operadores utilizados para calcular a matriz de relação fuzzy são:
+Neste exemplo, consideramos dois conjuntos fuzzy representando categorias de \textit{Temperatura} (\textit{Fria}, \textit{Morna}, \textit{Quente}, \textit{Muito Quente}) e \textit{Umidade} (\textit{Baixa}, \textit{Moderada}, \textit{Alta}, \textit{Muito Alta}). Os graus de pertinência para cada categoria são definidos como:
 
 \begin{itemize}
-    \item \textbf{t-Norma (Mínimo)}:
-    \[
-    \mu_{\text{Mínimo}}(x, y) = \min(\mu_A(x), \mu_B(y))
-    \]
-
-    \item \textbf{t-Norma (Produto)}:
-    \[
-    \mu_{\text{Produto}}(x, y) = \mu_A(x) \cdot \mu_B(y)
-    \]
-
-    \item \textbf{s-Norma (Máximo)}:
-    \[
-    \mu_{\text{Máximo}}(x, y) = \max(\mu_A(x), \mu_B(y))
-    \]
-
-    \item \textbf{s-Norma (Soma Probabilística)}:
-    \[
-    \mu_{\text{Soma Probabilística}}(x, y) = \mu_A(x) + \mu_B(y) - \mu_A(x) \cdot \mu_B(y)
-    \]
+    \item Conjunto A (\textit{Temperatura}): $[0.1, 0.5, 0.8, 1.0]$
+    \item Conjunto B (\textit{Umidade}): $[0.2, 0.4, 0.7, 0.9]$
 \end{itemize}
 
-\subsection{Resultados}
-
-As matrizes de relação fuzzy calculadas para os operadores acima são apresentadas a seguir:
+Utilizamos diferentes operadores t-norma e s-norma para calcular as matrizes de relação fuzzy entre os conjuntos, destacando as interações entre os graus de pertinência.
 
 \subsubsection{t-Norma (Mínimo)}
+
+\textbf{t-Norma (Mínimo)}:
+\[
+\mu_{\text{Mínimo}}(x, y) = \min(\mu_A(x), \mu_B(y))
+\]
+
 \[
 R_{\text{Mínimo}} =
 \begin{bmatrix}
-0.00 & 0.00 & 0.24 & 0.24 \\
-0.00 & 0.00 & 0.76 & 0.24 \\
-0.00 & 0.00 & 0.00 & 0.00 \\
-0.00 & 0.00 & 0.00 & 0.00
+0.1 & 0.1 & 0.1 & 0.1 \\
+0.2 & 0.4 & 0.5 & 0.5 \\
+0.2 & 0.4 & 0.7 & 0.8 \\
+0.2 & 0.4 & 0.7 & 0.9
 \end{bmatrix}
 \]
 
 \subsubsection{t-Norma (Produto)}
+
+\textbf{t-Norma (Produto)}:
+\[
+\mu_{\text{Produto}}(x, y) = \mu_A(x) \cdot \mu_B(y)
+\]
+
 \[
 R_{\text{Produto}} =
 \begin{bmatrix}
-0.00 & 0.00 & 0.18 & 0.06 \\
-0.00 & 0.00 & 0.58 & 0.18 \\
-0.00 & 0.00 & 0.00 & 0.00 \\
-0.00 & 0.00 & 0.00 & 0.00
+0.02 & 0.04 & 0.07 & 0.09 \\
+0.10 & 0.20 & 0.35 & 0.45 \\
+0.16 & 0.32 & 0.56 & 0.72 \\
+0.20 & 0.40 & 0.70 & 0.90
 \end{bmatrix}
 \]
 
 \subsubsection{s-Norma (Máximo)}
+
+\textbf{s-Norma (Máximo)}:
+\[
+\mu_{\text{Máximo}}(x, y) = \max(\mu_A(x), \mu_B(y))
+\]
+
 \[
 R_{\text{Máximo}} =
 \begin{bmatrix}
-0.24 & 0.24 & 0.76 & 0.24 \\
-0.76 & 0.76 & 0.76 & 0.76 \\
-0.76 & 0.76 & 0.76 & 0.76 \\
-0.24 & 0.24 & 0.76 & 0.24
+0.2 & 0.4 & 0.7 & 0.9 \\
+0.5 & 0.5 & 0.7 & 0.9 \\
+0.8 & 0.8 & 0.8 & 0.9 \\
+1.0 & 1.0 & 1.0 & 1.0
 \end{bmatrix}
 \]
 
 \subsubsection{s-Norma (Soma Probabilística)}
+
+\textbf{s-Norma (Soma Probabilística)}:
+\[
+\mu_{\text{Soma Probabilística}}(x, y) = \mu_A(x) + \mu_B(y) - \mu_A(x) \cdot \mu_B(y)
+\]
+
 \[
 R_{\text{Soma Probabilística}} =
 \begin{bmatrix}
-0.24 & 0.24 & 0.79 & 0.42 \\
-0.76 & 0.76 & 0.94 & 0.82 \\
-0.76 & 0.76 & 0.76 & 0.76 \\
-0.24 & 0.24 & 0.79 & 0.42
+0.28 & 0.46 & 0.73 & 0.91 \\
+0.60 & 0.70 & 0.85 & 0.95 \\
+0.84 & 0.88 & 0.94 & 0.98 \\
+1.00 & 1.00 & 1.00 & 1.00
 \end{bmatrix}
 \]
 
-\subsection{Análise Comparativa}
+\subsubsection{Conclusão}
+
+A seguir, destacamos as principais características de cada operador com base nos resultados obtidos:
 
 \begin{itemize}
-    \item \textbf{t-Norma (Mínimo)}: Gera valores mais conservadores, refletindo a interseção mais restritiva entre os conjuntos fuzzy.
-    \item \textbf{t-Norma (Produto)}: Permite suavização, gerando valores intermediários que refletem a interação proporcional entre os conjuntos.
-    \item \textbf{s-Norma (Máximo)}: Destaca a união dos conjuntos, sempre puxando para o maior grau de pertinência.
-    \item \textbf{s-Norma (Soma Probabilística)}: Reflete a união com suavização, garantindo que o resultado não ultrapasse 1.
+    \item \textbf{t-Norma (Mínimo)}:
+    \begin{itemize}
+        \item Este operador reflete a interseção mais conservadora entre os conjuntos fuzzy.
+        \item A matriz resultante apresenta valores que representam o menor grau de pertinência entre os elementos dos conjuntos.
+        \item É útil em aplicações onde se deseja garantir que a relação fuzzy seja restritiva e conservadora.
+    \end{itemize}
+
+    \item \textbf{t-Norma (Produto)}:
+    \begin{itemize}
+        \item Este operador permite suavização, gerando valores intermediários que refletem a interação proporcional entre os conjuntos fuzzy.
+        \item A matriz resultante apresenta valores que são o produto dos graus de pertinência dos elementos.
+        \item É ideal para modelar relações mais flexíveis e contínuas.
+    \end{itemize}
+
+    \item \textbf{s-Norma (Máximo)}:
+    \begin{itemize}
+        \item Este operador reflete a união mais abrangente entre os conjuntos fuzzy.
+        \item A matriz resultante apresenta valores que representam o maior grau de pertinência entre os elementos dos conjuntos.
+        \item É adequado para cenários onde se deseja destacar a união dos conjuntos.
+    \end{itemize}
+
+    \item \textbf{s-Norma (Soma Probabilística)}:
+    \begin{itemize}
+        \item Este operador reflete a união com suavização, garantindo que o resultado não ultrapasse 1.
+        \item A matriz resultante apresenta valores que combinam os graus de pertinência dos elementos de forma probabilística.
+        \item É útil em aplicações onde se deseja modelar interações suaves entre os conjuntos.
+    \end{itemize}
+\end{itemize}
+
+Os operadores analisados apresentam comportamentos distintos que os tornam adequados para diferentes aplicações:
+
+\begin{itemize}
+    \item O \textbf{t-Norma (Mínimo)} é mais conservador e restritivo, sendo útil em cenários onde a precisão é essencial.
+    \item O \textbf{t-Norma (Produto)} oferece uma abordagem mais suave e proporcional, sendo ideal para modelar interações contínuas.
+    \item O \textbf{s-Norma (Máximo)} destaca a união dos conjuntos, sempre puxando para o maior grau de pertinência.
+    \item O \textbf{s-Norma (Soma Probabilística)} combina suavidade e flexibilidade, sendo útil em aplicações que exigem modelagem probabilística.
 \end{itemize}
 
 
-\section{Composição de Relações Fuzzy}
+\subsection{Composição de Relações Fuzzy}
 
-Nesta seção, implementamos as funções para calcular a composição de relações fuzzy utilizando os operadores Máximo-Mínimo, Mínimo-Máximo e Máximo-Produto. Os conjuntos fuzzy utilizados representam categorias de temperatura (\textit{Fria}, \textit{Morno}, \textit{Quente}, \textit{Muito Quente}) com os seguintes graus de pertinência:
+Neste exemplo, consideramos dois conjuntos fuzzy representando categorias de \textit{Temperatura} (\textit{Fria}, \textit{Morna}, \textit{Quente}) e \textit{Umidade} (\textit{Baixa}, \textit{Moderada}, \textit{Alta}). As matrizes fuzzy foram calculadas utilizando diferentes operadores de composição.
 
-\begin{itemize}
-    \item Conjunto A (\textit{Temperatura 1}): $[0.24, 0.76, 0.0, 0.0]$
-    \item Conjunto B (\textit{Temperatura 2}): $[0.0, 0.0, 0.76, 0.24]$
-\end{itemize}
+\textbf{Matriz de Temperatura} (\textit{Fria, Morna, Quente}):
+\[
+\text{Temperatura} =
+\begin{bmatrix}
+0.1 & 0.5 & 0.8 \\
+0.2 & 0.6 & 0.9 \\
+0.3 & 0.7 & 1.0
+\end{bmatrix}
+\]
 
-\subsection{Definição dos Operadores}
+\textbf{Matriz de Umidade} (\textit{Baixa, Moderada, Alta}):
+\[
+\text{Umidade} =
+\begin{bmatrix}
+0.2 & 0.4 & 0.7 \\
+0.3 & 0.5 & 0.8 \\
+0.4 & 0.6 & 0.9
+\end{bmatrix}
+\]
 
-Os operadores utilizados para calcular a composição de relações fuzzy são:
-
-\begin{itemize}
-    \item \textbf{Máximo-Mínimo}:
-    \[
-    \mu_R(x, z) = \max_y \min(\mu_A(x, y), \mu_B(y, z))
-    \]
-
-    \item \textbf{Mínimo-Máximo}:
-    \[
-    \mu_R(x, z) = \min_y \max(\mu_A(x, y), \mu_B(y, z))
-    \]
-
-    \item \textbf{Máximo-Produto}:
-    \[
-    \mu_R(x, z) = \max_y (\mu_A(x, y) \cdot \mu_B(y, z))
-    \]
-\end{itemize}
-
-\subsection{Resultados}
 
 As matrizes de composição fuzzy calculadas para os operadores acima são apresentadas a seguir:
 
 \subsubsection{Máximo-Mínimo}
+\textbf{Máximo-Mínimo}:
+    \[
+    \mu_R(x, z) = \max_y \min(\mu_A(x, y), \mu_B(y, z))
+    \]
+
 \[
 R_{\text{Máximo-Mínimo}} =
 \begin{bmatrix}
-0.24 & 0.24 & 0.24 & 0.24 \\
-0.76 & 0.76 & 0.76 & 0.24 \\
-0.00 & 0.00 & 0.00 & 0.00 \\
-0.00 & 0.00 & 0.00 & 0.00
+0.4 & 0.6 & 0.8 \\
+0.4 & 0.6 & 0.9 \\
+0.4 & 0.6 & 0.9
 \end{bmatrix}
 \]
 
 \subsubsection{Mínimo-Máximo}
+
+\textbf{Mínimo-Máximo}:
+    \[
+    \mu_R(x, z) = \min_y \max(\mu_A(x, y), \mu_B(y, z))
+    \]
 \[
 R_{\text{Mínimo-Máximo}} =
 \begin{bmatrix}
-0.24 & 0.24 & 0.76 & 0.76 \\
-0.76 & 0.76 & 0.76 & 0.76 \\
-0.76 & 0.76 & 0.76 & 0.76 \\
-0.24 & 0.24 & 0.76 & 0.76
+0.2 & 0.4 & 0.7 \\
+0.2 & 0.4 & 0.7 \\
+0.3 & 0.4 & 0.7
 \end{bmatrix}
 \]
 
 \subsubsection{Máximo-Produto}
+
+\textbf{Máximo-Produto}:
+    \[
+    \mu_R(x, z) = \max_y (\mu_A(x, y) \cdot \mu_B(y, z))
+    \]
+
 \[
 R_{\text{Máximo-Produto}} =
 \begin{bmatrix}
-0.00 & 0.00 & 0.18 & 0.06 \\
-0.00 & 0.00 & 0.58 & 0.18 \\
-0.00 & 0.00 & 0.00 & 0.00 \\
-0.00 & 0.00 & 0.00 & 0.00
+0.32 & 0.48 & 0.72 \\
+0.36 & 0.54 & 0.81 \\
+0.40 & 0.60 & 0.90
 \end{bmatrix}
 \]
+\subsection{Conclusão}
 
-\subsection{Análise Comparativa}
+A seguir, destacamos as principais características de cada operador com base nos resultados obtidos:
 
 \begin{itemize}
-    \item \textbf{Máximo-Mínimo}: Reflete a interseção mais conservadora entre os conjuntos fuzzy, destacando os menores graus de pertinência.
-    \item \textbf{Mínimo-Máximo}: Reflete a união mais conservadora entre os conjuntos fuzzy, destacando os maiores graus de pertinência.
-    \item \textbf{Máximo-Produto}: Permite suavização, considerando o produto dos graus de pertinência, gerando valores intermediários.
+    \item \textbf{Máximo-Mínimo}:
+    \begin{itemize}
+        \item Este operador reflete a interseção mais conservadora entre os conjuntos fuzzy.
+        \item A matriz resultante apresenta valores que representam o maior grau de pertinência mínimo entre os elementos dos conjuntos.
+        \item É útil em aplicações onde se deseja garantir que a relação fuzzy seja restritiva e conservadora.
+    \end{itemize}
+
+    \item \textbf{Mínimo-Máximo}:
+    \begin{itemize}
+        \item Este operador reflete a união mais conservadora entre os conjuntos fuzzy.
+        \item A matriz resultante apresenta valores que representam o menor grau de pertinência máximo entre os elementos dos conjuntos.
+        \item É adequado para cenários onde se deseja modelar relações menos restritivas, mas ainda conservadoras.
+    \end{itemize}
+
+\item \textbf{Máximo-Produto}:
+    \begin{itemize}
+        \item Este operador permite suavização, considerando o produto dos graus de pertinência.
+        \item A matriz resultante apresenta valores intermediários, refletindo a interação proporcional entre os conjuntos fuzzy.
+        \item É ideal para aplicações onde se deseja modelar relações mais flexíveis e contínuas.
+    \end{itemize}
 \end{itemize}
 
+Os operadores analisados apresentam comportamentos distintos que os tornam adequados para diferentes aplicações:
+
+\begin{itemize}
+    \item O \textbf{Máximo-Mínimo} é mais conservador e restritivo, sendo útil em cenários onde a precisão é essencial.
+    \item O \textbf{Mínimo-Máximo} oferece uma abordagem mais flexível, mas ainda conservadora, sendo adequado para modelar relações menos restritivas.
+    \item O \textbf{Máximo-Produto} é o mais suave e flexível, permitindo modelar interações contínuas e graduais entre os conjuntos fuzzy.
+\end{itemize}
 
 
 
