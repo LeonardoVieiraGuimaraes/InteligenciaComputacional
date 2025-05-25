@@ -1,2 +1,5 @@
 numpy
 matplotlib
+
+# Instalar o pacote nbconvert
+nbconvert
