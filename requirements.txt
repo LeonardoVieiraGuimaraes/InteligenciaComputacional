@@ -3,3 +3,6 @@ matplotlib
 
 # Instalar o pacote nbconvert
 nbconvert
+
+pandas
+scikit-learn
