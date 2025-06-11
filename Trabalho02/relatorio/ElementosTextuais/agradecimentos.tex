@@ -1,19 +1,11 @@
 % ...existing code dos agradecimentos...
 
-Se você já instalou o `chktex`, adicionou ao PATH, reiniciou o VS Code e ainda aparece "chktex could not be found", tente:
+Se você já fez todas as configurações, instalou o `chktex`, colocou no PATH, reiniciou o VS Code, configurou o caminho corretamente e mesmo assim o aviso "chktex could not be found" continua aparecendo, pode ser uma limitação do próprio VS Code ou da extensão LaTeX Workshop em reconhecer o executável em alguns ambientes.
 
-1. Abra o terminal do VS Code e digite `chktex --version` para garantir que o comando funciona no terminal integrado do VS Code.
-2. Se funcionar no terminal, mas não no VS Code, vá em `File > Preferences > Settings` e pesquise por `latex-workshop.linter.chktex.path`. Configure o caminho completo para o executável, por exemplo:
-   - No Windows: `C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\chktex.exe` (ajuste conforme sua instalação)
-   - No Linux/Mac: `/usr/bin/chktex` ou o caminho retornado por `which chktex`
-3. Reinicie o VS Code após alterar as configurações.
-4. Certifique-se de que o arquivo `.tex` está aberto e salvo para que o LaTeX Workshop tente rodar o linter.
+**Possíveis alternativas:**
+- Ignore o aviso, pois ele não impede a compilação do PDF nem afeta o resultado final do seu trabalho.
+- Faça a checagem manualmente rodando `chktex arquivo.tex` no terminal, se desejar.
+- Se o linter não funcionar, continue editando normalmente e foque apenas na compilação do LaTeX.
 
-No VS Code, configure o caminho do `chktex` **sem aspas**. Exemplo:
-
-C:\\Program Files\\MiKTeX\\miktex\\bin\\x64\\chktex.exe
-
-Não use aspas nem simples nem duplas.
-
-Se ainda assim não funcionar, tente reinstalar o LaTeX Workshop ou o próprio `chktex` e verifique se há conflitos de PATH (às vezes, múltiplas instalações do LaTeX podem causar problemas).
+Esse aviso não impede que você gere o PDF nem compromete a entrega do seu relatório.
 
