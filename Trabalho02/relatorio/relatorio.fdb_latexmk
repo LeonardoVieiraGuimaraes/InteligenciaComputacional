@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex relatorio"] 1749598966.45784 "relatorio.aux" "relatorio.bbl" "relatorio" 1749598969.81114 0
+["bibtex relatorio"] 1749598966.45784 "relatorio.aux" "relatorio.bbl" "relatorio" 1749611877.75223 0
   "./ElementosTextuais/referencias.bib" 1749598652 3143 28db990b36506e93afdf6d886e3242ee ""
   "C:/Program Files/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "relatorio.aux" 1749598968 5234 5bb81d523b68770721dea9bafbd7ff66 "pdflatex"
+  "relatorio.aux" 1749611876 5234 5bb81d523b68770721dea9bafbd7ff66 "pdflatex"
   (generated)
   "relatorio.bbl"
   "relatorio.blg"
   (rewritten before read)
-["pdflatex"] 1749598967.00435 "d:/GitHub/DoutoradoCefet/InteligenciaComputacional/Trabalho02/relatorio/relatorio.tex" "relatorio.pdf" "relatorio" 1749598969.81228 0
+["pdflatex"] 1749611875.5112 "d:/GitHub/DoutoradoCefet/InteligenciaComputacional/Trabalho02/relatorio/relatorio.tex" "relatorio.pdf" "relatorio" 1749611877.75311 0
   "../img/erro_takagi_sugeno2.png" 1749598186 92462 05abe66d05c45e34775b832e7c008829 ""
   "../img/funcoes_pertinencia_mamdani2.png" 1749598078 119405 4f9e5a1420d4c008ff824f03f7fc4509 ""
   "../img/fx_aprox_1ordem_takagi_sugeno2.png" 1749598184 46384 1a45173213af835ed20d8c0142fb56ec ""
@@ -99,7 +99,7 @@
   "C:/Users/leona/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1730544106 4023 2c9f39712cf7b43d3eb93a8bbd5c8f67 ""
   "C:/Users/leona/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1716480499 29785 9f93ab201fe5dd053afcc6c1bcf7d266 ""
   "C:/Users/leona/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "ElementosTextuais/agradecimentos.tex" 1749598826 41 d24214cfc69ea0a86b5a1e40b2b876c8 ""
+  "ElementosTextuais/agradecimentos.tex" 1749611874 65 23ce3c3b2540cc72acf0502669a508d8 ""
   "ElementosTextuais/conclusao.tex" 1749598830 1368 ecad674026bc639dd82673aa173549ff ""
   "ElementosTextuais/discussao.tex" 1749598830 1910 aa76ac397bbf16be3d2fbe770aeff920 ""
   "ElementosTextuais/introducao.tex" 1749598829 1637 14325f9c2e027872da7d2bdc59ecfb13 ""
@@ -108,7 +108,7 @@
   "ElementosTextuais/resultados.tex" 1749598829 3987 ced6fe3380eea91cf882d4e0ec4997f5 ""
   "ElementosTextuais/resumo.tex" 1749598959 2201 0cd436223a57a34447bcecea52f54825 ""
   "d:/GitHub/DoutoradoCefet/InteligenciaComputacional/Trabalho02/relatorio/relatorio.tex" 1749598824 1564 87f6d01e78ea52ecd758fba4a803d3ff ""
-  "relatorio.aux" 1749598968 5234 5bb81d523b68770721dea9bafbd7ff66 "pdflatex"
+  "relatorio.aux" 1749611876 5234 5bb81d523b68770721dea9bafbd7ff66 "pdflatex"
   "relatorio.bbl" 1749598966 2045 b4cf157ed7578344a1758bee66de2314 "bibtex relatorio"
   "relatorio.tex" 1749598824 1564 87f6d01e78ea52ecd758fba4a803d3ff ""
   (generated)

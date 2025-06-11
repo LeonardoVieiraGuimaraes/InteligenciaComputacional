@@ -1,2 +1,2 @@
-\beamer@sectionintoc {1}{Sistema Mamdani}{6}{0}{1}
-\beamer@sectionintoc {2}{Sistema Takagi-Sugeno}{15}{0}{2}
+\beamer@sectionintoc {1}{Sistema Mamdani}{3}{0}{1}
+\beamer@sectionintoc {2}{Sistema Takagi-Sugeno}{7}{0}{2}
