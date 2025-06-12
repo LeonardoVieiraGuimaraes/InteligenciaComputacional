@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: relatorio.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
+Reallocating 'name_of_file' (item size: 1) to 30 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: ElementosTextuais/referencias.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in haykin2002adaptive
+
+Done.
+You've used 6 entries,
+            4087 wiz_defined-function locations,
+            855 strings with 7998 characters,
+and the built_in function-call counts, 3316 in all, are:
+= -- 261
+> -- 59
+< -- 22
++ -- 32
+- -- 10
+* -- 155
+:= -- 550
+add.period$ -- 12
+call.type$ -- 6
+change.case$ -- 4
+chr.to.int$ -- 48
+cite$ -- 7
+duplicate$ -- 246
+empty$ -- 287
+format.name$ -- 13
+if$ -- 747
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 40
+newline$ -- 41
+num.names$ -- 6
+pop$ -- 97
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 260
+stack$ -- 0
+substring$ -- 116
+swap$ -- 176
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 6
+warning$ -- 1
+while$ -- 14
+width$ -- 7
+write$ -- 73
+(There was 1 warning)

@@ -1,0 +1,205 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usefonttheme{professionalfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\usepackage{microtype}
+
+\title[Sistemas Fuzzy Mamdani e Takagi-Sugeno]{Sistemas Fuzzy Mamdani e Takagi-Sugeno}
+\author[Leonardo V. Guimarães]{Leonardo Vieira Guimarães}
+\institute[CEFET-MG]{Pós-Graduação em Engenharia Elétrica, CEFET-MG}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Sumário}
+    \tableofcontents
+\end{frame}
+
+\section*{Introdução}
+
+\begin{frame}{Contexto e Motivação}
+    \begin{itemize}
+        \item Ambientes fechados exigem controle eficiente de ventilação para conforto térmico e economia de energia.
+        \item Sistemas fuzzy permitem decisões flexíveis e interpretáveis, mesmo com incertezas e subjetividade.
+        \item Dois paradigmas fuzzy: \textbf{Mamdani} (qualitativo) e \textbf{Takagi-Sugeno} (quantitativo/aproximação).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Objetivos}
+    \begin{itemize}
+        \item Desenvolver um sistema fuzzy Mamdani para controle de ventilação em ambientes fechados.
+        \item Implementar um sistema Takagi-Sugeno para aproximação de funções não lineares.
+        \item Analisar o impacto de funções de pertinência, operadores e técnicas de defuzzificação/otimização.
+        \item Comparar desempenho, interpretabilidade e aplicações de cada abordagem.
+    \end{itemize}
+\end{frame}
+
+\section{Sistema Mamdani}
+
+\begin{frame}{Sistema Mamdani: Controle de Ventilação}
+    \begin{block}{Entradas}
+        \begin{itemize}
+            \item Temperatura interna (\(15^\circ\)C a \(35^\circ\)C)
+            \item Umidade relativa (20\% a 100\%)
+            \item Número de pessoas (0 a 20)
+        \end{itemize}
+    \end{block}
+    \begin{block}{Saída}
+        \begin{itemize}
+            \item Intensidade da ventilação: fraca, moderada, forte (0 a 10)
+        \end{itemize}
+    \end{block}
+    \begin{block}{Características}
+        \begin{itemize}
+            \item Funções de pertinência: triangulares
+            \item Base de regras: 9 regras baseadas em conforto térmico
+            \item Operadores: AND (mínimo), OR (máximo, soma)
+            \item Defuzzificação: Centroide, Média do Máximo, Bissetriz
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Particionamento dos Universos de Discurso}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Temperatura:}
+        \begin{itemize}
+            \item Baixa: 15 a 22
+            \item Média: 18 a 30
+            \item Alta: 25 a 35
+        \end{itemize}
+        \textbf{Umidade:}
+        \begin{itemize}
+            \item Baixa: 20 a 45
+            \item Média: 35 a 85
+            \item Alta: 70 a 100
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Pessoas:}
+        \begin{itemize}
+            \item Poucas: 0 a 7
+            \item Moderado: 3 a 17
+            \item Muitas: 12 a 20
+        \end{itemize}
+        \textbf{Ventilação:}
+        \begin{itemize}
+            \item Fraca: 0 a 4
+            \item Moderada: 2 a 8
+            \item Forte: 6 a 10
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Base de Regras Fuzzy - Mamdani}
+    \begin{itemize}
+        \item Se temperatura alta OU umidade alta OU pessoas muitas então ventilação forte
+        \item Se temperatura média E umidade média E pessoas moderado então ventilação moderada
+        \item Se temperatura baixa E umidade baixa E pessoas poucas então ventilação fraca
+        \item Se temperatura alta E umidade baixa então ventilação moderada
+        \item Se temperatura média E pessoas muitas então ventilação forte
+        \item Se umidade alta E pessoas poucas então ventilação moderada
+        \item Se temperatura baixa OU umidade baixa então ventilação fraca
+        \item Se pessoas moderado E umidade média então ventilação moderada
+        \item Se temperatura média E umidade alta então ventilação forte
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo de Inferência Fuzzy (Cenário 1)}
+    \begin{itemize}
+        \item \textbf{Entradas:} temperatura=28, umidade=80, pessoas=15
+        \item \textbf{Fuzzificação:} temp\_media(28) \(\approx\) 0.33, temp\_alta(28) \(\approx\) 0.30, umid\_alta(80) \(\approx\) 0.33, pess\_muitas(15) \(\approx\) 0.37
+        \item \textbf{Regras ativadas:} R1, R2, R5, R8, R9
+        \item \textbf{Agregação:} máximo das saídas das regras ativadas
+        \item \textbf{Defuzzificação:} centroide, média do máximo, bissetriz
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Resultados Mamdani: Técnicas de Defuzzificação}
+    \begin{table}
+    \centering
+    \caption{Resultados dos cenários simulados no sistema Mamdani}
+    \begin{tabular}{@{}cccc@{}}
+    \toprule
+    Cenário & Centroide & Média do Máximo & Bissetriz \\
+    \midrule
+    1 & forte & forte & forte \\
+    2 & moderada & moderada & moderada \\
+    3 & fraca & fraca & fraca \\
+    4 & forte & forte & forte \\
+    5 & forte & forte & forte \\
+    \bottomrule
+    \end{tabular}
+    \end{table}
+    \vspace{0.5em}
+    \begin{itemize}
+        \item Diferenças pequenas entre técnicas de defuzzificação.
+        \item Sistema flexível e interpretável.
+    \end{itemize}
+\end{frame}
+
+\section{Sistema Takagi-Sugeno}
+
+\begin{frame}{Sistema Takagi-Sugeno: Aproximação de Função}
+    \begin{itemize}
+        \item \textbf{Função alvo:} \(f(x) = e^{-x/5} \cdot \sin(3x) + 0.5 \cdot \sin(x)\), \(x \in [0, 10]\)
+        \item 3 regras (Baixo, Médio, Alto)
+        \item Funções de pertinência: Gaussianas, Triangulares, Trapezoidais
+        \item Consequentes: Constantes (ordem zero) e lineares (primeira ordem)
+        \item Otimização: Gradiente descendente para consequentes
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Resultados Takagi-Sugeno}
+    \begin{itemize}
+        \item RMSE (ordem zero, gaussiana): \(\approx 0.46\)
+        \item RMSE (triangular/trapezoidal): \(\approx 0.35\)
+        \item RMSE otimizado (gradiente descendente): \(\approx 0.41\)
+        \item RMSE (primeira ordem, gaussiana): \(\approx 0.41\)
+    \end{itemize}
+    \vspace{0.5em}
+    \textbf{Funções de pertinência e operadores influenciam o desempenho.}
+\end{frame}
+
+\begin{frame}{Comparação Mamdani vs Takagi-Sugeno}
+    \begin{table}
+    \centering
+    \caption{Comparação entre Mamdani e Takagi-Sugeno}
+    \begin{tabular}{@{}lcc@{}}
+    \toprule
+    & \textbf{Mamdani} & \textbf{Takagi-Sugeno} \\
+    \midrule
+    Saída & Qualitativa (fuzzy) & Numérica (precisa) \\
+    Interpretação & Alta & Média/baixa \\
+    Aplicação & Controle, decisão & Aproximação, modelagem \\
+    Defuzzificação & Necessária & Não (ordem zero/1) \\
+    Otimização & Não usual & Recomendada \\
+    \bottomrule
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Conclusões}
+    \begin{itemize}
+        \item Mamdani: eficaz para decisões qualitativas e interpretáveis.
+        \item Takagi-Sugeno: aproxima funções não lineares com boa precisão, especialmente após otimização.
+        \item A escolha das funções de pertinência e operadores influencia o desempenho.
+        \item Sistemas fuzzy são ferramentas poderosas para controle e modelagem.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Perguntas?}
+    \centering
+    \Huge Obrigado!
+\end{frame}
+
+\end{document}

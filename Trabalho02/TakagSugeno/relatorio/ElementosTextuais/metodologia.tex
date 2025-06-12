@@ -1,0 +1,42 @@
+A seguir, descreve-se a metodologia utilizada para a construção, ajuste e avaliação do sistema fuzzy Takagi-Sugeno aplicado à aproximação da função alvo $f(x) = e^{-x/5} \cdot \sin(3x) + 0.5 \cdot \sin(x)$ no intervalo $x \in [0, 10]$.
+
+\subsection{Geração do Conjunto de Dados}
+
+Foram gerados 200 pontos uniformemente espaçados no intervalo $[0, 10]$. Para cada ponto $x_k$, foi calculado o valor da função alvo $f(x_k)$. Esses dados foram utilizados tanto para o treinamento quanto para a avaliação dos modelos fuzzy.
+
+\subsection{Estrutura do Sistema Fuzzy Takagi-Sugeno}
+
+O sistema fuzzy foi estruturado com uma variável de entrada $x$ e uma saída $y \approx f(x)$. Foram consideradas três categorias para $x$ (Baixo, Médio, Alto), implementadas por meio de funções de pertinência gaussianas, triangulares e trapezoidais. O número de funções de pertinência (regras) foi definido como 20 para cobrir todo o intervalo de entrada.
+
+\subsection{Takagi-Sugeno de Ordem Zero}
+
+No modelo de ordem zero, cada regra fuzzy possui um consequente constante $c_i$. A saída do sistema é calculada como a média ponderada dos consequentes pelas pertinências:
+
+\[
+y(x) = \frac{\sum_{i=1}^{n} \mu_i(x) \cdot c_i}{\sum_{i=1}^{n} \mu_i(x)}
+\]
+
+Os consequentes $c_i$ são inicialmente determinados pela média ponderada dos valores da função alvo, considerando a pertinência de cada regra.
+
+\subsection{Takagi-Sugeno de Primeira Ordem}
+
+No modelo de primeira ordem, cada regra fuzzy possui um consequente linear $y = a_i x + b_i$. Os parâmetros $a_i$ e $b_i$ são ajustados por mínimos quadrados ponderados, utilizando os graus de pertinência como pesos. A saída global é dada por:
+
+\[
+y(x) = \frac{\sum_{i=1}^{n} \mu_i(x) \cdot (a_i x + b_i)}{\sum_{i=1}^{n} \mu_i(x)}
+\]
+
+\subsection{Avaliação de Desempenho}
+
+O desempenho dos modelos foi avaliado utilizando o erro quadrático médio (RMSE) entre a saída do sistema fuzzy e a função alvo. O RMSE foi calculado para cada configuração de função de pertinência e para ambos os modelos (ordem zero e primeira ordem).
+
+\subsection{Visualização dos Resultados}
+
+Foram gerados gráficos comparando a função alvo com as aproximações obtidas pelos modelos Takagi-Sugeno de ordem zero e primeira ordem, para cada tipo de função de pertinência. Também foram plotados os erros antes e depois da otimização dos consequentes.
+
+\subsection{Otimização dos Consequentes (Gradiente Descendente)}
+
+Os consequentes do modelo de ordem zero foram otimizados por gradiente descendente, minimizando o RMSE. A atualização dos consequentes foi feita iterativamente, ajustando cada $c_i$ de acordo com o gradiente do erro ponderado pelas pertinências.
+
+
+
