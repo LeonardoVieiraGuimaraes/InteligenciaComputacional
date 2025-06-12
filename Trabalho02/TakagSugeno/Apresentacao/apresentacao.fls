@@ -1,6 +1,6 @@
-PWD d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\Apresentacao
+PWD d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\TakagSugeno\Apresentacao
 INPUT C:\Users\leona\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\Apresentacao\apresentacao.tex
+INPUT d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\TakagSugeno\Apresentacao\apresentacao.tex
 OUTPUT apresentacao.log
 INPUT C:\Program Files\MiKTeX\tex\latex\beamer\beamer.cls
 INPUT C:\Program Files\MiKTeX\tex\latex\beamer\beamer.cls
@@ -360,15 +360,6 @@ INPUT .\apresentacao.nav
 INPUT apresentacao.nav
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
-INPUT C:\Users\leona\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
-INPUT .\apresentacao.toc
-INPUT .\apresentacao.toc
-INPUT apresentacao.toc
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss12.tfm
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
@@ -412,9 +403,101 @@ INPUT C:\Program Files\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Program Files\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmsso10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT .\apresentacao.toc
+INPUT .\apresentacao.toc
+INPUT apresentacao.toc
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
 INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_5.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT ..\img\funcoes_de_pertinencia_gaussianas_20.png
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_5.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_triangulares_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_5.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\funcoes_de_pertinencia_trapezoidais_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_5.png
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmss.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmss.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmss.fd
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmss8.tfm
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_takagi_sugeno2_20.png
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-ts1.enc
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_5.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
+INPUT ..\img\fx_aprox_1ordem_todas_otimizada_takagi_sugeno2_20.png
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss17.tfm
 OUTPUT apresentacao.nav
 OUTPUT apresentacao.toc
@@ -440,6 +523,8 @@ INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmssbx10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmssbx10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsso10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsso10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy8.pfb

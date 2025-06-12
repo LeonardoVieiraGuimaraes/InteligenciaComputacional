@@ -1,2 +1,4 @@
-\beamer@sectionintoc {2}{Sistema Mamdani}{5}{0}{1}
-\beamer@sectionintoc {3}{Sistema Takagi-Sugeno}{10}{0}{2}
+\beamer@sectionintoc {1}{Introdução}{3}{0}{1}
+\beamer@sectionintoc {2}{Metodologia}{4}{0}{2}
+\beamer@sectionintoc {3}{Resultados e Discussão}{7}{0}{3}
+\beamer@sectionintoc {4}{Conclusão}{11}{0}{4}

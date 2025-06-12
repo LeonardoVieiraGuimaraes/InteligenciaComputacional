@@ -32,7 +32,7 @@ O sistema fuzzy Takagi-Sugeno desenvolvido neste trabalho possui a seguinte estr
 
 \subsection{Funções de Pertinência}
 
-Para a modelagem fuzzy, foram utilizadas três famílias de funções de pertinência: gaussianas, triangulares e trapezoidais. O objetivo é comparar o desempenho do sistema em relação ao tipo de função de pertinência adotada. Foram definidos $n=20$ conjuntos fuzzy ao longo do intervalo $x \in [0, 10]$, com parâmetros calculados para garantir cobertura uniforme do domínio.
+Para a modelagem fuzzy, foram utilizadas três famílias de funções de pertinência: gaussianas, triangulares e trapezoidais. O objetivo é comparar o desempenho do sistema em relação ao tipo e à quantidade de funções de pertinência adotadas. Foram definidos dois cenários principais: $n_\text{mfs}=5$ e $n_\text{mfs}=20$ conjuntos fuzzy ao longo do intervalo $x \in [0, 10]$, com parâmetros calculados para garantir cobertura uniforme do domínio.
 
 As funções de pertinência são matematicamente definidas por:
 
@@ -42,7 +42,7 @@ As funções de pertinência são matematicamente definidas por:
     \item \textbf{Trapezoidal:} $\mu(x) = \max\left(0, \min\left(\frac{x-a}{b-a}, 1, \frac{d-x}{d-c}\right)\right)$
 \end{itemize}
 
-A Figura~\ref{fig:fx} mostra a função alvo $f(x)$, enquanto as Figuras~\ref{fig:mf_gaussiana}, \ref{fig:mf_triangular} e \ref{fig:mf_trapezoidal} apresentam, respectivamente, as funções de pertinência gaussianas, triangulares e trapezoidais utilizadas no sistema fuzzy.
+A Figura~\ref{fig:fx} mostra a função alvo $f(x)$. As Figuras~\ref{fig:mf_gaussiana_5}, \ref{fig:mf_triangular_5} e \ref{fig:mf_trapezoidal_5} apresentam as funções de pertinência gaussianas, triangulares e trapezoidais para $n_\text{mfs}=5$. As Figuras~\ref{fig:mf_gaussiana_20}, \ref{fig:mf_triangular_20} e \ref{fig:mf_trapezoidal_20} mostram as mesmas funções para $n_\text{mfs}=20$.
 
 \begin{figure}[!ht]
     \centering
@@ -51,28 +51,51 @@ A Figura~\ref{fig:fx} mostra a função alvo $f(x)$, enquanto as Figuras~\ref{fi
     \label{fig:fx}
 \end{figure}
 
+% n_mfs = 5
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_gaussianas.png}
-    \caption{Funções de pertinência gaussianas utilizadas no sistema fuzzy.}
-    \label{fig:mf_gaussiana}
+    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_gaussianas_5.png}
+    \caption{Funções de pertinência gaussianas para $n_\text{mfs}=5$.}
+    \label{fig:mf_gaussiana_5}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_triangulares.png}
-    \caption{Funções de pertinência triangulares utilizadas no sistema fuzzy.}
-    \label{fig:mf_triangular}
+    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_triangulares_5.png}
+    \caption{Funções de pertinência triangulares para $n_\text{mfs}=5$.}
+    \label{fig:mf_triangular_5}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_trapezoidais.png}
-    \caption{Funções de pertinência trapezoidais utilizadas no sistema fuzzy.}
-    \label{fig:mf_trapezoidal}
+    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_trapezoidais_5.png}
+    \caption{Funções de pertinência trapezoidais para $n_\text{mfs}=5$.}
+    \label{fig:mf_trapezoidal_5}
 \end{figure}
 
-As figuras foram geradas a partir do código Python, utilizando as bibliotecas NumPy e Matplotlib. Cada tipo de função de pertinência foi visualizado separadamente para facilitar a análise e comparação.
+% n_mfs = 20
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_gaussianas_20.png}
+    \caption{Funções de pertinência gaussianas para $n_\text{mfs}=20$.}
+    \label{fig:mf_gaussiana_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_triangulares_20.png}
+    \caption{Funções de pertinência triangulares para $n_\text{mfs}=20$.}
+    \label{fig:mf_triangular_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/funcoes_de_pertinencia_trapezoidais_20.png}
+    \caption{Funções de pertinência trapezoidais para $n_\text{mfs}=20$.}
+    \label{fig:mf_trapezoidal_20}
+\end{figure}
+
+As figuras foram geradas a partir do código Python, utilizando as bibliotecas NumPy e Matplotlib. Cada tipo de função de pertinência foi visualizado separadamente para facilitar a análise e comparação do impacto do número de conjuntos fuzzy na cobertura do domínio.
 
 \subsection{Takagi-Sugeno de Ordem Zero}
 
@@ -97,37 +120,63 @@ c_i = \frac{\sum_{k=1}^{N} \mu_i(x_k) \cdot f(x_k)}{\sum_{k=1}^{N} \mu_i(x_k)}
 
 onde $x_k$ são os pontos do conjunto de dados e $f(x_k)$ os valores da função alvo.
 
-A Figura~\ref{fig:ts_ordem_zero_todas} apresenta a aproximação da função alvo utilizando o sistema Takagi-Sugeno de ordem zero para diferentes tipos de funções de pertinência.
+Para analisar o impacto do número de conjuntos fuzzy, foram considerados dois cenários: $n_\text{mfs}=5$ e $n_\text{mfs}=20$. A Figura~\ref{fig:ts_ordem_zero_todas_5_20} apresenta, lado a lado, a aproximação da função alvo utilizando o sistema Takagi-Sugeno de ordem zero para diferentes tipos de funções de pertinência e para ambos os valores de $n_\text{mfs}$.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_todas_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (ordem zero) para diferentes funções de pertinência.}
-    \label{fig:ts_ordem_zero_todas}
+    \includegraphics[width=0.48\textwidth]{../img/fx_aprox_ordem_zero_todas_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/fx_aprox_ordem_zero_todas_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) para diferentes funções de pertinência: à esquerda $n_\text{mfs}=5$ e à direita $n_\text{mfs}=20$.}
+    \label{fig:ts_ordem_zero_todas_5_20}
 \end{figure}
 
-As Figuras~\ref{fig:ts_ordem_zero_gaussiana}, \ref{fig:ts_ordem_zero_triangular} e \ref{fig:ts_ordem_zero_trapezoidal} mostram detalhadamente a aproximação para cada tipo de função de pertinência:
+Além disso, as Figuras~\ref{fig:ts_ordem_zero_gaussiana_5}, \ref{fig:ts_ordem_zero_triangular_5} e \ref{fig:ts_ordem_zero_trapezoidal_5} mostram detalhadamente a aproximação para cada tipo de função de pertinência com $n_\text{mfs}=5$, enquanto as Figuras~\ref{fig:ts_ordem_zero_gaussiana_20}, \ref{fig:ts_ordem_zero_triangular_20} e \ref{fig:ts_ordem_zero_trapezoidal_20} apresentam os resultados para $n_\text{mfs}=20$.
 
+% n_mfs = 5
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_gaussiana_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (ordem zero) - Gaussiana.}
-    \label{fig:ts_ordem_zero_gaussiana}
-\end{figure}
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_triangular_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (ordem zero) - Triangular.}
-    \label{fig:ts_ordem_zero_triangular}
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_gaussiana_takagi_sugeno2_5.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) - Gaussiana, $n_\text{mfs}=5$.}
+    \label{fig:ts_ordem_zero_gaussiana_5}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_trapezoidal_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (ordem zero) - Trapezoidal.}
-    \label{fig:ts_ordem_zero_trapezoidal}
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_triangular_takagi_sugeno2_5.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) - Triangular, $n_\text{mfs}=5$.}
+    \label{fig:ts_ordem_zero_triangular_5}
 \end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_trapezoidal_takagi_sugeno2_5.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) - Trapezoidal, $n_\text{mfs}=5$.}
+    \label{fig:ts_ordem_zero_trapezoidal_5}
+\end{figure}
+
+% n_mfs = 20
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_gaussiana_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) - Gaussiana, $n_\text{mfs}=20$.}
+    \label{fig:ts_ordem_zero_gaussiana_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_triangular_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) - Triangular, $n_\text{mfs}=20$.}
+    \label{fig:ts_ordem_zero_triangular_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_trapezoidal_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (ordem zero) - Trapezoidal, $n_\text{mfs}=20$.}
+    \label{fig:ts_ordem_zero_trapezoidal_20}
+\end{figure}
+
+Observa-se que o aumento do número de funções de pertinência ($n_\text{mfs}$) resulta em uma aproximação mais precisa da função alvo, independentemente do tipo de função de pertinência utilizada.
 
 
 \subsection{Takagi-Sugeno de Primeira Ordem}
@@ -159,42 +208,65 @@ b_i
 
 em que $X$ é a matriz de entrada (com coluna de $x$ e coluna de 1's), $W_i$ é a matriz diagonal dos pesos (graus de pertinência) e $y$ é o vetor de valores da função alvo.
 
-A Figura~\ref{fig:ts_1ordem_todas} apresenta a aproximação da função alvo utilizando o sistema Takagi-Sugeno de primeira ordem para diferentes tipos de funções de pertinência.
+Para analisar o impacto do número de conjuntos fuzzy, foram considerados dois cenários: $n_\text{mfs}=5$ e $n_\text{mfs}=20$. A Figura~\ref{fig:ts_1ordem_todas_5_20} apresenta, lado a lado, a aproximação da função alvo utilizando o sistema Takagi-Sugeno de primeira ordem para diferentes tipos de funções de pertinência e para ambos os valores de $n_\text{mfs}$.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_todas_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (primeira ordem) para diferentes funções de pertinência.}
-    \label{fig:ts_1ordem_todas}
+    \includegraphics[width=0.48\textwidth]{../img/fx_aprox_1ordem_todas_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/fx_aprox_1ordem_todas_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) para diferentes funções de pertinência: à esquerda $n_\text{mfs}=5$ e à direita $n_\text{mfs}=20$.}
+    \label{fig:ts_1ordem_todas_5_20}
 \end{figure}
 
-As Figuras~\ref{fig:ts_1ordem_gaussiana}, \ref{fig:ts_1ordem_triangular} e \ref{fig:ts_1ordem_trapezoidal} mostram detalhadamente a aproximação para cada tipo de função de pertinência:
+Além disso, as Figuras~\ref{fig:ts_1ordem_gaussiana_5}, \ref{fig:ts_1ordem_triangular_5} e \ref{fig:ts_1ordem_trapezoidal_5} mostram detalhadamente a aproximação para cada tipo de função de pertinência com $n_\text{mfs}=5$, enquanto as Figuras~\ref{fig:ts_1ordem_gaussiana_20}, \ref{fig:ts_1ordem_triangular_20} e \ref{fig:ts_1ordem_trapezoidal_20} apresentam os resultados para $n_\text{mfs}=20$.
 
+% n_mfs = 5
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_gaussiana_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Gaussiana.}
-    \label{fig:ts_1ordem_gaussiana}
-\end{figure}
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_triangular_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Triangular.}
-    \label{fig:ts_1ordem_triangular}
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_gaussiana_takagi_sugeno2_5.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Gaussiana, $n_\text{mfs}=5$.}
+    \label{fig:ts_1ordem_gaussiana_5}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_trapezoidal_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Trapezoidal.}
-    \label{fig:ts_1ordem_trapezoidal}
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_triangular_takagi_sugeno2_5.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Triangular, $n_\text{mfs}=5$.}
+    \label{fig:ts_1ordem_triangular_5}
 \end{figure}
 
-Observa-se que, ao utilizar consequentes lineares, o sistema fuzzy é capaz de obter uma aproximação ainda mais precisa da função alvo, especialmente quando comparado ao modelo de ordem zero.
-Observa-se que, ao utilizar consequentes lineares, o sistema fuzzy é capaz de obter uma aproximação ainda mais precisa da função alvo, especialmente quando comparado ao modelo de ordem zero.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_trapezoidal_takagi_sugeno2_5.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Trapezoidal, $n_\text{mfs}=5$.}
+    \label{fig:ts_1ordem_trapezoidal_5}
+\end{figure}
 
-\subsection{Avaliação de Desempenho}
+% n_mfs = 20
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_gaussiana_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Gaussiana, $n_\text{mfs}=20$.}
+    \label{fig:ts_1ordem_gaussiana_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_triangular_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Triangular, $n_\text{mfs}=20$.}
+    \label{fig:ts_1ordem_triangular_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_1ordem_trapezoidal_takagi_sugeno2_20.png}
+    \caption{Aproximação Takagi-Sugeno (primeira ordem) - Trapezoidal, $n_\text{mfs}=20$.}
+    \label{fig:ts_1ordem_trapezoidal_20}
+\end{figure}
+
+Observa-se que, ao utilizar consequentes lineares, o sistema fuzzy é capaz de obter uma aproximação ainda mais precisa da função alvo, especialmente quando comparado ao modelo de ordem zero. O aumento do número de funções de pertinência ($n_\text{mfs}$) também contribui para uma redução significativa do erro, independentemente do tipo de função de pertinência utilizada.
+
+\subsection{Avaliação de Desempenho (Sem Otimização dos Consequentes)}
 
 Para avaliar o desempenho dos modelos Takagi-Sugeno de ordem zero e de primeira ordem, foi utilizado o erro quadrático médio (RMSE) entre a saída do sistema fuzzy e a função alvo $f(x)$. O RMSE é calculado por:
 
@@ -204,24 +276,37 @@ Para avaliar o desempenho dos modelos Takagi-Sugeno de ordem zero e de primeira 
 
 onde $y_k$ representa o valor real da função alvo e $\hat{y}_k$ o valor estimado pelo modelo.
 
-Os resultados obtidos para cada configuração de função de pertinência estão apresentados na Tabela~\ref{tab:rmse_ts}.
+A Tabela~\ref{tab:rmse_sem_otimizacao} apresenta os valores de RMSE obtidos para cada configuração de função de pertinência, considerando $n_\text{mfs}=5$ e $n_\text{mfs}=20$, sem otimização dos consequentes (apenas com o ajuste inicial):
 
 \begin{table}[H]
     \centering
-    \caption{RMSE para os modelos Takagi-Sugeno de ordem zero e primeira ordem.}
-    \label{tab:rmse_ts}
-    \begin{tabular}{lcc}
+    \caption{RMSE para os modelos Takagi-Sugeno de ordem zero (sem otimização) e primeira ordem, para $n_\text{mfs}=5$ e $n_\text{mfs}=20$.}
+    \label{tab:rmse_sem_otimizacao}
+    \begin{tabular}{llcc}
         \toprule
-        \textbf{Função de Pertinência} & \textbf{Ordem Zero} & \textbf{Primeira Ordem} \\
+        \textbf{$n_\text{mfs}$} & \textbf{Função de Pertinência} & \textbf{Ordem Zero} & \textbf{Primeira Ordem} \\
         \midrule
-        Gaussiana   & 0.16166 & 0.05076 \\
-        Triangular  & 0.12616 & 0.03851 \\
-        Trapezoidal & 0.21384 & 0.08118 \\
+        \multirow{3}{*}{5}  & Gaussiana   & 0.38126 & 0.32552 \\
+                            & Triangular  & 0.40072 & 0.32132 \\
+                            & Trapezoidal & 0.41274 & 0.34499 \\
+        \midrule
+        \multirow{3}{*}{20} & Gaussiana   & 0.16166 & 0.05076 \\
+                            & Triangular  & 0.12616 & 0.03851 \\
+                            & Trapezoidal & 0.21384 & 0.08118 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-Observa-se que o modelo de primeira ordem apresenta desempenho significativamente superior (menor RMSE) em relação ao modelo de ordem zero para todos os tipos de funções de pertinência. Entre as funções avaliadas, a triangular apresentou o menor erro em ambas as configurações.
+A análise dos resultados permite destacar os seguintes pontos:
+
+\begin{itemize}
+    \item O aumento do número de funções de pertinência ($n_\text{mfs}$) reduz significativamente o RMSE em todas as configurações, indicando maior capacidade de aproximação do sistema fuzzy.
+    \item O modelo Takagi-Sugeno de primeira ordem apresenta sempre o menor erro, especialmente para $n_\text{mfs}=20$, mostrando a vantagem do consequente linear.
+    \item Mesmo sem otimização adicional, o modelo de ordem zero já apresenta desempenho razoável, mas a diferença para o modelo de primeira ordem é mais acentuada quando se utiliza mais conjuntos fuzzy.
+    \item Entre as funções avaliadas, a triangular apresentou o menor erro em ambas as configurações, especialmente para $n_\text{mfs}=20$.
+\end{itemize}
+
+Esses resultados evidenciam que, mesmo sem otimização dos consequentes, tanto o número de conjuntos fuzzy quanto o tipo de função de pertinência têm grande influência na qualidade da aproximação da função alvo.
 
 \subsection{Otimização dos Consequentes (Gradiente Descendente)}
 
@@ -239,45 +324,53 @@ onde $\eta$ é a taxa de aprendizado. O gradiente para cada consequente é calcu
 \frac{\partial \mathrm{RMSE}}{\partial c_i} \approx \frac{1}{N} \sum_{k=1}^N \mu_i(x_k) \cdot (y_{\text{pred}}(x_k) - f(x_k))
 \]
 
-Após a otimização, os valores de RMSE para cada função de pertinência foram reduzidos, conforme apresentado abaixo:
+A Tabela~\ref{tab:rmse_otimizacao} apresenta os valores de RMSE antes e depois da otimização dos consequentes para cada função de pertinência, considerando $n_\text{mfs}=5$ e $n_\text{mfs}=20$. Também são apresentados os valores para o modelo de primeira ordem, antes e depois da otimização dos consequentes lineares via gradiente descendente.
 
-\begin{verbatim}
-RMSE Takagi-Sugeno Ordem Zero (após otimização):
-  Gaussiana   : 0.05382
-  Triangular  : 0.03819
-  Trapezoidal : 0.08097
-\end{verbatim}
+\begin{table*}[ht]
+    \centering
+    \caption{RMSE dos modelos Takagi-Sugeno de ordem zero e primeira ordem, antes e depois da otimização dos consequentes, para diferentes funções de pertinência e valores de $n_\text{mfs}$.}
+    \label{tab:rmse_otimizacao}
+    \begin{tabular}{llcccc}
+        \toprule
+        \textbf{$n_\text{mfs}$} & \textbf{Função de Pertinência} & \textbf{Ordem Zero} & \textbf{Ordem Zero (Otimiz.)} & \textbf{Primeira Ordem} & \textbf{Primeira Ordem (Otimiz.)} \\
+        \midrule
+        \multirow{3}{*}{5}  & Gaussiana   & 0.38126 & 0.34046 & 0.32552 & 0.31143 \\
+                            & Triangular  & 0.40072 & 0.38199 & 0.32132 & 0.31674 \\
+                            & Trapezoidal & 0.41274 & 0.35839 & 0.34499 & 0.33566 \\
+        \midrule
+        \multirow{3}{*}{20} & Gaussiana   & 0.16166 & 0.07545 & 0.05076 & 0.02901 \\
+                            & Triangular  & 0.12616 & 0.06510 & 0.03851 & 0.03103 \\
+                            & Trapezoidal & 0.21384 & 0.06829 & 0.08118 & 0.04117 \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
 
-A Figura~\ref{fig:ts_ordem_zero_otimizada} mostra a aproximação da função alvo após a otimização dos consequentes para cada tipo de função de pertinência.
+Os resultados mostram que a otimização dos consequentes reduz significativamente o RMSE para ambos os modelos, especialmente quando se utiliza um maior número de funções de pertinência ($n_\text{mfs}=20$). O modelo de ordem zero otimizado se aproxima do desempenho do modelo de primeira ordem, enquanto a otimização dos consequentes lineares torna o modelo de primeira ordem ainda mais preciso.
+
+Para ilustrar o efeito da otimização, as Figuras~\ref{fig:erro_ordem_zero_gaussiana_5_20}, \ref{fig:erro_ordem_zero_triangular_5_20} e \ref{fig:erro_ordem_zero_trapezoidal_5_20} apresentam os gráficos do erro (diferença entre a saída do sistema e a função alvo) antes e depois da otimização dos consequentes, para $n_\text{mfs}=5$ e $n_\text{mfs}=20$.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_otimizada_takagi_sugeno2.png}
-    \caption{Aproximação Takagi-Sugeno ordem zero após otimização dos consequentes para diferentes funções de pertinência.}
-    \label{fig:ts_ordem_zero_otimizada}
-\end{figure}
-
-As Figuras~\ref{fig:ts_ordem_zero_otimizada_gaussiana}, \ref{fig:ts_ordem_zero_otimizada_triangular} e \ref{fig:ts_ordem_zero_otimizada_trapezoidal} detalham o resultado para cada função de pertinência:
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_otimizada_gaussiana_takagi_sugeno2.png}
-    \caption{Aproximação TS ordem zero otimizada - Gaussiana.}
-    \label{fig:ts_ordem_zero_otimizada_gaussiana}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_gaussiana_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_gaussiana_takagi_sugeno2_20.png}
+    \caption{Erro TS Ordem Zero - Gaussiana: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$. Comparação do erro antes e depois da otimização dos consequentes.}
+    \label{fig:erro_ordem_zero_gaussiana_5_20}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_otimizada_triangular_takagi_sugeno2.png}
-    \caption{Aproximação TS ordem zero otimizada - Triangular.}
-    \label{fig:ts_ordem_zero_otimizada_triangular}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_triangular_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_triangular_takagi_sugeno2_20.png}
+    \caption{Erro TS Ordem Zero - Triangular: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$. Comparação do erro antes e depois da otimização dos consequentes.}
+    \label{fig:erro_ordem_zero_triangular_5_20}
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.45\textwidth]{../img/fx_aprox_ordem_zero_otimizada_trapezoidal_takagi_sugeno2.png}
-    \caption{Aproximação TS ordem zero otimizada - Trapezoidal.}
-    \label{fig:ts_ordem_zero_otimizada_trapezoidal}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_trapezoidal_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_trapezoidal_takagi_sugeno2_20.png}
+    \caption{Erro TS Ordem Zero - Trapezoidal: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$. Comparação do erro antes e depois da otimização dos consequentes.}
+    \label{fig:erro_ordem_zero_trapezoidal_5_20}
 \end{figure}
 
-Observa-se que a otimização dos consequentes reduz significativamente o erro, tornando o modelo de ordem zero competitivo com o de primeira ordem, especialmente para funções de pertinência triangulares.
+Observa-se que a otimização dos consequentes reduz significativamente o erro ao longo de todo o domínio, especialmente para $n_\text{mfs}=20$, tornando o modelo de ordem zero competitivo com o de primeira ordem. Além disso, a otimização dos consequentes lineares no modelo de primeira ordem proporciona um ganho adicional de desempenho, atingindo valores de RMSE ainda menores.

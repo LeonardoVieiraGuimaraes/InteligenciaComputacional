@@ -1,21 +1,57 @@
-Neste trabalho, foi implementado e avaliado um sistema fuzzy Takagi-Sugeno para a aproximação de uma função não linear, utilizando tanto consequentes constantes (ordem zero) quanto lineares (primeira ordem) e diferentes tipos de funções de pertinência (gaussiana, triangular e trapezoidal).
+Neste trabalho, foi implementado e avaliado um sistema fuzzy Takagi-Sugeno para a aproximação de uma função não linear, considerando tanto consequentes constantes (ordem zero) quanto lineares (primeira ordem), com diferentes tipos de funções de pertinência (gaussiana, triangular e trapezoidal) e dois cenários principais: $n_\text{mfs}=5$ e $n_\text{mfs}=20$.
 
-Os resultados demonstraram que o modelo de primeira ordem apresenta desempenho superior em relação ao de ordem zero, alcançando menores valores de RMSE para todas as funções de pertinência avaliadas. Destaca-se também que a otimização dos consequentes do modelo de ordem zero, por meio de gradiente descendente, proporcionou uma redução significativa do erro, tornando-o competitivo com o modelo de primeira ordem, especialmente quando utilizadas funções de pertinência triangulares.
+Os resultados obtidos, sintetizados na Tabela~\ref{tab:rmse_otimizacao}, mostram que o modelo de primeira ordem apresenta desempenho superior ao de ordem zero em todos os casos, especialmente quando se utiliza um maior número de funções de pertinência. Destaca-se que, para $n_\text{mfs}=20$, os valores de RMSE foram significativamente reduzidos, evidenciando a importância do número de conjuntos fuzzy para a qualidade da aproximação.
 
-Além disso, observou-se que a escolha adequada das funções de pertinência e o ajuste dos parâmetros do sistema são fundamentais para a qualidade da aproximação. O sistema Takagi-Sugeno mostrou-se eficiente e flexível, sendo capaz de aproximar funções não lineares com boa precisão mesmo com um número reduzido de regras.
+A otimização dos consequentes do modelo de ordem zero, por meio de gradiente descendente, proporcionou uma redução expressiva do erro, tornando-o competitivo com o modelo de primeira ordem, principalmente para funções de pertinência triangulares e gaussianas. Da mesma forma, a otimização dos consequentes lineares no modelo de primeira ordem resultou nos menores valores de RMSE observados.
 
-Para ilustrar o impacto da otimização dos consequentes, a Figura~\ref{fig:erro_ordem_zero_otimizacao} apresenta os gráficos do erro antes e depois da otimização para cada tipo de função de pertinência no modelo de ordem zero.
+As Figuras~\ref{fig:erro_ordem_zero_gaussiana_5_20}, \ref{fig:erro_ordem_zero_triangular_5_20} e \ref{fig:erro_ordem_zero_trapezoidal_5_20} ilustram o comportamento do erro antes e depois da otimização dos consequentes para cada tipo de função de pertinência e para ambos os valores de $n_\text{mfs}$. Já as Figuras~\ref{fig:erro_1ordem_gaussiana_antes_depois}, \ref{fig:erro_1ordem_triangular_antes_depois} e \ref{fig:erro_1ordem_trapezoidal_antes_depois} apresentam a evolução do erro para o modelo de primeira ordem, também antes e após a otimização.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.32\textwidth]{../img/erro_ordem_zero_gaussiana_antes_takagi_sugeno2.png}
-    \includegraphics[width=0.32\textwidth]{../img/erro_ordem_zero_triangular_antes_takagi_sugeno2.png}
-    \includegraphics[width=0.32\textwidth]{../img/erro_ordem_zero_trapezoidal_antes_takagi_sugeno2.png}
-    \includegraphics[width=0.32\textwidth]{../img/erro_ordem_zero_gaussiana_otimizada_takagi_sugeno2.png}
-    \includegraphics[width=0.32\textwidth]{../img/erro_ordem_zero_triangular_otimizada_takagi_sugeno2.png}
-    \includegraphics[width=0.32\textwidth]{../img/erro_ordem_zero_trapezoidal_otimizada_takagi_sugeno2.png}
-    \caption{Erro do Takagi-Sugeno de ordem zero antes (linha superior) e após (linha inferior) a otimização dos consequentes para funções de pertinência gaussiana, triangular e trapezoidal.}
-    \label{fig:erro_ordem_zero_otimizacao}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_gaussiana_antes_depois_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_gaussiana_antes_depois_takagi_sugeno2_20.png}
+    \caption{Erro TS Ordem Zero - Gaussiana: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$, antes e depois da otimização dos consequentes.}
+    \label{fig:erro_ordem_zero_gaussiana_5_20}
 \end{figure}
 
-Portanto, conclui-se que o modelo Takagi-Sugeno é uma ferramenta poderosa para problemas de aproximação de funções, e seu desempenho pode ser potencializado com técnicas de otimização e seleção criteriosa dos componentes fuzzy.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_triangular_antes_depois_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_triangular_antes_depois_takagi_sugeno2_20.png}
+    \caption{Erro TS Ordem Zero - Triangular: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$, antes e depois da otimização dos consequentes.}
+    \label{fig:erro_ordem_zero_triangular_5_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_trapezoidal_antes_depois_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_ordem_zero_trapezoidal_antes_depois_takagi_sugeno2_20.png}
+    \caption{Erro TS Ordem Zero - Trapezoidal: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$, antes e depois da otimização dos consequentes.}
+    \label{fig:erro_ordem_zero_trapezoidal_5_20}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/erro_1ordem_gaussiana_antes_depois_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_1ordem_gaussiana_antes_depois_takagi_sugeno2_20.png}
+    \caption{Erro TS Primeira Ordem - Gaussiana: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$, antes e depois da otimização dos consequentes lineares.}
+    \label{fig:erro_1ordem_gaussiana_antes_depois}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/erro_1ordem_triangular_antes_depois_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_1ordem_triangular_antes_depois_takagi_sugeno2_20.png}
+    \caption{Erro TS Primeira Ordem - Triangular: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$, antes e depois da otimização dos consequentes lineares.}
+    \label{fig:erro_1ordem_triangular_antes_depois}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{../img/erro_1ordem_trapezoidal_antes_depois_takagi_sugeno2_5.png}
+    \includegraphics[width=0.48\textwidth]{../img/erro_1ordem_trapezoidal_antes_depois_takagi_sugeno2_20.png}
+    \caption{Erro TS Primeira Ordem - Trapezoidal: à esquerda $n_\text{mfs}=5$, à direita $n_\text{mfs}=20$, antes e depois da otimização dos consequentes lineares.}
+    \label{fig:erro_1ordem_trapezoidal_antes_depois}
+\end{figure}
+
+Em síntese, o sistema fuzzy Takagi-Sugeno mostrou-se eficiente e flexível para a aproximação de funções não lineares, sendo seu desempenho fortemente influenciado pelo número de funções de pertinência, pelo tipo de função adotada e pelas técnicas de ajuste dos consequentes. A utilização de 20 funções de pertinência e a aplicação de métodos de otimização permitiram alcançar erros muito baixos, tornando o modelo adequado para aplicações que exigem alta precisão.

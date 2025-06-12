@@ -2,6 +2,17 @@ A modelagem fuzzy para controle de ventilação em ambientes fechados foi conduz
 
 \subsection{Definição dos Universos de Discurso e Funções de Pertinência}
 
+Os universos de discurso das variáveis foram definidos para cobrir toda a faixa relevante de operação do sistema fuzzy:
+
+\begin{itemize}
+    \item Temperatura: $15 \leq x \leq 40$ ($^\circ$C), \texttt{temp\_univ = np.arange(15, 40, 0.1)}
+    \item Umidade: $20 \leq x \leq 90$ (\%), \texttt{umid\_univ = np.arange(20, 90, 0.1)}
+    \item Pessoas: $0 \leq x \leq 50$, \texttt{pess\_univ = np.arange(0, 50, 0.1)}
+    \item Ventilação: $0 \leq x \leq 100$, \texttt{vent\_univ = np.arange(0, 100, 0.1)}
+\end{itemize}
+
+Esses intervalos garantem que o sistema fuzzy seja aplicável a diferentes ambientes e condições.
+
 O primeiro passo consistiu na definição dos universos de discurso para as variáveis de entrada (temperatura interna, umidade relativa e número de pessoas) e saída (intensidade da ventilação), conforme apresentado na Tabela~\ref{tab:parametros-triangulares}. Cada variável foi particionada em três conjuntos fuzzy, utilizando funções de pertinência triangulares, de modo a garantir transições suaves e sobreposição adequada entre os estados linguísticos. As funções de pertinência são ilustradas nas Figuras~\ref{fig:fp-temp}, \ref{fig:fp-umid}, \ref{fig:fp-pessoas} e \ref{fig:fp-ventilacao}.
 
 \begin{table}[ht]

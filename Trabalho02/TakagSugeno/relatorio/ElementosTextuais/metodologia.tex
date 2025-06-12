@@ -6,7 +6,7 @@ Foram gerados 200 pontos uniformemente espaçados no intervalo $[0, 10]$. Para c
 
 \subsection{Estrutura do Sistema Fuzzy Takagi-Sugeno}
 
-O sistema fuzzy foi estruturado com uma variável de entrada $x$ e uma saída $y \approx f(x)$. Foram consideradas três categorias para $x$ (Baixo, Médio, Alto), implementadas por meio de funções de pertinência gaussianas, triangulares e trapezoidais. O número de funções de pertinência (regras) foi definido como 20 para cobrir todo o intervalo de entrada.
+O sistema fuzzy foi estruturado com uma variável de entrada $x$ e uma saída $y \approx f(x)$. Foram consideradas três categorias para $x$ (Baixo, Médio, Alto), implementadas por meio de funções de pertinência gaussianas, triangulares e trapezoidais. O número de funções de pertinência (regras) foi variado entre 5 e 20, permitindo analisar o impacto da granularidade do particionamento do universo de entrada na qualidade da aproximação.
 
 \subsection{Takagi-Sugeno de Ordem Zero}
 
@@ -28,15 +28,16 @@ y(x) = \frac{\sum_{i=1}^{n} \mu_i(x) \cdot (a_i x + b_i)}{\sum_{i=1}^{n} \mu_i(x
 
 \subsection{Avaliação de Desempenho}
 
-O desempenho dos modelos foi avaliado utilizando o erro quadrático médio (RMSE) entre a saída do sistema fuzzy e a função alvo. O RMSE foi calculado para cada configuração de função de pertinência e para ambos os modelos (ordem zero e primeira ordem).
+O desempenho dos modelos foi avaliado utilizando o erro quadrático médio (RMSE) entre a saída do sistema fuzzy e a função alvo. O RMSE foi calculado para cada configuração de função de pertinência, para ambos os modelos (ordem zero e primeira ordem), e para ambos os cenários de número de regras ($n=5$ e $n=20$).
 
 \subsection{Visualização dos Resultados}
 
-Foram gerados gráficos comparando a função alvo com as aproximações obtidas pelos modelos Takagi-Sugeno de ordem zero e primeira ordem, para cada tipo de função de pertinência. Também foram plotados os erros antes e depois da otimização dos consequentes.
+Foram gerados gráficos comparando a função alvo com as aproximações obtidas pelos modelos Takagi-Sugeno de ordem zero e primeira ordem, para cada tipo de função de pertinência e para cada quantidade de regras. Também foram plotados os erros antes e depois da otimização dos consequentes.
 
 \subsection{Otimização dos Consequentes (Gradiente Descendente)}
 
 Os consequentes do modelo de ordem zero foram otimizados por gradiente descendente, minimizando o RMSE. A atualização dos consequentes foi feita iterativamente, ajustando cada $c_i$ de acordo com o gradiente do erro ponderado pelas pertinências.
 
+\subsection{Análise Comparativa}
 
-
+Os resultados evidenciam a eficiência do sistema fuzzy Takagi-Sugeno na aproximação de funções não lineares, ressaltando a influência do número de funções de pertinência (regras), dos parâmetros do modelo e das técnicas de ajuste dos consequentes na obtenção de aproximações mais precisas. A comparação entre $n=5$ e $n=20$ regras permitiu observar que o aumento do número de funções de pertinência geralmente resulta em melhor desempenho (menor RMSE), ao custo de maior complexidade do modelo.

@@ -1,6 +1,6 @@
-PWD d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\Apresentacao
+PWD d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\Mandani\Apresentacao
 INPUT C:\Users\leona\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\Apresentacao\apresentacao.tex
+INPUT d:\GitHub\DoutoradoCefet\InteligenciaComputacional\Trabalho02\Mandani\Apresentacao\apresentacao.tex
 OUTPUT apresentacao.log
 INPUT C:\Program Files\MiKTeX\tex\latex\beamer\beamer.cls
 INPUT C:\Program Files\MiKTeX\tex\latex\beamer\beamer.cls
@@ -312,6 +312,8 @@ INPUT C:\Program Files\MiKTeX\tex\latex\microtype\microtype-pdftex.def
 INPUT C:\Program Files\MiKTeX\tex\latex\microtype\microtype.cfg
 INPUT C:\Program Files\MiKTeX\tex\latex\microtype\microtype.cfg
 INPUT C:\Program Files\MiKTeX\tex\latex\microtype\microtype.cfg
+INPUT C:\Program Files\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\multirow\multirow.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmss.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmss.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmss.fd
@@ -360,15 +362,6 @@ INPUT .\apresentacao.nav
 INPUT apresentacao.nav
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
-INPUT C:\Users\leona\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
-INPUT .\apresentacao.toc
-INPUT .\apresentacao.toc
-INPUT apresentacao.toc
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss12.tfm
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
@@ -412,9 +405,128 @@ INPUT C:\Program Files\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Program Files\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmsso10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT .\apresentacao.toc
+INPUT .\apresentacao.toc
+INPUT apresentacao.toc
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmss.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmss.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmss.fd
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmss10.tfm
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmtt.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmtt.fd
+INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmtt.fd
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmtt10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-ts1.enc
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rmtt.enc
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmss8.tfm
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_temp_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_umid_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_pessoas_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT ..\img\fp_ventilacao_mamdani2.png
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmssbx10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmssbx10.tfm
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixapessoas.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixaumidade.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\superficie_cenario1_fixatemperatura.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario1.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario2.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario3.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario4.png
+INPUT ..\img\defuzz_cenario5.png
+INPUT ..\img\defuzz_cenario5.png
+INPUT ..\img\defuzz_cenario5.png
+INPUT ..\img\defuzz_cenario5.png
+INPUT ..\img\defuzz_cenario5.png
+INPUT ..\img\defuzz_cenario5.png
+INPUT ..\img\defuzz_cenario5.png
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmss17.tfm
 OUTPUT apresentacao.nav
 OUTPUT apresentacao.toc
@@ -422,14 +534,6 @@ OUTPUT apresentacao.snm
 INPUT apresentacao.aux
 INPUT .\apresentacao.out
 INPUT .\apresentacao.out
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi8.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi8.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr8.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss12.pfb
@@ -440,7 +544,7 @@ INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmss8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmssbx10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmssbx10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsso10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsso10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmtt10.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmtt10.pfb

@@ -9,10 +9,19 @@
 \usepackage{lmodern}
 \usepackage{hyperref}
 \usepackage{microtype}
+\usepackage{multirow}
 
-\title[Sistemas Fuzzy Mamdani e Takagi-Sugeno]{Sistemas Fuzzy Mamdani e Takagi-Sugeno}
-\author[Leonardo V. Guimarães]{Leonardo Vieira Guimarães}
-\institute[CEFET-MG]{Pós-Graduação em Engenharia Elétrica, CEFET-MG}
+\title[Sistema Fuzzy Mamdani]{Sistema Fuzzy Mamdani para Controle de Ventilação em Ambientes Fechados}
+\author[Fabrício Silva, Leonardo Vieira Guimarães]{
+    1\textsuperscript{st} Fabrício Silva \\
+    \textit{Programa de Pós-Graduação em Modelagem Matemática e Computacional} \\
+    \textit{CEFET-MG}
+    \and
+    2\textsuperscript{nd} Leonardo Vieira Guimarães \\
+    \textit{Programa de Pós-Graduação em Modelagem Matemática e Computacional} \\
+    \textit{CEFET-MG}
+}
+\institute[CEFET-MG]{Programa de Pós-Graduação em Modelagem Matemática e Computacional, CEFET-MG}
 \date{\today}
 
 \begin{document}
@@ -25,175 +34,215 @@
     \tableofcontents
 \end{frame}
 
-\section*{Introdução}
+\section{Introdução}
 
-\begin{frame}{Contexto e Motivação}
+\begin{frame}{Motivação}
     \begin{itemize}
-        \item Ambientes fechados exigem controle eficiente de ventilação para conforto térmico e economia de energia.
-        \item Sistemas fuzzy permitem decisões flexíveis e interpretáveis, mesmo com incertezas e subjetividade.
-        \item Dois paradigmas fuzzy: \textbf{Mamdani} (qualitativo) e \textbf{Takagi-Sugeno} (quantitativo/aproximação).
+        \item Ambientes fechados exigem controle eficiente de ventilação para garantir conforto térmico, qualidade do ar e economia de energia.
+        \item Métodos tradicionais podem ser limitados diante das incertezas e variabilidades presentes em ambientes reais.
+        \item Sistemas fuzzy, especialmente o modelo Mamdani, destacam-se por lidar com informações imprecisas e incorporar conhecimento linguístico.
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Objetivos}
+\begin{frame}{Objetivo}
     \begin{itemize}
         \item Desenvolver um sistema fuzzy Mamdani para controle de ventilação em ambientes fechados.
-        \item Implementar um sistema Takagi-Sugeno para aproximação de funções não lineares.
-        \item Analisar o impacto de funções de pertinência, operadores e técnicas de defuzzificação/otimização.
-        \item Comparar desempenho, interpretabilidade e aplicações de cada abordagem.
+        \item Utilizar variáveis de entrada: temperatura, umidade e número de pessoas.
+        \item Demonstrar como a lógica fuzzy pode ser aplicada para tomada de decisão automática, promovendo conforto térmico e eficiência energética.
     \end{itemize}
 \end{frame}
 
-\section{Sistema Mamdani}
+\section{Metodologia}
 
-\begin{frame}{Sistema Mamdani: Controle de Ventilação}
-    \begin{block}{Entradas}
-        \begin{itemize}
-            \item Temperatura interna (\(15^\circ\)C a \(35^\circ\)C)
-            \item Umidade relativa (20\% a 100\%)
-            \item Número de pessoas (0 a 20)
-        \end{itemize}
-    \end{block}
-    \begin{block}{Saída}
-        \begin{itemize}
-            \item Intensidade da ventilação: fraca, moderada, forte (0 a 10)
-        \end{itemize}
-    \end{block}
-    \begin{block}{Características}
-        \begin{itemize}
-            \item Funções de pertinência: triangulares
-            \item Base de regras: 9 regras baseadas em conforto térmico
-            \item Operadores: AND (mínimo), OR (máximo, soma)
-            \item Defuzzificação: Centroide, Média do Máximo, Bissetriz
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}{Particionamento dos Universos de Discurso}
-    \begin{columns}
-        \column{0.5\textwidth}
-        \textbf{Temperatura:}
-        \begin{itemize}
-            \item Baixa: 15 a 22
-            \item Média: 18 a 30
-            \item Alta: 25 a 35
-        \end{itemize}
-        \textbf{Umidade:}
-        \begin{itemize}
-            \item Baixa: 20 a 45
-            \item Média: 35 a 85
-            \item Alta: 70 a 100
-        \end{itemize}
-        \column{0.5\textwidth}
-        \textbf{Pessoas:}
-        \begin{itemize}
-            \item Poucas: 0 a 7
-            \item Moderado: 3 a 17
-            \item Muitas: 12 a 20
-        \end{itemize}
-        \textbf{Ventilação:}
-        \begin{itemize}
-            \item Fraca: 0 a 4
-            \item Moderada: 2 a 8
-            \item Forte: 6 a 10
-        \end{itemize}
-    \end{columns}
-\end{frame}
-
-\begin{frame}{Base de Regras Fuzzy - Mamdani}
+\begin{frame}{Universos de Discurso}
     \begin{itemize}
-        \item Se temperatura alta OU umidade alta OU pessoas muitas então ventilação forte
-        \item Se temperatura média E umidade média E pessoas moderado então ventilação moderada
-        \item Se temperatura baixa E umidade baixa E pessoas poucas então ventilação fraca
-        \item Se temperatura alta E umidade baixa então ventilação moderada
-        \item Se temperatura média E pessoas muitas então ventilação forte
-        \item Se umidade alta E pessoas poucas então ventilação moderada
-        \item Se temperatura baixa OU umidade baixa então ventilação fraca
-        \item Se pessoas moderado E umidade média então ventilação moderada
-        \item Se temperatura média E umidade alta então ventilação forte
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Exemplo de Inferência Fuzzy (Cenário 1)}
-    \begin{itemize}
-        \item \textbf{Entradas:} temperatura=28, umidade=80, pessoas=15
-        \item \textbf{Fuzzificação:} temp\_media(28) \(\approx\) 0.33, temp\_alta(28) \(\approx\) 0.30, umid\_alta(80) \(\approx\) 0.33, pess\_muitas(15) \(\approx\) 0.37
-        \item \textbf{Regras ativadas:} R1, R2, R5, R8, R9
-        \item \textbf{Agregação:} máximo das saídas das regras ativadas
-        \item \textbf{Defuzzificação:} centroide, média do máximo, bissetriz
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Resultados Mamdani: Técnicas de Defuzzificação}
-    \begin{table}
-    \centering
-    \caption{Resultados dos cenários simulados no sistema Mamdani}
-    \begin{tabular}{@{}cccc@{}}
-    \toprule
-    Cenário & Centroide & Média do Máximo & Bissetriz \\
-    \midrule
-    1 & forte & forte & forte \\
-    2 & moderada & moderada & moderada \\
-    3 & fraca & fraca & fraca \\
-    4 & forte & forte & forte \\
-    5 & forte & forte & forte \\
-    \bottomrule
-    \end{tabular}
-    \end{table}
-    \vspace{0.5em}
-    \begin{itemize}
-        \item Diferenças pequenas entre técnicas de defuzzificação.
-        \item Sistema flexível e interpretável.
-    \end{itemize}
-\end{frame}
-
-\section{Sistema Takagi-Sugeno}
-
-\begin{frame}{Sistema Takagi-Sugeno: Aproximação de Função}
-    \begin{itemize}
-        \item \textbf{Função alvo:} \(f(x) = e^{-x/5} \cdot \sin(3x) + 0.5 \cdot \sin(x)\), \(x \in [0, 10]\)
-        \item 3 regras (Baixo, Médio, Alto)
-        \item Funções de pertinência: Gaussianas, Triangulares, Trapezoidais
-        \item Consequentes: Constantes (ordem zero) e lineares (primeira ordem)
-        \item Otimização: Gradiente descendente para consequentes
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Resultados Takagi-Sugeno}
-    \begin{itemize}
-        \item RMSE (ordem zero, gaussiana): \(\approx 0.46\)
-        \item RMSE (triangular/trapezoidal): \(\approx 0.35\)
-        \item RMSE otimizado (gradiente descendente): \(\approx 0.41\)
-        \item RMSE (primeira ordem, gaussiana): \(\approx 0.41\)
+        \item Temperatura: 15 a 40°C \hspace{1em} (\texttt{temp\_univ = np.arange(15, 40, 0.1)})
+        \item Umidade: 20 a 90\% \hspace{1em} (\texttt{umid\_univ = np.arange(20, 90, 0.1)})
+        \item Pessoas: 0 a 50 \hspace{1em} (\texttt{pess\_univ = np.arange(0, 50, 0.1)})
+        \item Ventilação: 0 a 100 \hspace{1em} (\texttt{vent\_univ = np.arange(0, 100, 0.1)})
     \end{itemize}
     \vspace{0.5em}
-    \textbf{Funções de pertinência e operadores influenciam o desempenho.}
+    {\small Esses intervalos garantem que o sistema fuzzy seja aplicável a diferentes ambientes e condições.}
 \end{frame}
 
-\begin{frame}{Comparação Mamdani vs Takagi-Sugeno}
-    \begin{table}
+\begin{frame}{Parâmetros das Funções de Pertinência}
     \centering
-    \caption{Comparação entre Mamdani e Takagi-Sugeno}
-    \begin{tabular}{@{}lcc@{}}
+    \scriptsize
+    \begin{tabular}{llccc}
     \toprule
-    & \textbf{Mamdani} & \textbf{Takagi-Sugeno} \\
+    \textbf{Variável} & \textbf{Conjunto} & \textbf{a} & \textbf{b} & \textbf{c} \\
     \midrule
-    Saída & Qualitativa (fuzzy) & Numérica (precisa) \\
-    Interpretação & Alta & Média/baixa \\
-    Aplicação & Controle, decisão & Aproximação, modelagem \\
-    Defuzzificação & Necessária & Não (ordem zero/1) \\
-    Otimização & Não usual & Recomendada \\
+    Temperatura (°C) & Baixa   & 15.00 & 21.22 & 27.45 \\
+    Temperatura (°C) & Média   & 21.22 & 27.45 & 33.67 \\
+    Temperatura (°C) & Alta    & 27.45 & 33.67 & 39.90 \\
+    Umidade (\%)     & Baixa   & 20.00 & 37.48 & 54.95 \\
+    Umidade (\%)     & Média   & 37.48 & 54.95 & 72.43 \\
+    Umidade (\%)     & Alta    & 54.95 & 72.43 & 89.90 \\
+    Pessoas          & Poucas  & 0.00  & 12.48 & 24.95 \\
+    Pessoas          & Moderado& 12.48 & 24.95 & 37.43 \\
+    Pessoas          & Muitas  & 24.95 & 37.43 & 49.90 \\
+    Ventilação       & Fraca   & 0.00  & 24.98 & 49.95 \\
+    Ventilação       & Moderada& 24.98 & 49.95 & 74.93 \\
+    Ventilação       & Forte   & 49.95 & 74.93 & 99.90 \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \vspace{0.5em}
+
 \end{frame}
 
-\begin{frame}{Conclusões}
+\begin{frame}{Função de Pertinência: Temperatura}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/fp_temp_mamdani2.png}
+    \vspace{0.5em}
+    {\small Funções de pertinência triangulares para a variável temperatura interna.}
+\end{frame}
+
+\begin{frame}{Função de Pertinência: Umidade}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/fp_umid_mamdani2.png}
+    \vspace{0.5em}
+    {\small Funções de pertinência triangulares para a variável umidade relativa.}
+\end{frame}
+
+\begin{frame}{Função de Pertinência: Pessoas}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/fp_pessoas_mamdani2.png}
+    \vspace{0.5em}
+    {\small Funções de pertinência triangulares para a variável número de pessoas.}
+\end{frame}
+
+\begin{frame}{Função de Pertinência: Ventilação}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/fp_ventilacao_mamdani2.png}
+    \vspace{0.5em}
+    {\small Funções de pertinência triangulares para a variável ventilação (saída).}
+\end{frame}
+
+\begin{frame}{Base de Regras Fuzzy}
     \begin{itemize}
-        \item Mamdani: eficaz para decisões qualitativas e interpretáveis.
-        \item Takagi-Sugeno: aproxima funções não lineares com boa precisão, especialmente após otimização.
-        \item A escolha das funções de pertinência e operadores influencia o desempenho.
-        \item Sistemas fuzzy são ferramentas poderosas para controle e modelagem.
+        \item 9 regras baseadas em conforto térmico:
+        \item[] Se temperatura alta OU umidade alta OU pessoas muitas então ventilação forte
+        \item[] Se temperatura média E umidade média E pessoas moderado então ventilação moderada
+        \item[] Se temperatura baixa E umidade baixa E pessoas poucas então ventilação fraca
+        \item[] Se temperatura alta E umidade baixa então ventilação moderada
+        \item[] Se temperatura média E pessoas muitas então ventilação forte
+        \item[] Se umidade alta E pessoas poucas então ventilação moderada
+        \item[] Se temperatura baixa OU umidade baixa então ventilação fraca
+        \item[] Se pessoas moderado E umidade média então ventilação moderada
+        \item[] Se temperatura média E umidade alta então ventilação forte
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Cenários de Teste}
+    \begin{itemize}
+        \item 5 cenários simulados para avaliação do sistema.
+    \end{itemize}
+    \centering
+    \small
+    \begin{tabular}{c|c|c|c}
+    \toprule
+    \textbf{Cenário} & \textbf{Temperatura (°C)} & \textbf{Umidade (\%)} & \textbf{Pessoas} \\
+    \midrule
+    1 & 28 & 80 & 15 \\
+    2 & 22 & 50 & 5  \\
+    3 & 18 & 30 & 2  \\
+    4 & 32 & 60 & 10 \\
+    5 & 25 & 90 & 8  \\
+    \bottomrule
+    \end{tabular}
+\end{frame}
+
+\section{Resultados e Discussão}
+
+\begin{frame}{Superfícies Fuzzy: Temperatura vs Umidade}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/superficie_cenario1_fixapessoas.png}
+    \vspace{0.5em}
+    {\small Superfície fuzzy: ventilação em função de temperatura e umidade (pessoas fixas).}
+\end{frame}
+
+\begin{frame}{Superfícies Fuzzy: Temperatura vs Pessoas}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/superficie_cenario1_fixaumidade.png}
+    \vspace{0.5em}
+    {\small Superfície fuzzy: ventilação em função de temperatura e pessoas (umidade fixa).}
+\end{frame}
+
+\begin{frame}{Superfícies Fuzzy: Umidade vs Pessoas}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/superficie_cenario1_fixatemperatura.png}
+    \vspace{0.5em}
+    {\small Superfície fuzzy: ventilação em função de umidade e pessoas (temperatura fixa).}
+\end{frame}
+
+\begin{frame}{Saída Fuzzy e Defuzzificação: Cenário 1}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/defuzz_cenario1.png}
+    \vspace{0.5em}
+    {\small Saída fuzzy agregada e valor defuzzificado para o Cenário 1.}
+\end{frame}
+
+\begin{frame}{Saída Fuzzy e Defuzzificação: Cenário 2}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/defuzz_cenario2.png}
+    \vspace{0.5em}
+    {\small Saída fuzzy agregada e valor defuzzificado para o Cenário 2.}
+\end{frame}
+
+\begin{frame}{Saída Fuzzy e Defuzzificação: Cenário 3}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/defuzz_cenario3.png}
+    \vspace{0.5em}
+    {\small Saída fuzzy agregada e valor defuzzificado para o Cenário 3.}
+\end{frame}
+
+\begin{frame}{Saída Fuzzy e Defuzzificação: Cenário 4}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/defuzz_cenario4.png}
+    \vspace{0.5em}
+    {\small Saída fuzzy agregada e valor defuzzificado para o Cenário 4.}
+\end{frame}
+
+\begin{frame}{Saída Fuzzy e Defuzzificação: Cenário 5}
+    \centering
+    \includegraphics[width=0.7\textwidth]{../img/defuzz_cenario5.png}
+    \vspace{0.5em}
+    {\small Saída fuzzy agregada e valor defuzzificado para o Cenário 5.}
+\end{frame}
+
+\begin{frame}{Resumo dos Resultados Detalhado}
+    \centering
+    \scriptsize
+    \begin{tabular}{c|c|c|c|c|l|c}
+    \toprule
+    \textbf{Cenário} & \textbf{Temp.} & \textbf{Umid.} & \textbf{Pessoas} & \textbf{Centroide} & \textbf{Regras Ativadas} & \textbf{Ventilação} \\
+    \midrule
+    1 & 28 & 80 & 15 & 62,44 & R1 (0,567), R6 (0,567), R9 (0,567) & Forte \\
+    2 & 22 & 50 & 5  & 24,98 & R3 (0,283), R7 (0,876)             & Fraca \\
+    3 & 18 & 30 & 2  & 24,98 & R3 (0,160), R7 (0,572)             & Fraca \\
+    4 & 32 & 60 & 10 & 66,88 & R1 (0,731), R6 (0,289), R9 (0,269) & Forte \\
+    5 & 25 & 90 & 8  & 24,98 & R7 (0,394)                         & Fraca \\
+    \bottomrule
+    \end{tabular}
+\end{frame}
+
+\begin{frame}{Discussão}
+    \begin{itemize}
+        \item O sistema fuzzy responde adequadamente às diferentes condições ambientais.
+        \item Recomenda ventilação mais intensa para cenários com altas temperaturas, umidade elevada ou maior número de pessoas.
+        \item Ventilação fraca para ambientes amenos ou pouco ocupados.
+        \item Pequenas variações nos valores numéricos não afetam a tendência qualitativa das recomendações.
+    \end{itemize}
+\end{frame}
+
+\section{Conclusão}
+
+\begin{frame}{Conclusão}
+    \begin{itemize}
+        \item O sistema fuzzy Mamdani desenvolvido é robusto, flexível e interpretável.
+        \item Fornece recomendações qualitativas de ventilação adequadas ao conforto térmico e eficiência energética.
+        \item Fácil adaptação a diferentes contextos e requisitos.
+        \item A escolha das funções de pertinência, operadores e técnicas de defuzzificação é fundamental para o desempenho.
     \end{itemize}
 \end{frame}
 
@@ -201,5 +250,6 @@
     \centering
     \Huge Obrigado!
 \end{frame}
+
 
 \end{document}
