@@ -7,3 +7,5 @@ nbconvert
 pandas
 scikit-learn
 ucimlrepo
+scikit-fuzzy
+seaborn
