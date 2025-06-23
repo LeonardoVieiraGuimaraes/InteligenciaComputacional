@@ -6,3 +6,4 @@ nbconvert
 
 pandas
 scikit-learn
+ucimlrepo
