@@ -1,11 +1,29 @@
-numpy
-matplotlib
+# Dependências básicas
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
 
-# Instalar o pacote nbconvert
-nbconvert
+# Machine Learning
+scikit-learn>=1.0.0
 
-pandas
-scikit-learn
-ucimlrepo
-scikit-fuzzy
-seaborn
+# Processamento de dados
+openpyxl>=3.0.0
+xlrd>=2.0.0
+
+# Jupyter
+nbconvert>=6.0.0
+jupyter>=1.0.0
+
+# Datasets UCI
+ucimlrepo>=0.0.3
+
+# Fuzzy (para outros trabalhos)
+scikit-fuzzy>=0.4.0
+
+# Utilitários
+tqdm>=4.60.0
+warnings
+time
+os
+collections

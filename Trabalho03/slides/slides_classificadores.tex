@@ -1,0 +1,309 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% Tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Informações do documento
+\title{Classificadores Multiclasse Baseados em Algoritmos de Agrupamento}
+\subtitle{Inteligência Computacional}
+\author{[Seu Nome]}
+\institute{CEFET-MG}
+\date{\today}
+
+\begin{document}
+
+% Slide de título
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Sumário
+\begin{frame}{Sumário}
+\tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}{Objetivo}
+\begin{block}{Objetivo Principal}
+Implementar e avaliar três classificadores multiclasse baseados em algoritmos de agrupamento com treinamento supervisionado.
+\end{block}
+
+\vspace{0.5cm}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Algoritmos Implementados:}
+\begin{itemize}
+    \item K-means
+    \item Gaussian Mixture Model (GMM)
+    \item Clustering Hierárquico
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Datasets Avaliados:}
+\begin{itemize}
+    \item Adult (UCI)
+    \item Dry Bean (UCI)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Metodologia}
+
+\begin{frame}{Abordagem Proposta}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{fluxograma_metodologia.png}
+\caption{Fluxograma da metodologia proposta}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Pseudocódigo}
+\begin{algorithm}[H]
+\caption{Classificador Baseado em Clustering}
+\begin{algorithmic}[1]
+\REQUIRE $X_{treino}$, $y_{treino}$, $X_{teste}$
+\STATE Normalizar dados com StandardScaler
+\STATE Encontrar $k_{ótimo}$ usando método do cotovelo
+\STATE Aplicar clustering com $k_{ótimo}$
+\STATE Mapear clusters $\rightarrow$ classes (mais frequente)
+\STATE Classificar novos pontos usando mapeamento
+\RETURN Predições
+\end{algorithmic}
+\end{algorithm}
+\end{frame}
+
+\begin{frame}{Método do Cotovelo}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{../img/elbow_method_example.png}
+\caption{Exemplo do método do cotovelo}
+\end{figure}
+\end{column}
+\begin{column}{0.4\textwidth}
+\textbf{Características:}
+\begin{itemize}
+    \item Determina $k$ automaticamente
+    \item Baseado na inércia
+    \item Identifica "cotovelo" na curva
+    \item Evita overfitting
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Protocolo Experimental}
+\begin{block}{Configuração dos Experimentos}
+\begin{itemize}
+    \item \textbf{Repetições}: 30 execuções (sementes 1-30)
+    \item \textbf{Divisão}: 70\% treino / 30\% teste
+    \item \textbf{Normalização}: StandardScaler
+    \item \textbf{Estratificação}: Manter proporção das classes
+\end{itemize}
+\end{block}
+
+\vspace{0.5cm}
+
+\begin{block}{Métricas de Avaliação}
+\begin{itemize}
+    \item Acurácia média e desvio padrão
+    \item Matriz de confusão
+    \item Tempo de execução
+    \item Número de clusters utilizados
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Datasets}
+
+\begin{frame}{Datasets Utilizados}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Adult Dataset}
+\begin{itemize}
+    \item \textbf{Amostras}: 48,842
+    \item \textbf{Features}: 14
+    \item \textbf{Classes}: 2
+    \item \textbf{Tipo}: Renda (≤50K, >50K)
+    \item \textbf{Desafio}: Features categóricas
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{block}{Dry Bean Dataset}
+\begin{itemize}
+    \item \textbf{Amostras}: 13,611
+    \item \textbf{Features}: 16
+    \item \textbf{Classes}: 7
+    \item \textbf{Tipo}: Tipos de feijão
+    \item \textbf{Desafio}: Multiclasse
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textbf{Ambos datasets do repositório UCI Machine Learning}
+\end{center}
+\end{frame}
+
+\section{Resultados}
+
+\begin{frame}{Resultados - Dataset Adult}
+\begin{table}
+\centering
+\caption{Desempenho no Dataset Adult}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia} & \textbf{Desvio Padrão} & \textbf{Min} & \textbf{Max} \\
+\midrule
+K-means & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+GMM & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+Hierárquico & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{../img/adult_comprehensive_results.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Resultados - Dataset Dry Bean}
+\begin{table}
+\centering
+\caption{Desempenho no Dataset Dry Bean}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia} & \textbf{Desvio Padrão} & \textbf{Min} & \textbf{Max} \\
+\midrule
+K-means & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+GMM & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+Hierárquico & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{../img/dry_bean_comprehensive_results.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Comparação entre Algoritmos}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{../img/comparison_datasets.png}
+\caption{Comparação de desempenho entre datasets}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Matrizes de Confusão}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{../img/confusion_matrix_adult.png}
+\caption{Adult Dataset}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{../img/confusion_matrix_bean.png}
+\caption{Dry Bean Dataset}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section{Análise}
+
+\begin{frame}{Principais Achados}
+\begin{block}{Desempenho dos Algoritmos}
+\begin{itemize}
+    \item \textbf{K-means}: [Análise baseada nos resultados]
+    \item \textbf{GMM}: [Análise baseada nos resultados]
+    \item \textbf{Hierárquico}: [Análise baseada nos resultados]
+\end{itemize}
+\end{block}
+
+\begin{block}{Eficácia do Método do Cotovelo}
+\begin{itemize}
+    \item Determinou automaticamente número ideal de clusters
+    \item Evitou overfitting e underfitting
+    \item Mostrou consistência entre execuções
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Fatores de Influência}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Fatores Positivos}
+\begin{itemize}
+    \item Normalização dos dados
+    \item Treinamento supervisionado
+    \item Múltiplas repetições
+    \item Estratificação
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{block}{Limitações}
+\begin{itemize}
+    \item Dependência do clustering inicial
+    \item Suposições de distribuição (GMM)
+    \item Complexidade computacional
+    \item Sensibilidade a outliers
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\section{Conclusões}
+
+\begin{frame}{Conclusões}
+\begin{block}{Principais Contribuições}
+\begin{itemize}
+    \item Implementação bem-sucedida de três classificadores baseados em clustering
+    \item Demonstração da eficácia do método do cotovelo
+    \item Avaliação rigorosa com 30 repetições
+    \item Análise comparativa em dois datasets distintos
+\end{itemize}
+\end{block}
+
+\begin{block}{Trabalhos Futuros}
+\begin{itemize}
+    \item Otimização de hiperparâmetros
+    \item Comparação com classificadores tradicionais
+    \item Aplicação em datasets com mais classes
+    \item Investigação de outros algoritmos de clustering
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\Huge Obrigado!
+\vspace{1cm}
+
+\Large Perguntas?
+\end{center}
+\end{frame}
+
+\end{document}

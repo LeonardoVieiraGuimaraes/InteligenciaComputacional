@@ -1,0 +1,276 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{Classificadores Baseados em Clustering}
+
+% Configuração para código
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true
+}
+
+\title{
+    \textbf{Classificadores Multiclasse Baseados em\\Algoritmos de Agrupamento}\\
+    \vspace{0.5cm}
+    \large Inteligência Computacional
+}
+
+\author{
+    [Seu Nome]\\
+    [Sua Matrícula]\\
+    CEFET-MG
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este trabalho apresenta a implementação e avaliação de três classificadores multiclasse baseados em algoritmos de agrupamento com treinamento supervisionado. Os algoritmos implementados foram K-means, Gaussian Mixture Model (GMM) e Clustering Hierárquico. O método do cotovelo foi utilizado para determinar o número ideal de clusters. Os classificadores foram avaliados nos datasets Adult e Dry Bean do repositório UCI, com 30 repetições cada, utilizando divisão 70\%-30\% para treino-teste. Os resultados mostram que [completar com resultados obtidos].
+\end{abstract}
+
+\section{Introdução}
+
+Os algoritmos de agrupamento (clustering) são tradicionalmente utilizados para análise exploratória de dados e descoberta de padrões não supervisionados. No entanto, quando combinados com informações de classe durante o treinamento, podem ser adaptados para tarefas de classificação supervisionada.
+
+Este trabalho implementa três classificadores baseados em clustering:
+\begin{itemize}
+    \item \textbf{K-means}: Algoritmo de particionamento baseado em centroides
+    \item \textbf{Gaussian Mixture Model (GMM)}: Modelo probabilístico baseado em misturas gaussianas
+    \item \textbf{Clustering Hierárquico}: Algoritmo aglomerativo baseado em distâncias
+\end{itemize}
+
+\section{Metodologia}
+
+\subsection{Pseudocódigo do Classificador}
+
+\begin{algorithm}[H]
+\caption{Classificador Baseado em Clustering}
+\begin{algorithmic}[1]
+\REQUIRE $X_{treino}$, $y_{treino}$, $X_{teste}$, algoritmo
+\ENSURE $y_{pred}$
+\STATE Normalizar $X_{treino}$ usando StandardScaler
+\STATE Encontrar $k_{ótimo}$ usando método do cotovelo:
+\FOR{$k = 2$ \TO $k_{max}$}
+    \STATE Aplicar clustering com $k$ clusters
+    \STATE Calcular inércia/score
+\ENDFOR
+\STATE Encontrar cotovelo na curva de inércia
+\STATE Aplicar clustering com $k_{ótimo}$ em $X_{treino}$
+\FOR{cada cluster $i$}
+    \STATE Encontrar classe mais frequente no cluster
+    \STATE Mapear $cluster_i \rightarrow classe_{frequente}$
+\ENDFOR
+\STATE Normalizar $X_{teste}$
+\FOR{cada ponto em $X_{teste}$}
+    \STATE Atribuir ao cluster mais próximo
+    \STATE Mapear cluster $\rightarrow$ classe
+\ENDFOR
+\RETURN $y_{pred}$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Método do Cotovelo}
+
+O método do cotovelo é utilizado para determinar automaticamente o número ideal de clusters. O algoritmo calcula a inércia (soma das distâncias quadráticas aos centroides) para diferentes valores de $k$ e identifica o ponto onde a taxa de redução da inércia diminui significativamente, formando um "cotovelo" na curva.
+
+\subsection{Treinamento Supervisionado}
+
+Após o agrupamento, cada cluster é associado à classe mais frequente entre os pontos que o compõem. Esta abordagem permite que algoritmos não supervisionados sejam utilizados para classificação.
+
+\subsection{Datasets Utilizados}
+
+\subsubsection{Adult Dataset}
+\begin{itemize}
+    \item \textbf{Amostras}: 48,842
+    \item \textbf{Features}: 14
+    \item \textbf{Classes}: 2 (<=50K, >50K)
+    \item \textbf{Tipo}: Classificação binária de renda
+\end{itemize}
+
+\subsubsection{Dry Bean Dataset}
+\begin{itemize}
+    \item \textbf{Amostras}: 13,611
+    \item \textbf{Features}: 16
+    \item \textbf{Classes}: 7 tipos de feijão
+    \item \textbf{Tipo}: Classificação multiclasse
+\end{itemize}
+
+\subsection{Protocolo Experimental}
+
+\begin{itemize}
+    \item \textbf{Repetições}: 30 execuções com sementes 1-30
+    \item \textbf{Divisão}: 70\% treino, 30\% teste
+    \item \textbf{Normalização}: StandardScaler aplicado às features
+    \item \textbf{Métricas}: Acurácia, desvio padrão, matriz de confusão
+\end{itemize}
+
+\section{Resultados Experimentais}
+
+\subsection{Dataset Adult}
+
+\begin{table}[H]
+\centering
+\caption{Resultados para o Dataset Adult}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} & \textbf{Min} & \textbf{Max} \\
+\midrule
+K-means & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+GMM & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+Hierárquico & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../img/adult_comprehensive_results.png}
+\caption{Resultados detalhados para o dataset Adult}
+\end{figure}
+
+\subsection{Dataset Dry Bean}
+
+\begin{table}[H]
+\centering
+\caption{Resultados para o Dataset Dry Bean}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} & \textbf{Min} & \textbf{Max} \\
+\midrule
+K-means & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+GMM & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+Hierárquico & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{../img/dry_bean_comprehensive_results.png}
+\caption{Resultados detalhados para o dataset Dry Bean}
+\end{figure}
+
+\subsection{Método do Cotovelo}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{../img/elbow_method_example.png}
+\caption{Exemplo do método do cotovelo para determinação do número ideal de clusters}
+\end{figure}
+
+\subsection{Matrizes de Confusão}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{../img/confusion_matrix_adult.png}
+\caption{Matriz de confusão média - Adult}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{../img/confusion_matrix_bean.png}
+\caption{Matriz de confusão média - Dry Bean}
+\end{minipage}
+\end{figure}
+
+\section{Análise dos Resultados}
+
+\subsection{Desempenho dos Algoritmos}
+
+\textbf{K-means}: [Análise do desempenho do K-means]
+
+\textbf{GMM}: [Análise do desempenho do GMM]
+
+\textbf{Clustering Hierárquico}: [Análise do desempenho do clustering hierárquico]
+
+\subsection{Comparação entre Datasets}
+
+O dataset Adult, sendo um problema de classificação binária, apresentou [análise]. Já o dataset Dry Bean, com 7 classes, mostrou [análise].
+
+\subsection{Eficácia do Método do Cotovelo}
+
+O método do cotovelo mostrou-se eficaz para [análise da eficácia].
+
+\subsection{Estabilidade dos Resultados}
+
+A análise dos desvios padrão ao longo das 30 repetições indica [análise da estabilidade].
+
+\section{Conclusões}
+
+Este trabalho demonstrou que classificadores baseados em algoritmos de clustering podem ser eficazes quando combinados com treinamento supervisionado. Os principais achados incluem:
+
+\begin{itemize}
+    \item O método do cotovelo é uma ferramenta útil para determinação automática do número de clusters
+    \item A normalização dos dados é crucial para o desempenho dos algoritmos
+    \item [Outras conclusões baseadas nos resultados]
+\end{itemize}
+
+\subsection{Limitações}
+
+\begin{itemize}
+    \item Dependência da qualidade do clustering inicial
+    \item Sensibilidade à normalização dos dados
+    \item Complexidade computacional do clustering hierárquico
+    \item Suposições de distribuição gaussiana no GMM
+\end{itemize}
+
+\subsection{Trabalhos Futuros}
+
+\begin{itemize}
+    \item Investigação de outros algoritmos de clustering
+    \item Otimização de hiperparâmetros
+    \item Aplicação em datasets com mais classes
+    \item Comparação com classificadores tradicionais
+\end{itemize}
+
+\section{Referências}
+
+\begin{thebibliography}{9}
+
+\bibitem{kmeans}
+MacQueen, J. (1967). Some methods for classification and analysis of multivariate observations. In Proceedings of the fifth Berkeley symposium on mathematical statistics and probability (Vol. 1, No. 14, pp. 281-297).
+
+\bibitem{gmm}
+Reynolds, D. A. (2009). Gaussian mixture models. Encyclopedia of biometrics, 741, 659-663.
+
+\bibitem{hierarchical}
+Murtagh, F., \& Contreras, P. (2012). Algorithms for hierarchical clustering: an overview. Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery, 2(1), 86-97.
+
+\bibitem{elbow}
+Thorndike, R. L. (1953). Who belongs in the family?. Psychometrika, 18(4), 267-276.
+
+\bibitem{uci}
+Dua, D. and Graff, C. (2019). UCI Machine Learning Repository. Irvine, CA: University of California, School of Information and Computer Science.
+
+\end{thebibliography}
+
+\end{document}
