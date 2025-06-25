@@ -1,29 +1,25 @@
 # Dependências básicas
-numpy>=1.21.0
-pandas>=1.3.0
-matplotlib>=3.4.0
-seaborn>=0.11.0
+numpy
+pandas
+matplotlib
+seaborn
 
 # Machine Learning
-scikit-learn>=1.0.0
+scikit-learn
 
 # Processamento de dados
-openpyxl>=3.0.0
-xlrd>=2.0.0
+openpyxl
+xlrd
 
 # Jupyter
-nbconvert>=6.0.0
-jupyter>=1.0.0
+nbconvert
+jupyter
 
 # Datasets UCI
-ucimlrepo>=0.0.3
+# ucimlrep  # Removido pois não existe no PyPI
 
 # Fuzzy (para outros trabalhos)
-scikit-fuzzy>=0.4.0
+scikit-fuzzy
 
 # Utilitários
-tqdm>=4.60.0
-warnings
-time
-os
-collections
+tqdm
