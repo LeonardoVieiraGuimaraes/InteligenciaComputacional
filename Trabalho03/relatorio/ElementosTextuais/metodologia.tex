@@ -1,158 +1,100 @@
-A modelagem fuzzy para controle de ventilação em ambientes fechados foi conduzida com rigor científico, visando garantir clareza, reprodutibilidade e fundamentação teórica. Esta seção detalha todas as etapas do desenvolvimento do sistema fuzzy Mamdani, desde a definição dos universos de discurso até a análise dos resultados, referenciando as imagens e tabelas utilizadas para ilustrar cada conceito.
+\section{Metodologia}
 
-\subsection{Definição dos Universos de Discurso e Funções de Pertinência}
+A metodologia adotada neste trabalho consiste na aplicação e comparação de diferentes algoritmos de agrupamento sobre os conjuntos de dados Adult e Dry Bean, utilizando métricas quantitativas e visualização para análise dos resultados. O objetivo é avaliar, de forma didática e acessível, o comportamento de cada método frente a dados reais e variados.
 
-Os universos de discurso das variáveis foram definidos para cobrir toda a faixa relevante de operação do sistema fuzzy:
+\subsection{Bases de Dados}
 
+\textbf{Adult:} O conjunto de dados Adult contém informações demográficas e socioeconômicas de indivíduos, como idade, escolaridade, ocupação, sexo, raça, horas trabalhadas por semana, entre outros. As principais variáveis de entrada incluem:
 \begin{itemize}
-    \item Temperatura: $15 \leq x \leq 40$ ($^\circ$C), \texttt{temp\_univ = np.arange(15, 40, 0.1)}
-    \item Umidade: $20 \leq x \leq 90$ (\%), \texttt{umid\_univ = np.arange(20, 90, 0.1)}
-    \item Pessoas: $0 \leq x \leq 50$, \texttt{pess\_univ = np.arange(0, 50, 0.1)}
-    \item Ventilação: $0 \leq x \leq 100$, \texttt{vent\_univ = np.arange(0, 100, 0.1)}
+    \item \textbf{Idade} (numérica, coluna: \texttt{age})
+    \item \textbf{Escolaridade} (categórica, coluna: \texttt{education}, codificada numericamente)
+    \item \textbf{Ocupação} (categórica, coluna: \texttt{occupation}, codificada numericamente)
+    \item \textbf{Sexo} (categórica, coluna: \texttt{sex}, codificada numericamente)
+    \item \textbf{Raça} (categórica, coluna: \texttt{race}, codificada numericamente)
+    \item \textbf{Horas por semana} (numérica, coluna: \texttt{hours-per-week})
+    \item \textbf{País de origem} (categórica, coluna: \texttt{native-country}, codificada numericamente)
+\end{itemize}
+As variáveis categóricas foram convertidas para valores numéricos por meio de codificação (Label Encoding), e os dados foram normalizados. O agrupamento é realizado sem utilizar a variável de saída (\texttt{income}), que é usada apenas para avaliação das métricas.
+
+\textbf{Dry Bean:} O conjunto Dry Bean reúne características físicas extraídas de imagens de diferentes tipos de feijões. As variáveis de entrada são todas numéricas e descrevem propriedades morfológicas dos grãos, tais como:
+\begin{itemize}
+    \item \textbf{Área} (número de pixels, coluna: \texttt{Area})
+    \item \textbf{Perímetro} (comprimento do contorno, coluna: \texttt{Perimeter})
+    \item \textbf{Comprimento principal} (maior eixo, coluna: \texttt{MajorAxisLength})
+    \item \textbf{Largura principal} (menor eixo, coluna: \texttt{MinorAxisLength})
+    \item \textbf{Coeficiente de assimetria} (coluna: \texttt{AsymmetryCoeff})
+    \item \textbf{Comprimento do retângulo delimitador} (coluna: \texttt{BoundingRectLength})
+    \item \textbf{Largura do retângulo delimitador} (coluna: \texttt{BoundingRectWidth})
+    \item \textbf{Raio equivalente} (coluna: \texttt{EquivDiameter}), \textbf{Excentricidade} (coluna: \texttt{Eccentricity}), \textbf{Solidez} (coluna: \texttt{Solidity}), entre outros.
+\end{itemize}
+A variável de saída (\texttt{Class}) indica o tipo de feijão, mas é utilizada apenas para avaliação dos agrupamentos. Todas as variáveis foram normalizadas.
+
+
+\subsection{Descrição e Pseudocódigo dos Algoritmos de Agrupamento}
+
+Foram avaliados quatro algoritmos principais, descritos a seguir juntamente com seus respectivos pseudocódigos para facilitar a compreensão didática do funcionamento de cada método:
+
+\textbf{KMeans:} Algoritmo que particiona os dados em $k$ grupos, alternando entre atribuir cada ponto ao centro mais próximo e recalcular os centros como a média dos pontos atribuídos. É eficiente para clusters esféricos e de tamanho semelhante.
+
+\begin{algorithmic}[1]
+\STATE Escolha o número de clusters $k$ e inicialize aleatoriamente os centros dos clusters.
+\WHILE{os centros mudarem e não atingir o número máximo de iterações}
+    \STATE Atribua cada ponto de dado ao centro mais próximo (menor distância Euclidiana).
+    \STATE Atualize os centros dos clusters calculando a média dos pontos atribuídos a cada cluster.
+\ENDWHILE
+\end{algorithmic}
+
+\vspace{0.5em}
+\textbf{Fuzzy C-Means:} Extensão do KMeans que permite que cada ponto pertença a múltiplos clusters, com diferentes graus de pertinência. Útil quando há sobreposição entre os grupos ou incerteza na separação dos dados.
+
+\begin{algorithmic}[1]
+\STATE Escolha o número de clusters $c$ e inicialize aleatoriamente a matriz de pertinência $U$.
+\WHILE{as mudanças em $U$ forem maiores que um limiar e não atingir o número máximo de iterações}
+    \STATE Atualize os centros dos clusters considerando os graus de pertinência de cada ponto.
+    \STATE Atualize a matriz de pertinência $U$ com base nas distâncias dos pontos aos centros.
+\ENDWHILE
+\end{algorithmic}
+
+\vspace{0.5em}
+\textbf{Gustafson-Kessel:} Generalização do Fuzzy C-Means que permite que cada cluster tenha sua própria matriz de covariância, adaptando-se a diferentes formas e orientações. Utiliza distâncias Mahalanobis adaptadas.
+
+\begin{algorithmic}[1]
+\STATE Escolha o número de clusters $c$ e inicialize aleatoriamente a matriz de pertinência $U$.
+\WHILE{as mudanças em $U$ forem maiores que um limiar e não atingir o número máximo de iterações}
+    \STATE Para cada cluster, calcule o centro e a matriz de covariância adaptativa.
+    \STATE Atualize a matriz de pertinência $U$ considerando as distâncias Mahalanobis adaptadas.
+\ENDWHILE
+\end{algorithmic}
+
+\vspace{0.5em}
+\textbf{Agglomerativo:} Método hierárquico que começa considerando cada ponto como um cluster individual e une os clusters mais próximos em cada etapa, formando uma árvore de agrupamentos (dendrograma).
+
+\begin{algorithmic}[1]
+\STATE Considere cada ponto como um cluster individual.
+\WHILE{houver mais de um cluster}
+    \STATE Calcule as distâncias entre todos os pares de clusters.
+    \STATE Una os dois clusters mais próximos em um novo cluster.
+\ENDWHILE
+\end{algorithmic}
+
+Esses pseudocódigos resumem o funcionamento básico de cada método, facilitando a compreensão dos passos principais de cada algoritmo de agrupamento.
+
+\subsection{Métricas de Avaliação}
+
+A avaliação dos agrupamentos foi realizada por meio de métricas clássicas de comparação entre os rótulos verdadeiros e os grupos encontrados:
+\begin{itemize}
+    \item \textbf{Acurácia:} Proporção de exemplos corretamente agrupados em relação ao total.
+    \item \textbf{Precisão:} Proporção de exemplos classificados como pertencentes a um grupo que realmente pertencem a esse grupo.
+    \item \textbf{Revocação (Recall):} Proporção de exemplos de um grupo real que foram corretamente identificados pelo algoritmo.
+    \item \textbf{Especificidade:} Proporção de exemplos negativos corretamente identificados como não pertencentes a um grupo.
+    \item \textbf{F1-score:} Média harmônica entre precisão e revocação, útil para avaliar o equilíbrio entre as duas métricas.
+    \item \textbf{Matriz de Confusão:} Tabela que resume os acertos e erros de classificação para cada grupo, permitindo análise detalhada dos padrões de agrupamento.
 \end{itemize}
 
-Esses intervalos garantem que o sistema fuzzy seja aplicável a diferentes ambientes e condições.
+\subsection{Visualização dos Resultados}
 
-O primeiro passo consistiu na definição dos universos de discurso para as variáveis de entrada (temperatura interna, umidade relativa e número de pessoas) e saída (intensidade da ventilação), conforme apresentado na Tabela~\ref{tab:parametros-triangulares}. Cada variável foi particionada em três conjuntos fuzzy, utilizando funções de pertinência triangulares, de modo a garantir transições suaves e sobreposição adequada entre os estados linguísticos. As funções de pertinência são ilustradas nas Figuras~\ref{fig:fp-temp}, \ref{fig:fp-umid}, \ref{fig:fp-pessoas} e \ref{fig:fp-ventilacao}.
+Para facilitar a interpretação dos agrupamentos, foi utilizada a Análise de Componentes Principais (PCA) para projetar os dados em duas dimensões. Os resultados foram apresentados em gráficos de dispersão, nos quais cada ponto representa uma amostra e as cores indicam o cluster atribuído pelo algoritmo. Os centros dos clusters também foram destacados, permitindo observar a separação e a compactação dos grupos
 
-\begin{table}[ht]
-\centering
-\caption{Parâmetros $(a, b, c)$ das funções de pertinência triangulares}
-\label{tab:parametros-triangulares}
-\begin{tabular}{llccc}
-\hline
-\textbf{Variável} & \textbf{Conjunto} & \textbf{a} & \textbf{b} & \textbf{c} \\
-\hline
-Temperatura (°C) & Baixa   & 15.00 & 21.22 & 27.45 \\
-Temperatura (°C) & Média   & 21.22 & 27.45 & 33.67 \\
-Temperatura (°C) & Alta    & 27.45 & 33.67 & 39.90 \\
-\hline
-Umidade (\%)     & Baixa   & 20.00 & 37.48 & 54.95 \\
-Umidade (\%)     & Média   & 37.48 & 54.95 & 72.43 \\
-Umidade (\%)     & Alta    & 54.95 & 72.43 & 89.90 \\
-\hline
-Pessoas          & Poucas  & 0.00  & 12.48 & 24.95 \\
-Pessoas          & Moderado& 12.48 & 24.95 & 37.43 \\
-Pessoas          & Muitas  & 24.95 & 37.43 & 49.90 \\
-\hline
-Ventilação       & Fraca   & 0.00  & 24.98 & 49.95 \\
-Ventilação       & Moderada& 24.98 & 49.95 & 74.93 \\
-Ventilação       & Forte   & 49.95 & 74.93 & 99.90 \\
-\hline
-\end{tabular}
-\end{table}
+A metodologia apresentada neste trabalho foi cuidadosamente estruturada para garantir uma análise comparativa clara, didática e reprodutível dos principais algoritmos de agrupamento aplicados a bases de dados reais. A escolha dos métodos, das métricas e das técnicas de visualização permite não apenas avaliar o desempenho quantitativo dos algoritmos, mas também compreender suas características, limitações e adequação a diferentes tipos de dados. Essa abordagem fornece uma base sólida para a discussão dos resultados e para a escolha do método mais apropriado em aplicações práticas de agrupamento.
 
 
-A função de pertinência triangular é definida por:
-
-\begin{equation}
-\mu_{A}(x) =
-\begin{cases}
-0, & x \leq a \\
-\frac{x-a}{b-a}, & a < x \leq b \\
-\frac{c-x}{c-b}, & b < x < c \\
-0, & x \geq c
-\end{cases}
-\end{equation}
-
-onde $a$, $b$ e $c$ são os parâmetros do conjunto fuzzy.
-
-As curvas de pertinência para cada variável são apresentadas nas Figuras~\ref{fig:fp-temp} (temperatura), \ref{fig:fp-umid} (umidade), \ref{fig:fp-pessoas} (pessoas) e \ref{fig:fp-ventilacao} (ventilação).
-
-% Curvas de pertinência (nomes conferidos conforme imagens geradas pelo notebook mamdani2)
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.48\textwidth]{../img/fp_temp_mamdani2.png}
-    \caption{Funções de pertinência triangulares para a variável \textbf{temperatura interna}.}
-    \label{fig:fp-temp}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.48\textwidth]{../img/fp_umid_mamdani2.png}
-    \caption{Funções de pertinência triangulares para a variável \textbf{umidade relativa}.}
-    \label{fig:fp-umid}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.48\textwidth]{../img/fp_pessoas_mamdani2.png}
-    \caption{Funções de pertinência triangulares para a variável \textbf{número de pessoas}.}
-    \label{fig:fp-pessoas}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.48\textwidth]{../img/fp_ventilacao_mamdani2.png}
-    \caption{Funções de pertinência triangulares para a variável \textbf{ventilação (saída)}.}
-    \label{fig:fp-ventilacao}
-\end{figure}
-
-
-\subsection{Base de Regras Fuzzy}
-
-A base de regras fuzzy foi construída com base em princípios de conforto térmico e conhecimento prático, conforme detalhado na literatura~\cite{ross2010fuzzy}. As regras estabelecem relações qualitativas entre as variáveis de entrada e a intensidade de ventilação recomendada, utilizando operadores fuzzy clássicos (mínimo para AND, máximo para OR):
-
-\begin{itemize}
-    \item Se \textbf{temperatura} é \textit{alta} OU \textbf{umidade} é \textit{alta} OU \textbf{pessoas} são \textit{muitas}, então \textbf{ventilação} é \textit{forte}.
-    \item Se \textbf{temperatura} é \textit{média} E \textbf{umidade} é \textit{média} E \textbf{pessoas} são \textit{moderadas}, então \textbf{ventilação} é \textit{moderada}.
-    \item Se \textbf{temperatura} é \textit{baixa} E \textbf{umidade} é \textit{baixa} E \textbf{pessoas} são \textit{poucas}, então \textbf{ventilação} é \textit{fraca}.
-    \item Se \textbf{temperatura} é \textit{alta} E \textbf{umidade} é \textit{baixa}, então \textbf{ventilação} é \textit{moderada}.
-    \item Se \textbf{temperatura} é \textit{média} E \textbf{pessoas} são \textit{muitas}, então \textbf{ventilação} é \textit{forte}.
-    \item Se \textbf{umidade} é \textit{alta} E \textbf{pessoas} são \textit{poucas}, então \textbf{ventilação} é \textit{moderada}.
-    \item Se \textbf{temperatura} é \textit{baixa} OU \textbf{umidade} é \textit{baixa}, então \textbf{ventilação} é \textit{fraca}.
-    \item Se \textbf{pessoas} são \textit{moderadas} E \textbf{umidade} é \textit{média}, então \textbf{ventilação} é \textit{moderada}.
-    \item Se \textbf{temperatura} é \textit{média} E \textbf{umidade} é \textit{alta}, então \textbf{ventilação} é \textit{forte}.
-\end{itemize}
-
-
-\subsection{Fuzzificação das Entradas}
-
-A fuzzificação constitui a primeira etapa do processamento em sistemas fuzzy, sendo responsável por converter os valores numéricos (crisp) das variáveis de entrada em graus de pertinência nos conjuntos fuzzy previamente definidos. No sistema desenvolvido, cada variável de entrada --- temperatura interna, umidade relativa e número de pessoas --- é associada a três conjuntos fuzzy linguísticos (por exemplo, \textit{baixa}, \textit{média} e \textit{alta} para temperatura e umidade; \textit{poucas}, \textit{moderado} e \textit{muitas} para pessoas).
-
-% Para cada valor de entrada, calcula-se o grau de pertinência em cada conjunto fuzzy por meio das funções de pertinência triangulares, conforme os parâmetros apresentados na Tabela~\ref{tab:parametros-triangulares}. O resultado desse processo é um vetor de graus de pertinência para cada variável, refletindo o quanto cada valor pertence a cada estado linguístico.
-
-% A Tabela~\ref{tab:fuzzificacao} apresenta os graus de pertinência obtidos para cada cenário simulado, evidenciando como a fuzzificação permite representar incertezas e transições suaves entre os estados das variáveis. Esses graus de pertinência são então utilizados na etapa de inferência fuzzy, possibilitando a avaliação das regras e a obtenção de uma resposta interpretável pelo sistema.
-
-
-\subsection{Inferência Mamdani e Agregação}
-
-A inferência Mamdani utiliza operadores fuzzy para combinar os graus de pertinência das entradas conforme as regras. Os principais operadores utilizados são:
-
-\begin{itemize}
-    \item \textbf{AND (mínimo):}
-    \begin{equation}
-        \mu_{A \cap B}(x) = \min\left(\mu_A(x), \mu_B(x)\right)
-    \end{equation}
-    \item \textbf{OR (máximo):}
-    \begin{equation}
-        \mu_{A \cup B}(x) = \max\left(\mu_A(x), \mu_B(x)\right)
-    \end{equation}
-\end{itemize}
-
-A agregação das saídas das regras é feita por:
-
-\begin{equation}
-\mu_{\text{Saída}}(x) = \max_{i} \left( \min\left(\alpha_i, \mu_{B_i}(x)\right) \right)
-\end{equation}
-
-onde $\alpha_i$ é o grau de ativação (firing strength) da $i$-ésima regra e $\mu_{B_i}(x)$ é a função de pertinência da saída da regra.
-
-\subsection{Técnicas de Defuzzificação}
-
-As principais técnicas de defuzzificação utilizadas são:
-
-\begin{itemize}
-    \item \textbf{Centroide (Center of Area):}
-    \begin{equation}
-        y^* = \frac{\int_{a}^{b} y \cdot \mu_{\text{Saída}}(y) \, dy}{\int_{a}^{b} \mu_{\text{Saída}}(y) \, dy}
-    \end{equation}
-    \item \textbf{Média do Máximo (Mean of Maximum):}
-    \begin{equation}
-        y^* = \frac{1}{n} \sum_{i=1}^{n} y_i, \quad \text{onde } \mu_{\text{Saída}}(y_i) = \max \mu_{\text{Saída}}(y)
-    \end{equation}
-    \item \textbf{Bissetriz:}
-    \begin{equation}
-        \int_{a}^{y^*} \mu_{\text{Saída}}(y) \, dy = \frac{1}{2} \int_{a}^{b} \mu_{\text{Saída}}(y) \, dy
-    \end{equation}
-\end{itemize}
