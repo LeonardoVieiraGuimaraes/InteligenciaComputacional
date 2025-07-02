@@ -6,7 +6,41 @@ Neste trabalho, utilizamos os conjuntos de dados \textbf{Adult} (Census Income) 
 
 \textbf{Adult:} O conjunto Adult contém aproximadamente 48 mil amostras de indivíduos adultos dos Estados Unidos, com atributos demográficos e socioeconômicos, distribuídos em duas classes principais (renda >50K e <=50K). Os atributos incluem variáveis numéricas e categóricas, exigindo codificação e normalização cuidadosas. O balanceamento foi fundamental para evitar viés nos resultados devido à predominância de uma das classes.
 
-\textbf{Dry Bean:} O conjunto Dry Bean é composto por mais de 13 mil amostras de feijões secos de sete diferentes cultivares, com atributos morfológicos extraídos de imagens. Todos os atributos são numéricos, facilitando a aplicação direta das técnicas de normalização. A distribuição das classes é naturalmente mais equilibrada, não sendo necessário aplicar técnicas adicionais de balanceamento. Essa preparação garante que os métodos de agrupamento possam explorar de forma justa as relações entre as amostras e as classes reais.
+% Gráficos de frequência das classes - Adult
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_adult_class_distribution.png}
+    \caption{Distribuição das classes no dataset Adult antes do balanceamento.}
+    \label{fig:adult_freq_antes}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_adult_balance_class_distribution.png}
+    \caption{Distribuição das classes no dataset Adult após o balanceamento por oversampling.}
+    \label{fig:adult_freq_depois}
+\end{figure}
+
+\textbf{Dry Bean:} O conjunto Dry Bean é composto por mais de 13 mil amostras de feijões secos de sete diferentes cultivares, com atributos morfológicos extraídos de imagens. Todos os atributos são numéricos, facilitando a aplicação direta das técnicas de normalização. Apesar de apresentar uma distribuição de classes mais equilibrada que o Adult, algumas cultivares são minoritárias. Por isso, também foi realizado balanceamento por oversampling para igualar o número de amostras de cada classe antes da divisão em treino e teste. Essa preparação garante que os métodos de agrupamento possam explorar de forma justa as relações entre as amostras e as classes reais.\\
+\textit{Tamanho do dataset original:} 13611 amostras, 17 colunas\\
+\textit{Tamanho do dataset balanceado:} 24822 amostras, 17 colunas
+
+% Gráficos de frequência das classes - Dry Bean
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_drybean_class_distribution.png}
+    \caption{Distribuição das classes no dataset Dry Bean antes do balanceamento.}
+    \label{fig:drybean_freq_antes}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_drybean_balance_class_distribution.png}
+    \caption{Distribuição das classes no dataset Dry Bean após o balanceamento por oversampling.}
+    \label{fig:drybean_freq_depois}
+\end{figure}
 
 \subsection{Seleção do Número de Clusters: Método do Cotovelo}
 
@@ -34,7 +68,7 @@ As Figuras~\ref{fig:elbow_adult} e \ref{fig:elbow_drybean} ilustram as curvas do
 \begin{itemize}
     \item \textbf{Divisão dos dados:} 70\% para treinamento e 30\% para teste, com estratificação das classes.
     \item \textbf{Pré-processamento:} Codificação numérica das variáveis categóricas (quando presentes) e normalização dos atributos.
-    \item \textbf{Balanceamento:} No Adult, foi realizado oversampling para igualar as classes; no Dry Bean, não foi necessário devido ao equilíbrio natural das classes.
+    \item \textbf{Balanceamento:} No Adult, foi realizado oversampling para igualar as classes; no Dry Bean, também foi realizado balanceamento por oversampling devido à presença de classes minoritárias.
     \item \textbf{Seleção do número de clusters:} Adult: 2 clusters (duas classes); Dry Bean: 7 clusters (sete classes), conforme sugerido pelo método do cotovelo.
     \item \textbf{Execuções:} 30 repetições com diferentes sementes para garantir robustez estatística dos resultados.
     \item \textbf{Parâmetros do algoritmo:} (Descreva aqui os parâmetros específicos do algoritmo, como grau de fuzzificação para Fuzzy C-Means, matriz de covariância para Gustafson-Kessel, etc.)
@@ -104,12 +138,12 @@ As Figuras~\ref{fig:kmeans_drybean_acc_repeticoes}, \ref{fig:kmeans_drybean_mse_
     \label{fig:kmeans_drybean_mse_repeticoes}
 \end{figure}
 
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_confusion_matrix_media.png}
-%     \caption{Matriz de confusão média das execuções no Dry Bean.}
-%     \label{fig:kmeans_drybean_cm_media}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_confusion_matrix_media.png}
+    \caption{Matriz de confusão média das execuções no Dry Bean.}
+    \label{fig:kmeans_drybean_cm_media}
+\end{figure}
 
 \textbf{Discussão:}
 

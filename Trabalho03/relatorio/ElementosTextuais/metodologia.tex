@@ -27,6 +27,15 @@ As variáveis categóricas foram convertidas para valores numéricos por meio de
 \end{itemize}
 A variável de saída (\texttt{Class}) indica o tipo de feijão, mas é utilizada apenas para avaliação dos agrupamentos. Todas as variáveis foram normalizadas.
 
+\subsection{Balanceamento das Classes}
+
+Em muitos problemas reais, os conjuntos de dados apresentam distribuição desbalanceada entre as classes, ou seja, algumas categorias possuem muito mais exemplos do que outras. Esse desbalanceamento pode prejudicar algoritmos de agrupamento e classificação, pois os métodos tendem a favorecer as classes majoritárias, resultando em baixa sensibilidade para as classes minoritárias.
+
+Para mitigar esse problema, foi aplicado o \textbf{balanceamento por oversampling} nos conjuntos de dados utilizados neste trabalho. O oversampling consiste em aumentar artificialmente o número de exemplos das classes minoritárias, por meio da replicação aleatória de amostras dessas classes, até igualar a quantidade de exemplos da classe majoritária. Dessa forma, garante-se que todas as classes tenham o mesmo peso durante o treinamento e avaliação dos algoritmos.
+
+No caso do conjunto Adult, a variável de saída (renda) apresenta forte desbalanceamento entre as classes ``>50K'' e ``<=50K''. Para o conjunto Dry Bean, algumas variedades de feijão são muito menos frequentes que outras. O balanceamento foi realizado antes da divisão dos dados em treino e teste, assegurando que a avaliação dos métodos reflita um cenário mais justo e comparável entre as classes.
+
+O balanceamento é fundamental para evitar viés nos resultados e garantir que as métricas de avaliação representem de forma adequada o desempenho dos algoritmos em todas as classes presentes nos dados.
 
 \subsection{Descrição e Pseudocódigo dos Algoritmos de Agrupamento}
 
@@ -82,10 +91,35 @@ Esses pseudocódigos resumem o funcionamento básico de cada método, facilitand
 A avaliação dos agrupamentos foi realizada por meio de métricas clássicas de comparação entre os rótulos verdadeiros e os grupos encontrados:
 \begin{itemize}
     \item \textbf{Acurácia:} Proporção de exemplos corretamente agrupados em relação ao total.
+    
+    \begin{equation}
+        \text{Acurácia} = \frac{TP + TN}{TP + TN + FP + FN}
+    \end{equation}
+    
     \item \textbf{Precisão:} Proporção de exemplos classificados como pertencentes a um grupo que realmente pertencem a esse grupo.
+    
+    \begin{equation}
+        \text{Precisão} = \frac{TP}{TP + FP}
+    \end{equation}
+    
     \item \textbf{Revocação (Recall):} Proporção de exemplos de um grupo real que foram corretamente identificados pelo algoritmo.
+    
+    \begin{equation}
+        \text{Recall} = \frac{TP}{TP + FN}
+    \end{equation}
+    
     \item \textbf{Especificidade:} Proporção de exemplos negativos corretamente identificados como não pertencentes a um grupo.
+    
+    \begin{equation}
+        \text{Especificidade} = \frac{TN}{TN + FP}
+    \end{equation}
+    
     \item \textbf{F1-score:} Média harmônica entre precisão e revocação, útil para avaliar o equilíbrio entre as duas métricas.
+    
+    \begin{equation}
+        F1 = 2 \cdot \frac{\text{Precisão} \cdot \text{Recall}}{\text{Precisão} + \text{Recall}}
+    \end{equation}
+    
     \item \textbf{Matriz de Confusão:} Tabela que resume os acertos e erros de classificação para cada grupo, permitindo análise detalhada dos padrões de agrupamento.
 \end{itemize}
 
