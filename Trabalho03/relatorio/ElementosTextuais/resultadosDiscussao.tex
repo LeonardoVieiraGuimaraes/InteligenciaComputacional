@@ -10,7 +10,7 @@ Neste trabalho, utilizamos os conjuntos de dados \textbf{Adult} (Census Income) 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_adult_class_distribution.png}
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_adult_balance_class_distribution.png}
     \caption{Distribuição das classes no dataset Adult antes do balanceamento.}
     \label{fig:adult_freq_antes}
 \end{figure}
@@ -124,26 +124,28 @@ As Figuras~\ref{fig:kmeans_adult_acc_repeticoes}, \ref{fig:kmeans_adult_mse_repe
 \end{itemize}
 As Figuras~\ref{fig:kmeans_drybean_acc_repeticoes}, \ref{fig:kmeans_drybean_mse_repeticoes} e \ref{fig:kmeans_drybean_cm_media} ilustram a estabilidade da acurácia, o erro médio quadrático e a matriz de confusão média, respectivamente.
 
+% Gráficos de resultados do KMeans no Dry Bean balanceado
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_accuracy_repetitions.png}
-    \caption{Acurácia por repetição do KMeans no Dry Bean.}
+    \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_balance_accuracy_repetitions.png}
+    \caption{Acurácia por repetição do KMeans no Dry Bean balanceado.}
     \label{fig:kmeans_drybean_acc_repeticoes}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_mse_repetitions.png}
-    \caption{Erro médio quadrático (MSE) por repetição no Dry Bean.}
+    \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_balance_mse_repetitions.png}
+    \caption{Erro médio quadrático (MSE) por repetição no Dry Bean balanceado.}
     \label{fig:kmeans_drybean_mse_repeticoes}
 \end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_confusion_matrix_media.png}
-    \caption{Matriz de confusão média das execuções no Dry Bean.}
-    \label{fig:kmeans_drybean_cm_media}
-\end{figure}
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.9\linewidth]{../src/img/kmeans_drybean_balance_confusion_matrix_media.png}
+%     \caption{Matriz de confusão média das execuções no Dry Bean balanceado.}
+%     \label{fig:kmeans_drybean_cm_media}
+% \end{figure}
 
 \textbf{Discussão:}
 
