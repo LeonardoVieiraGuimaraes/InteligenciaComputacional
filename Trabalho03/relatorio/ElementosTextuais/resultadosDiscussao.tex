@@ -96,13 +96,14 @@ Em ambos os casos, o método do cotovelo foi fundamental para fundamentar a esco
     \label{fig:elbow_drybean}
 \end{figure}
 
+
 \subsection{Setup 1 -- KMeans: Resultados nos Datasets Adult e Dry Bean}
 
 Neste primeiro setup, avaliamos o desempenho do KMeans supervisionado nos conjuntos Adult (balanceado) e Dry Bean (balanceado), ambos após pré-processamento e balanceamento por oversampling. O pipeline seguiu rigorosamente as etapas de normalização, divisão estratificada, definição do número de clusters ($n_{clusters}=10$), treinamento, repetição dos experimentos (30 execuções) e análise quantitativa detalhada.
 
 \subsubsection{Adult (Balanceado)}
 
-O KMeans foi executado com $n_{clusters}=10$. Os resultados médios das 30 repetições estão na Tabela~\ref{tab:kmeans_adult_metrics}. O desempenho foi avaliado por métricas macro e matriz de confusão média.
+O KMeans foi executado com $n_{clusters}=10$. Os resultados médios das 30 repetições estão na Tabela~\ref{tab:kmeans_adult_metrics}. O desempenho foi avaliado por métricas macro e matriz de confusão média. Observa-se que o balanceamento das classes foi fundamental para evitar viés para as classes majoritárias, permitindo uma avaliação mais justa do agrupamento.
 
 \begin{table}[H]
 \centering
@@ -121,11 +122,14 @@ F1-score (macro) & 0.7166 & -- \\
 \end{tabular}
 \end{table}
 
-A matriz de confusão média foi:
-\begin{verbatim}
-[[4877 2539]
- [1650 5766]]
-\end{verbatim}
+
+A matriz de confusão média está ilustrada na Figura~\ref{fig:kmeans_adult_balance_confusion_matrix_media}:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_adult_balance_confusion_matrix_media.png}
+    \caption{Matriz de confusão média (KMeans - Adult Balanceado)}
+    \label{fig:kmeans_adult_balance_confusion_matrix_media}
+\end{figure}
 
 As principais visualizações estão apresentadas a seguir:
 \begin{figure}[ht]
@@ -150,9 +154,11 @@ As principais visualizações estão apresentadas a seguir:
     \caption{Matriz de confusão média (KMeans - Adult Balanceado)}
 \end{figure}
 
+\textbf{Discussão:} O KMeans supervisionado apresentou desempenho consistente após o balanceamento das classes, com acurácia média de 0.7176 e baixo desvio padrão, indicando estabilidade entre as repetições. A matriz de confusão média revela que a maior parte das classes foi corretamente agrupada, embora haja confusões entre algumas classes. O balanceamento contribuiu para uma avaliação mais justa do agrupamento, evitando o viés para classes majoritárias. As métricas macro reforçam a análise quantitativa, mostrando que o método consegue capturar a estrutura binária do conjunto de dados, ainda que com limitações inerentes ao agrupamento não supervisionado.
+
 \subsubsection{Dry Bean (Balanceado)}
 
-No dataset Dry Bean, o KMeans também foi executado com $n_{clusters}=10$ e 30 repetições. Os resultados estão sumarizados na Tabela~\ref{tab:kmeans_drybean_metrics}.
+No dataset Dry Bean, o KMeans também foi executado com $n_{clusters}=10$ e 30 repetições. Os resultados estão sumarizados na Tabela~\ref{tab:kmeans_drybean_metrics}. O desempenho foi superior ao observado no Adult, refletindo a maior separabilidade das classes neste conjunto multiclasse.
 
 \begin{table}[H]
 \centering
@@ -171,16 +177,14 @@ F1-score (macro) & 0.8449 & -- \\
 \end{tabular}
 \end{table}
 
-A matriz de confusão média foi:
-\begin{verbatim}
-[[ 772    0  200    5   12   11   63]
- [   0 1060    2    0    1    0    0]
- [  26    0  985    1   29    3   20]
- [   2    0    4  773    2   49  233]
- [   0    0  133    1  902    0   27]
- [   9    0    0   86    0  944   24]
- [   3    0   24  168   16    8  844]]
-\end{verbatim}
+
+A matriz de confusão média está ilustrada na Figura~\ref{fig:kmeans_drybean_balance_confusion_matrix_media}:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../src/img/kmeans_drybean_balance_confusion_matrix_media.png}
+    \caption{Matriz de confusão média (KMeans - Dry Bean Balanceado)}
+    \label{fig:kmeans_drybean_balance_confusion_matrix_media}
+\end{figure}
 
 As principais visualizações estão apresentadas a seguir:
 \begin{figure}[ht]
@@ -204,7 +208,7 @@ As principais visualizações estão apresentadas a seguir:
     \caption{Matriz de confusão média (KMeans - Dry Bean Balanceado)}
 \end{figure}
 
-\textbf{Discussão:} Os resultados mostram que o KMeans supervisionado, mesmo sendo um método originalmente não supervisionado, pode atingir desempenho competitivo em tarefas de classificação quando aliado a uma estratégia de rotulação dos clusters. O balanceamento das classes foi fundamental para evitar viés para as classes majoritárias, especialmente no dataset Adult. O desempenho no Dry Bean foi superior, refletindo a maior separabilidade das classes neste conjunto. Todos os resultados quantitativos e gráficos foram salvos em arquivos para reprodutibilidade e análise posterior.
+\textbf{Discussão:} O KMeans supervisionado, mesmo sendo um método originalmente não supervisionado, pode atingir desempenho competitivo em tarefas de classificação quando aliado a uma estratégia de rotulação dos clusters. O desempenho no Dry Bean foi superior ao do Adult, refletindo a maior separabilidade das classes neste conjunto. O balanceamento das classes foi fundamental para evitar viés para as classes majoritárias. Todos os resultados quantitativos e gráficos foram salvos em arquivos para reprodutibilidade e análise posterior.
 
 
 
