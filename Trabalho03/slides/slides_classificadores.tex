@@ -31,29 +31,39 @@
 \end{frame}
 
 % --- SLIDE DE TRANSIÇÃO: INTRODUÇÃO ---
-\section{Introdução}
+\section*{}
 \begin{frame}[plain]
     \begin{center}
-        \vspace{2cm}
-        {\Huge Introdução}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Introdução}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
     \end{center}
 \end{frame}
 
 % --- INTRODUÇÃO ---
 \begin{frame}{Contexto e Objetivo}
 \begin{itemize}
-    \item Análise e comparação de algoritmos de agrupamento (KMeans, Fuzzy C-Means, Agglomerativo, Gustafson-Kessel)
+    \item Análise e comparação de algoritmos de agrupamento (KMeans, Fuzzy C-Means, Agglomerativo)
     \item Aplicação nos datasets Adult (binário) e Dry Bean (multiclasse)
-    \item Ênfase em padronização, repetição dos experimentos e análise quantitativa
+  
 \end{itemize}
 \end{frame}
 
 % --- SLIDE DE TRANSIÇÃO: METODOLOGIA ---
-\section{Metodologia}
+\section*{}
 \begin{frame}[plain]
     \begin{center}
-        \vspace{2cm}
-        {\Huge Metodologia}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Metodologia}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
     \end{center}
 \end{frame}
 
@@ -64,6 +74,64 @@
     \item Datasets: Adult (demográfico) e Dry Bean (morfologia de feijões)
     \item Pipeline padronizado: balanceamento, pré-processamento, definição de $k$, repetição dos experimentos, avaliação quantitativa e visualização
 \end{itemize}
+\end{frame}
+
+% --- SLIDES SOBRE OS ALGORITMOS DE AGRUPAMENTO (DENTRO DA METODOLOGIA) ---
+
+\begin{frame}{KMeans}
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+        \begin{itemize}
+            \item Algoritmo de agrupamento baseado em centroides.
+            \item Inicializa $k$ centroides aleatórios e atribui cada ponto ao centro mais próximo.
+            \item Atualiza os centroides como a média dos pontos atribuídos.
+            \item Repete até convergência (centroides não mudam).
+            \item Simples, eficiente, mas sensível a outliers e à escolha de $k$.
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{../src/img/cmeans.jpg} \\[-0.5em]
+        \scriptsize Exemplo de clusters do KMeans
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fuzzy C-Means}
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+        \begin{itemize}
+            \item Variante "fuzzy" do KMeans: cada ponto pertence a todos os clusters com um grau de pertinência.
+            \item Minimiza uma função de custo ponderada pelas pertinências.
+            \item Permite sobreposição entre clusters, útil para dados ambíguos.
+            \item Mais flexível, mas requer ajuste do parâmetro de fuzzificação.
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{../src/img/cmeans.jpg} \\[-0.5em]
+        \scriptsize Exemplo de clusters do Fuzzy C-Means
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Agglomerativo}
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+        \begin{itemize}
+            \item Algoritmo hierárquico: cada ponto começa em seu próprio cluster.
+            \item Une os clusters mais próximos iterativamente até restar $k$ clusters.
+            \item Não requer definição prévia de centroides.
+            \item Gera uma árvore de agrupamento (dendrograma).
+            \item Capaz de capturar estruturas complexas, mas pode ser computacionalmente custoso.
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{../src/img/002-agglomerative-clustering-cut.jpg} \\[-0.5em]
+        \scriptsize Exemplo de dendrograma (Agglomerativo)
+    \end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Bases de Dados}
@@ -124,10 +192,10 @@
 \end{tabular}
 \end{center}
 \begin{itemize}
-    \item VP: verdadeiro positivo
-    \item FP: falso positivo
-    \item VN: verdadeiro negativo
-    \item FN: falso negativo
+    \item VP: verdadeiro positivo (classe real e predita são positivas)
+    \item FP: falso positivo (classe real é negativa, mas predita como positiva)
+    \item VN: verdadeiro negativo (classe real e predita são negativas)
+    \item FN: falso negativo (classe real é positiva, mas predita como negativa)
 \end{itemize}
 \end{frame}
 
@@ -154,11 +222,701 @@ Técnica que reduz a dimensionalidade dos dados, projetando-os em 2D para facili
 
 % --- RESULTADOS E DISCUSSÃO ---
 % --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
-\section{Resultados e Discuss\~ao}
+\section*{}
 \begin{frame}[plain]
     \begin{center}
-        \vspace{2cm}
-        {\Huge Resultados e Discussão}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados e Discussão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+\begin{frame}{Base de Dados: Adult}
+\begin{itemize}
+    \item 48.842 amostras
+    \item 14 atributos: age, workclass, fnlwgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country
+    \item 2 classes: renda $\leq$ 50K e $>$ 50K
+    \item Desafio: alta proporção de atributos categóricos
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Adult - histograma antes do balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 48.842
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Adult - histograma após o balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 97.484 (balanceado)
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - informações gerais
+\begin{frame}{Base de Dados: Dry Bean}
+\begin{itemize}
+    \item 13.611 amostras
+    \item 16 atributos: Area, Perimeter, MajorAxisLength, MinorAxisLength, AspectRation, Eccentricity, ConvexArea, EquivDiameter, Extent, Solidity, roundness, Compactness, ShapeFactor1, ShapeFactor2, ShapeFactor3, ShapeFactor4
+    \item 7 classes: Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+    \item Desafio: problema multiclasse e classes desbalanceadas
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Dry Bean - histograma antes do balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 13.611
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - histograma após o balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 47.096 (balanceado)
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- PCA das classes verdadeiras ---
+\begin{frame}{Visualização PCA das Classes Verdadeiras}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_pca_true_labels.png}\\
+        \scriptsize Dry Bean (classes verdadeiras)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_pca_true_labels.png}\\
+        \scriptsize Adult (classes verdadeiras)
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{itemize}
+    \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
+    \item Ponto de inflexão indica o valor mais adequado
+    \item Aplicado separadamente para Adult e Dry Bean
+\end{itemize}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
+\section*{}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados e Discussão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+\begin{frame}{Base de Dados: Adult}
+\begin{itemize}
+    \item 48.842 amostras
+    \item 14 atributos: age, workclass, fnlwgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country
+    \item 2 classes: renda $\leq$ 50K e $>$ 50K
+    \item Desafio: alta proporção de atributos categóricos
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Adult - histograma antes do balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 48.842
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Adult - histograma após o balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 97.484 (balanceado)
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - informações gerais
+\begin{frame}{Base de Dados: Dry Bean}
+\begin{itemize}
+    \item 13.611 amostras
+    \item 16 atributos: Area, Perimeter, MajorAxisLength, MinorAxisLength, AspectRation, Eccentricity, ConvexArea, EquivDiameter, Extent, Solidity, roundness, Compactness, ShapeFactor1, ShapeFactor2, ShapeFactor3, ShapeFactor4
+    \item 7 classes: Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+    \item Desafio: problema multiclasse e classes desbalanceadas
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Dry Bean - histograma antes do balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 13.611
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - histograma após o balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 47.096 (balanceado)
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- PCA das classes verdadeiras ---
+\begin{frame}{Visualização PCA das Classes Verdadeiras}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_pca_true_labels.png}\\
+        \scriptsize Dry Bean (classes verdadeiras)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_pca_true_labels.png}\\
+        \scriptsize Adult (classes verdadeiras)
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{itemize}
+    \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
+    \item Ponto de inflexão indica o valor mais adequado
+    \item Aplicado separadamente para Adult e Dry Bean
+\end{itemize}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
+\section*{}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados e Discussão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+\begin{frame}{Base de Dados: Adult}
+\begin{itemize}
+    \item 48.842 amostras
+    \item 14 atributos: age, workclass, fnlwgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country
+    \item 2 classes: renda $\leq$ 50K e $>$ 50K
+    \item Desafio: alta proporção de atributos categóricos
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Adult - histograma antes do balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 48.842
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Adult - histograma após o balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 97.484 (balanceado)
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - informações gerais
+\begin{frame}{Base de Dados: Dry Bean}
+\begin{itemize}
+    \item 13.611 amostras
+    \item 16 atributos: Area, Perimeter, MajorAxisLength, MinorAxisLength, AspectRation, Eccentricity, ConvexArea, EquivDiameter, Extent, Solidity, roundness, Compactness, ShapeFactor1, ShapeFactor2, ShapeFactor3, ShapeFactor4
+    \item 7 classes: Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+    \item Desafio: problema multiclasse e classes desbalanceadas
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Dry Bean - histograma antes do balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 13.611
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - histograma após o balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 47.096 (balanceado)
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- PCA das classes verdadeiras ---
+\begin{frame}{Visualização PCA das Classes Verdadeiras}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_pca_true_labels.png}\\
+        \scriptsize Dry Bean (classes verdadeiras)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_pca_true_labels.png}\\
+        \scriptsize Adult (classes verdadeiras)
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{itemize}
+    \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
+    \item Ponto de inflexão indica o valor mais adequado
+    \item Aplicado separadamente para Adult e Dry Bean
+\end{itemize}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
+\section*{}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados e Discussão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+\begin{frame}{Base de Dados: Adult}
+\begin{itemize}
+    \item 48.842 amostras
+    \item 14 atributos: age, workclass, fnlwgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country
+    \item 2 classes: renda $\leq$ 50K e $>$ 50K
+    \item Desafio: alta proporção de atributos categóricos
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Adult - histograma antes do balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 48.842
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Adult - histograma após o balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 97.484 (balanceado)
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - informações gerais
+\begin{frame}{Base de Dados: Dry Bean}
+\begin{itemize}
+    \item 13.611 amostras
+    \item 16 atributos: Area, Perimeter, MajorAxisLength, MinorAxisLength, AspectRation, Eccentricity, ConvexArea, EquivDiameter, Extent, Solidity, roundness, Compactness, ShapeFactor1, ShapeFactor2, ShapeFactor3, ShapeFactor4
+    \item 7 classes: Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+    \item Desafio: problema multiclasse e classes desbalanceadas
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Dry Bean - histograma antes do balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 13.611
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - histograma após o balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 47.096 (balanceado)
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- PCA das classes verdadeiras ---
+\begin{frame}{Visualização PCA das Classes Verdadeiras}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_pca_true_labels.png}\\
+        \scriptsize Dry Bean (classes verdadeiras)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_pca_true_labels.png}\\
+        \scriptsize Adult (classes verdadeiras)
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{itemize}
+    \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
+    \item Ponto de inflexão indica o valor mais adequado
+    \item Aplicado separadamente para Adult e Dry Bean
+\end{itemize}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
+\section*{}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados e Discussão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+\begin{frame}{Base de Dados: Adult}
+\begin{itemize}
+    \item 48.842 amostras
+    \item 14 atributos: age, workclass, fnlwgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country
+    \item 2 classes: renda $\leq$ 50K e $>$ 50K
+    \item Desafio: alta proporção de atributos categóricos
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Adult - histograma antes do balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 48.842
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Adult - histograma após o balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 97.484 (balanceado)
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - informações gerais
+\begin{frame}{Base de Dados: Dry Bean}
+\begin{itemize}
+    \item 13.611 amostras
+    \item 16 atributos: Area, Perimeter, MajorAxisLength, MinorAxisLength, AspectRation, Eccentricity, ConvexArea, EquivDiameter, Extent, Solidity, roundness, Compactness, ShapeFactor1, ShapeFactor2, ShapeFactor3, ShapeFactor4
+    \item 7 classes: Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+    \item Desafio: problema multiclasse e classes desbalanceadas
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Dry Bean - histograma antes do balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 13.611
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - histograma após o balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 47.096 (balanceado)
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- PCA das classes verdadeiras ---
+\begin{frame}{Visualização PCA das Classes Verdadeiras}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_pca_true_labels.png}\\
+        \scriptsize Dry Bean (classes verdadeiras)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_pca_true_labels.png}\\
+        \scriptsize Adult (classes verdadeiras)
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{itemize}
+    \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
+    \item Ponto de inflexão indica o valor mais adequado
+    \item Aplicado separadamente para Adult e Dry Bean
+\end{itemize}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
+\section*{}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados e Discussão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
     \end{center}
 \end{frame}
 
@@ -298,6 +1056,29 @@ Técnica que reduz a dimensionalidade dos dados, projetando-os em 2D para facili
     \item Cada experimento foi repetido 30 vezes com diferentes seeds.
     \item Resultados apresentados como média e desvio padrão.
     \item Permite avaliar a estabilidade e robustez dos métodos (KMeans, Fuzzy C-Means, Agglomerativo).
+\end{itemize}
+\end{frame}
+
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS ---
+\section*{}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Resultados}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS ---
+\begin{frame}{Resultados: Visão Geral}
+\begin{itemize}
+    \item Apresentação dos resultados obtidos com os algoritmos KMeans, Fuzzy C-Means e Agglomerativo.
+    \item Para cada algoritmo: visualização em PCA, matriz de confusão e gráficos de acurácia.
+    \item Comparação da performance entre os algoritmos e discussão sobre os resultados.
 \end{itemize}
 \end{frame}
 
@@ -484,11 +1265,16 @@ Agglomerativo & 0,2694 & 0,1546 \\
 \end{frame}
 
 % --- SLIDE DE TRANSIÇÃO: CONCLUSÃO ---
-\section{Conclus\~ao}
+\section*{}
 \begin{frame}[plain]
     \begin{center}
-        \vspace{2cm}
-        {\Huge Conclusão}
+        \vspace{0.5cm}
+        {\color{blue!70!black}\rule{0.7\linewidth}{1.5pt}}
+        
+        {\Huge\bfseries Conclusão}
+        
+        \vspace{0.3cm}
+        {\color{blue!70!black}\rule{0.5\linewidth}{1.5pt}}
     \end{center}
 \end{frame}
 
