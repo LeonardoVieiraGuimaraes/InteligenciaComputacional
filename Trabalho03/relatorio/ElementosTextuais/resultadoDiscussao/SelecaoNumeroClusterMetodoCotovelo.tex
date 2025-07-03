@@ -1,12 +1,8 @@
 \subsection{Seleção do Número de Clusters: Método do Cotovelo}
 
-A definição do número ideal de clusters ($k$) é uma etapa crucial em experimentos de agrupamento. Neste trabalho, utilizou-se o \textbf{método do cotovelo} aplicado aos dados balanceados e normalizados de cada base para determinar o valor mais adequado de $k$.
+A escolha do número de clusters ($k$) foi feita pelo \textbf{método do cotovelo} \cite{thorndike1953belongs}, que consiste em analisar o gráfico de uma métrica de agrupamento para diferentes valores de $k$ e identificar o ponto onde a redução dessa métrica passa a ser menos acentuada. Esse ponto, chamado de "cotovelo", indica o valor mais adequado de clusters para representar a estrutura dos dados.
 
-Para o conjunto \textbf{Adult}, avaliou-se o comportamento da soma das distâncias quadráticas internas (inertia) para valores de $k$ variando de 2 a 24. Observa-se, na Figura~\ref{fig:elbow_adult}, uma queda acentuada da inércia até $k=8$, caracterizando o "cotovelo" da curva. Esse ponto sugere que oito clusters são suficientes para capturar a estrutura principal dos dados, ainda que o número de classes reais seja dois (<=50K e >50K), indicando a presença de subgrupos relevantes na estrutura dos dados.
-
-No caso do \textbf{Dry Bean}, o mesmo procedimento foi realizado, variando $k$ de 2 a 24. O gráfico apresentado na Figura~\ref{fig:elbow_drybean} evidencia o cotovelo em $k=7$, valor alinhado ao número de cultivares presentes no conjunto, indicando que sete clusters representam adequadamente a diversidade das classes reais.
-
-Assim, o método do cotovelo fundamentou a escolha do número de clusters nos experimentos, garantindo avaliações justas e alinhadas à estrutura dos dados. As Figuras a seguir ilustram o comportamento da inércia em função de $k$ para cada base:
+No conjunto \textbf{Adult}, o cotovelo foi observado em $k=8$ (Figura~\ref{fig:elbow_adult}), sugerindo a presença de subgrupos além das duas classes reais. Para o \textbf{Dry Bean}, o cotovelo ocorreu em $k=7$ (Figura~\ref{fig:elbow_drybean}), valor alinhado ao número de cultivares.
 
 \begin{figure}[ht]
     \centering

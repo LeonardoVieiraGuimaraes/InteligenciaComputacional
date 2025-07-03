@@ -1,0 +1,100 @@
+# Bibliotecas necessárias
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.utils import resample
+import os
+
+# Diretório para salvar imagens
+os.makedirs('img', exist_ok=True)
+
+# Carregar o dataset Adult
+adult_path = 'data/AdultDataset/adult.data'
+adult_df = pd.read_csv(adult_path, header=None, na_values=' ?', skipinitialspace=True)
+adult_df.columns = [
+    'age', 'workclass', 'fnlwgt', 'education', 'education-num', 'marital-status',
+    'occupation', 'relationship', 'race', 'sex', 'capital-gain', 'capital-loss',
+    'hours-per-week', 'native-country', 'income'
+]
+print('Informações do dataset Adult:')
+adult_df.info()
+print('\nTamanho (linhas, colunas):', adult_df.shape)
+print('\nDistribuição original da coluna income:')
+print(adult_df['income'].value_counts())
+
+# Gráfico de frequência antes do balanceamento (Adult)
+plt.figure(figsize=(5,3))
+sns.countplot(x=adult_df['income'])
+plt.title('Distribuição das classes (income) ANTES do balanceamento - Adult')
+plt.xlabel('Classe')
+plt.ylabel('Contagem')
+plt.tight_layout()
+plt.savefig('img/adult_class_distribution_before_balance.png')
+plt.show()
+
+# Balanceamento por oversampling (Adult)
+adult_df = adult_df.dropna().copy()
+adult_df['income_bin'] = adult_df['income'].apply(lambda val: 1 if val.strip() == '>50K' else 0)
+df_majority = adult_df[adult_df['income_bin'] == 0]
+df_minority = adult_df[adult_df['income_bin'] == 1]
+df_minority_upsampled = resample(df_minority, replace=True, n_samples=len(df_majority), random_state=42)
+adult_df_balanced = pd.concat([df_majority, df_minority_upsampled])
+adult_df_balanced = adult_df_balanced.sample(frac=1, random_state=42).reset_index(drop=True)
+print('Tamanho após balanceamento:', adult_df_balanced.shape)
+print('Distribuição após balanceamento:')
+print(adult_df_balanced['income'].value_counts())
+
+# Gráfico de frequência após o balanceamento (Adult)
+plt.figure(figsize=(5,3))
+sns.countplot(x=adult_df_balanced['income'])
+plt.title('Distribuição das classes (income) APÓS balanceamento - Adult')
+plt.xlabel('Classe')
+plt.ylabel('Contagem')
+plt.tight_layout()
+plt.savefig('img/adult_class_distribution_after_balance.png')
+plt.show()
+
+# Carregar o dataset Dry Bean
+bean_path = 'data/DryBeanDataset/Dry_Bean_Dataset.xlsx'
+bean_df = pd.read_excel(bean_path)
+bean_df = bean_df.dropna()
+print('Informações do dataset Dry Bean:')
+bean_df.info()
+print('\nTamanho (linhas, colunas):', bean_df.shape)
+print('\nDistribuição original da coluna Class:')
+print(bean_df['Class'].value_counts())
+
+# Gráfico de frequência antes do balanceamento (Dry Bean)
+plt.figure(figsize=(7,4))
+sns.countplot(x=bean_df['Class'])
+plt.title('Distribuição das classes (Class) ANTES do balanceamento - Dry Bean')
+plt.xlabel('Classe')
+plt.ylabel('Contagem')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('img/drybean_class_distribution_before_balance.png')
+plt.show()
+
+# Balanceamento por oversampling (Dry Bean)
+max_count = bean_df['Class'].value_counts().max()
+bean_df_balanced = pd.DataFrame()
+for label in bean_df['Class'].unique():
+    df_class = bean_df[bean_df['Class'] == label]
+    df_upsampled = resample(df_class, replace=True, n_samples=max_count, random_state=42)
+    bean_df_balanced = pd.concat([bean_df_balanced, df_upsampled])
+bean_df_balanced = bean_df_balanced.sample(frac=1, random_state=42).reset_index(drop=True)
+print('Tamanho após balanceamento:', bean_df_balanced.shape)
+print('Distribuição após balanceamento:')
+print(bean_df_balanced['Class'].value_counts())
+
+# Gráfico de frequência após o balanceamento (Dry Bean)
+plt.figure(figsize=(7,4))
+sns.countplot(x=bean_df_balanced['Class'])
+plt.title('Distribuição das classes (Class) APÓS balanceamento - Dry Bean')
+plt.xlabel('Classe')
+plt.ylabel('Contagem')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('img/drybean_class_distribution_after_balance.png')
+plt.show()

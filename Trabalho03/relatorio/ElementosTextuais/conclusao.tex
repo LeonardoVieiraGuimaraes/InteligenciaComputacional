@@ -1,13 +1,13 @@
-\section*{Conclusão}
-
 Este trabalho apresentou uma análise comparativa e padronizada dos algoritmos de agrupamento KMeans, Fuzzy C-Means e Agglomerativo aplicados aos conjuntos de dados Adult e Dry Bean. A padronização do pipeline experimental, com balanceamento das classes, repetição dos experimentos, uso de métricas quantitativas e visualizações, permitiu uma avaliação justa e didática do desempenho de cada método.
 
 Os resultados evidenciaram que:
 \begin{itemize}
-    \item O \textbf{KMeans} apresentou desempenho consistente, com boa acurácia média e baixo desvio padrão, sendo eficiente para clusters bem separados e esféricos.
-    \item O \textbf{Fuzzy C-Means} mostrou-se útil em cenários com sobreposição entre grupos, permitindo análise de pertinência, mas pode ser mais sensível a ruídos e à escolha do número de clusters.
-    \item O \textbf{Agglomerativo} destacou-se pela flexibilidade em capturar estruturas hierárquicas, mas pode ser mais afetado por outliers e pela definição da métrica de ligação.
+    \item O \textbf{Fuzzy C-Means} apresentou o melhor desempenho geral, especialmente no conjunto Dry Bean (acurácia média de 0,84), mostrando-se robusto para problemas multiclasse e dados com sobreposição entre grupos.
+    \item O \textbf{KMeans} teve desempenho intermediário, com acurácia razoável em ambos os conjuntos (0,71 no Adult e 0,75 no Dry Bean), sendo mais estável no Adult (menor desvio padrão) e eficiente para clusters bem separados.
+    \item O \textbf{Agglomerativo} apresentou desempenho inferior, principalmente no Dry Bean (acurácia média de 0,27), indicando limitação para dados com muitas classes ou estrutura complexa. O alto desvio padrão sugere instabilidade e sensibilidade à estrutura dos dados.
 \end{itemize}
+
+De modo geral, a escolha do algoritmo mais adequado depende da natureza dos dados, do número de classes e da necessidade de robustez frente a ruídos e desbalanceamento. O estudo reforça a importância de pipelines padronizados, análise crítica dos resultados e da avaliação quantitativa e visual para a aplicação prática de técnicas de agrupamento em ciência de dados.
 
 A tabela a seguir resume a comparação dos métodos quanto a desempenho médio e robustez (desvio padrão), apresentando lado a lado os resultados quantitativos para Adult e Dry Bean:
 
@@ -20,9 +20,9 @@ A seguir, apresentamos tabelas separadas para cada conjunto de dados, detalhando
 \toprule
 \textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} \\
 \midrule
-KMeans & 0,8221 & 0,0142 \\
-Fuzzy C-Means & 0,8010 & 0,0175 \\
-Agglomerativo & 0,6932 & 0,0148 \\
+KMeans & 0,7117 & 0,0160 \\
+Fuzzy C-Means & 0,7259 & 0,0034 \\
+Agglomerativo & 0,5812 & 0,1116 \\
 \bottomrule
 \end{tabular}
 \label{tab:comparacao_adult}
@@ -35,9 +35,9 @@ Agglomerativo & 0,6932 & 0,0148 \\
 \toprule
 \textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} \\
 \midrule
-KMeans & 0,7215 & 0,0123 \\
-Fuzzy C-Means & 0,6840 & 0,0157 \\
-Agglomerativo & 0,6125 & 0,0112 \\
+KMeans & 0,7537 & 0,2840 \\
+Fuzzy C-Means & 0,8424 & 0,0205 \\
+Agglomerativo & 0,2694 & 0,1546 \\
 \bottomrule
 \end{tabular}
 \label{tab:comparacao_drybean}

@@ -34,12 +34,6 @@ Em muitos problemas reais, os conjuntos de dados apresentam distribuição desba
 Para mitigar esse problema, foi aplicado o \textbf{balanceamento por oversampling} nos conjuntos de dados utilizados neste trabalho. O oversampling consiste em aumentar artificialmente o número de exemplos das classes minoritárias, por meio da replicação aleatória de amostras dessas classes, até igualar a quantidade de exemplos da classe majoritária. Dessa forma, garante-se que todas as classes tenham o mesmo peso durante o treinamento e avaliação dos algoritmos.
 
 No caso do conjunto Adult, a variável de saída (renda) apresenta forte desbalanceamento entre as classes $y = 1$ (renda $>\!50\,\mathrm{K}$) e $y = 0$ (renda $\leq\!50\,\mathrm{K}$):
-\begin{equation}
-    y = \begin{cases}
-        1, & \text{se renda} > 50\,\mathrm{K} \\
-        0, & \text{se renda} \leq 50\,\mathrm{K}
-    \end{cases}
-\end{equation}
 
 Para o conjunto Dry Bean, algumas variedades de feijão são muito menos frequentes que outras. O balanceamento foi realizado antes da divisão dos dados em treino e teste, assegurando que a avaliação dos métodos reflita um cenário mais justo e comparável entre as classes.
 
@@ -49,7 +43,13 @@ O balanceamento é fundamental para evitar viés nos resultados e garantir que a
 
 Foram avaliados três algoritmos principais: KMeans, Fuzzy C-Means e Agglomerativo. Todos foram implementados e aplicados de forma padronizada, seguindo um pipeline didático que inclui: balanceamento das classes, pré-processamento, definição do número de clusters, repetição dos experimentos com diferentes seeds, avaliação quantitativa e visualização dos resultados. O método Gustafson-Kessel foi considerado, mas não incluído na comparação final devido à instabilidade dos resultados em alguns cenários.
 
-O KMeans particiona os dados em $k$ grupos, associando cada ponto ao centro mais próximo \cite{lloyd1982least}. O Fuzzy C-Means permite que cada ponto pertença a múltiplos clusters, com diferentes graus de pertinência, sendo útil em situações de sobreposição entre grupos \cite{bezdek1981pattern}. O método Agglomerativo realiza agrupamento hierárquico, unindo iterativamente os clusters mais próximos até formar uma estrutura em árvore \cite{mullner2011modern}. Todos os métodos foram avaliados sem acesso à variável de saída durante o agrupamento, utilizando-a apenas para avaliação das métricas.
+\begin{itemize}
+    \item \textbf{KMeans:} Algoritmo particional clássico que agrupa os dados em $k$ clusters, atribuindo cada ponto ao centro mais próximo. É eficiente para grandes volumes de dados, mas sensível à escolha inicial dos centróides e ao formato dos grupos \cite{lloyd1982least}.
+    \item \textbf{Fuzzy C-Means:} Extensão fuzzy do KMeans, permite que cada ponto pertença a múltiplos clusters com diferentes graus de pertinência, refletindo incertezas e sobreposições naturais nos dados. Proporciona uma segmentação mais flexível e interpretável \cite{bezdek1981pattern}.
+    \item \textbf{Agglomerativo:} Método hierárquico que une iterativamente os clusters mais próximos, formando uma estrutura em árvore (dendrograma) e revelando relações hierárquicas nos dados. Não exige a definição prévia do número de clusters e é útil para explorar estruturas hierárquicas, mas pode ser mais custoso computacionalmente \cite{mullner2011modern}.
+\end{itemize}
+
+Todos os métodos foram avaliados sem acesso à variável de saída durante o agrupamento, utilizando-a apenas para avaliação das métricas.
 
 \subsection{Métricas de Avaliação}
 
@@ -57,7 +57,25 @@ A avaliação dos agrupamentos foi realizada por meio das seguintes métricas pa
 \begin{itemize}
     \item \textbf{Acurácia média:} Proporção média de exemplos corretamente agrupados em relação ao total, calculada sobre múltiplas repetições do experimento.
     \item \textbf{Desvio padrão:} Medida da dispersão das acurácias obtidas nas repetições, indicando a estabilidade do método.
-    \item \textbf{Matriz de confusão média em porcentagem:} Média das matrizes de confusão normalizadas por linha, permitindo análise detalhada do desempenho em cada classe.
+    \item \textbf{Matriz de confusão:} Tabela que resume a quantidade de exemplos de cada classe real atribuídos a cada grupo pelo algoritmo. A matriz de confusão média em porcentagem é obtida normalizando as linhas, permitindo análise detalhada do desempenho em cada classe. Em problemas binários, a matriz pode ser representada como:
+    \begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \textbf{Predito: 1} & \textbf{Predito: 0} \\
+        \hline
+        \textbf{Real: 1} & VP & FN \\
+        \hline
+        \textbf{Real: 0} & FP & VN \\
+        \hline
+    \end{tabular}
+    \end{center}
+    \begin{itemize}
+        \item VP = verdadeiro positivo (exemplos da classe 1 corretamente identificados)
+        \item FP = falso positivo (exemplos de outras classes incorretamente atribuídos à classe 1)
+        \item VN = verdadeiro negativo (exemplos das demais classes corretamente não atribuídos à classe 1)
+        \item FN = falso negativo (exemplos da classe 1 incorretamente agrupados em outra classe)
+    \end{itemize}
+    Em problemas multiclasse, cada linha e coluna da matriz representa uma classe diferente: a diagonal principal mostra os acertos (exemplos corretamente agrupados), enquanto os elementos fora da diagonal indicam confusões entre as classes. Assim, a matriz permite identificar quais classes são mais confundidas pelo algoritmo e avaliar detalhadamente o desempenho do agrupamento para cada grupo.
 \end{itemize}
 
 \subsection{Visualização dos Resultados}
@@ -66,13 +84,10 @@ Para facilitar a interpretação dos agrupamentos, foi utilizada a Análise de C
 
 \subsection{Seleção do Número de Clusters: Método do Cotovelo}
 
-Para determinar o número ideal de clusters a ser utilizado nos algoritmos de agrupamento, foi empregado o \textbf{método do cotovelo} (silhouette). Essa técnica consiste em executar o algoritmo para diferentes valores de $k$ (número de clusters) e calcular, para cada valor, uma métrica de qualidade (como a soma das distâncias quadráticas ou o índice silhouette). O valor de $k$ ideal é identificado no ponto em que a melhoria da métrica passa a ser menos significativa, formando um "cotovelo" na curva. Esse ponto indica um equilíbrio entre a compactação dos clusters e a complexidade do modelo.
-
-No contexto deste trabalho, o método do cotovelo foi aplicado separadamente para os conjuntos de dados Adult e Dry Bean, guiando a escolha do número de clusters para cada algoritmo testado. As curvas geradas e a análise visual do cotovelo permitiram definir, de forma objetiva, o valor de $k$ mais apropriado para cada cenário.
+Para definir o número ideal de clusters, utilizou-se o \textbf{método do cotovelo} \cite{thorndike1953belongs,rousseeuw1987silhouettes}, que avalia uma métrica de qualidade (como o índice silhouette \cite{rousseeuw1987silhouettes}) para diferentes valores de $k$. O ponto de inflexão da curva indica o valor mais adequado de clusters, equilibrando qualidade e simplicidade do modelo. Esse procedimento foi aplicado separadamente para os conjuntos Adult e Dry Bean, orientando a escolha de $k$ em cada caso.
 
 A metodologia apresentada neste trabalho foi cuidadosamente estruturada para garantir uma análise comparativa clara, didática e reprodutível dos principais algoritmos de agrupamento aplicados a bases de dados reais. A escolha dos métodos, das métricas e das técnicas de visualização permite não apenas avaliar o desempenho quantitativo dos algoritmos, mas também compreender suas características, limitações e adequação a diferentes tipos de dados. Essa abordagem fornece uma base sólida para a discussão dos resultados e para a escolha do método mais apropriado em aplicações práticas de agrupamento.
 
-\bibliographystyle{apalike}
-\bibliography{referencias}
+
 
 

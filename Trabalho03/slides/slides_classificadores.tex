@@ -6,7 +6,7 @@
 \usepackage{booktabs}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-
+\usepackage{lmodern}
 % Tema
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -14,8 +14,8 @@
 % Informações do documento
 \title{Classificadores Multiclasse Baseados em Algoritmos de Agrupamento}
 \subtitle{Inteligência Computacional}
-\author{[Seu Nome]}
-\institute{CEFET-MG}
+\author{Leonardo Vieira Guimar\~aes}
+\institute{Mestrado em Modelagem Computacional e Sistemas\\CEFET-MG}
 \date{\today}
 
 \begin{document}
@@ -30,9 +30,16 @@
 \tableofcontents
 \end{frame}
 
-% --- INTRODUÇÃO ---
+% --- SLIDE DE TRANSIÇÃO: INTRODUÇÃO ---
 \section{Introdução}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{2cm}
+        {\Huge Introdução}
+    \end{center}
+\end{frame}
 
+% --- INTRODUÇÃO ---
 \begin{frame}{Contexto e Objetivo}
 \begin{itemize}
     \item Análise e comparação de algoritmos de agrupamento (KMeans, Fuzzy C-Means, Agglomerativo, Gustafson-Kessel)
@@ -41,25 +48,121 @@
 \end{itemize}
 \end{frame}
 
-% --- METODOLOGIA ---
+% --- SLIDE DE TRANSIÇÃO: METODOLOGIA ---
 \section{Metodologia}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{2cm}
+        {\Huge Metodologia}
+    \end{center}
+\end{frame}
 
-\begin{frame}{Pipeline Padronizado}
+% --- METODOLOGIA ---
+\begin{frame}{Metodologia: Visão Geral}
+\begin{itemize}
+    \item Aplicação e comparação de KMeans, Fuzzy C-Means e Agglomerativo
+    \item Datasets: Adult (demográfico) e Dry Bean (morfologia de feijões)
+    \item Pipeline padronizado: balanceamento, pré-processamento, definição de $k$, repetição dos experimentos, avaliação quantitativa e visualização
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Bases de Dados}
+\textbf{Adult:}
+\begin{itemize}
+    \item Informações demográficas e socioeconômicas
+    \item Variáveis: idade, escolaridade, ocupação, sexo, raça, horas/semana, país de origem
+    \item Variáveis categóricas codificadas numericamente
+    \item Agrupamento sem uso da variável de saída (income)
+\end{itemize}
+\vspace{0.5em}
+\textbf{Dry Bean:}
+\begin{itemize}
+    \item Características físicas/morfológicas de feijões
+    \item Todas as variáveis numéricas
+    \item Variável de saída (Class) usada apenas para avaliação
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Balanceamento das Classes}
+\begin{itemize}
+    \item Problema: distribuição desbalanceada entre as classes
+    \item Solução: oversampling das classes minoritárias até igualar a maioria
+    \item Balanceamento feito antes da divisão treino/teste
+    \item Garante avaliação justa e sem viés
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Pipeline de Agrupamento}
 \begin{enumerate}
-    \item Importação e balanceamento dos dados
+    \item Balanceamento das classes
     \item Pré-processamento (normalização, codificação)
-    \item Definição do número de clusters (método do cotovelo/silhouette)
-    \item Implementação dos algoritmos
-    \item Repetição dos experimentos (30 execuções)
-    \item Avaliação quantitativa (acurácia, desvio padrão, matriz de confusão em porcentagem)
+    \item Definição do número de clusters ($k$)
+    \item Execução dos algoritmos
+    \item Repetição dos experimentos (30 execuções, seeds diferentes)
+    \item Avaliação quantitativa (acurácia média, desvio padrão, matriz de confusão)
     \item Visualização dos resultados (PCA, matrizes de confusão)
 \end{enumerate}
 \end{frame}
 
-% --- RESULTADOS E DISCUSSÃO ---
-\section{Resultados e Discussão}
+\begin{frame}{Métricas de Avaliação}
+\begin{itemize}
+    \item \textbf{Acurácia média:} proporção média de exemplos corretamente agrupados
+    \item \textbf{Desvio padrão:} dispersão das acurácias nas repetições
+    \item \textbf{Matriz de confusão:} mostra acertos e erros por classe
+\end{itemize}
+\vspace{0.5em}
+\textbf{Matriz de confusão binária:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    & \textbf{Predito: 1} & \textbf{Predito: 0} \\
+    \hline
+    \textbf{Real: 1} & VP & FN \\
+    \hline
+    \textbf{Real: 0} & FP & VN \\
+    \hline
+\end{tabular}
+\end{center}
+\begin{itemize}
+    \item VP: verdadeiro positivo
+    \item FP: falso positivo
+    \item VN: verdadeiro negativo
+    \item FN: falso negativo
+\end{itemize}
+\end{frame}
 
-% Adult - informações gerais
+% --- VISUALIZAÇÃO DOS RESULTADOS E PCA (VERSÃO RESUMIDA) ---
+\begin{frame}{Visualização dos Resultados e PCA}
+\begin{block}{PCA (Análise de Componentes Principais)}
+Técnica que reduz a dimensionalidade dos dados, projetando-os em 2D para facilitar a visualização de padrões e agrupamentos.
+\end{block}
+
+\begin{itemize}
+    \item Gráficos de dispersão mostram os clusters ou classes em duas dimensões.
+    \item Centros dos clusters são destacados para melhor interpretação.
+    \item Matrizes de confusão médias facilitam a comparação entre métodos.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{itemize}
+    \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
+    \item Ponto de inflexão indica o valor mais adequado
+    \item Aplicado separadamente para Adult e Dry Bean
+\end{itemize}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
+% --- SLIDE DE TRANSIÇÃO: RESULTADOS E DISCUSSÃO ---
+\section{Resultados e Discuss\~ao}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{2cm}
+        {\Huge Resultados e Discussão}
+    \end{center}
+\end{frame}
+
+% --- RESULTADOS E DISCUSSÃO ---
 \begin{frame}{Base de Dados: Adult}
 \begin{itemize}
     \item 48.842 amostras
@@ -72,12 +175,40 @@
 
 % Adult - histograma antes do balanceamento
 \begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
-\includegraphics[width=0.8\textwidth]{../src/img/adult_income_hist_before_balance.png}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 48.842
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
 \end{frame}
 
 % Adult - histograma após o balanceamento
 \begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
-\includegraphics[width=0.8\textwidth]{../src/img/adult_income_hist_after_balance.png}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/adult_income_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 97.484 (balanceado)
+                \item Atributos: 14
+                \item Classes: 2\\
+                $\leq$ 50K, $>$ 50K
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
 \end{frame}
 
 % Dry Bean - informações gerais
@@ -93,12 +224,56 @@
 
 % Dry Bean - histograma antes do balanceamento
 \begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
-\includegraphics[width=0.8\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 13.611
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
 \end{frame}
 
 % Dry Bean - histograma após o balanceamento
 \begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
-\includegraphics[width=0.8\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \includegraphics[width=0.95\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \begin{block}{Informações}
+            \begin{itemize}
+                \item Amostras: 47.096 (balanceado)
+                \item Atributos: 16
+                \item Classes: 7\\
+                Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+            \end{itemize}
+        \end{block}
+    \end{column}
+\end{columns}
+\end{frame}
+
+% --- PCA das classes verdadeiras ---
+\begin{frame}{Visualização PCA das Classes Verdadeiras}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_pca_true_labels.png}\\
+        \scriptsize Dry Bean (classes verdadeiras)
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_pca_true_labels.png}\\
+        \scriptsize Adult (classes verdadeiras)
+    \end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Seleção do Número de Clusters}
@@ -106,116 +281,225 @@
 \begin{column}{0.5\textwidth}
 \textbf{Adult:}
 \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_elbow.png}
+\\[0.5em]
+{\centering\scriptsize k escolhido = 8\par}
 \end{column}
 \begin{column}{0.5\textwidth}
 \textbf{Dry Bean:}
 \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_elbow.png}
+\\[0.5em]
+{\centering\scriptsize k escolhido = 7\par}
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Repetição dos Experimentos}
 \begin{itemize}
-    \item 30 repetições para cada algoritmo e dataset
-    \item Avaliação da estabilidade (acurácia/desvio padrão)
+    \item Cada experimento foi repetido 30 vezes com diferentes seeds.
+    \item Resultados apresentados como média e desvio padrão.
+    \item Permite avaliar a estabilidade e robustez dos métodos (KMeans, Fuzzy C-Means, Agglomerativo).
 \end{itemize}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_accuracy_repetitions.png}
-\end{column}
-\begin{column}{0.5\textwidth}
-\includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_accuracy_repetitions.png}
-\end{column}
-\end{columns}
 \end{frame}
 
 % --- SETUP 1: KMEANS ---
-\begin{frame}{Setup 1: KMeans -- Acurácia e Desvio Padrão}
-\begin{itemize}
-    \item Pipeline padronizado aplicado ao KMeans
-    \item 30 repetições: acurácia média e desvio padrão
-\end{itemize}
-\includegraphics[width=0.7\textwidth]{../src/img/kmeans_adult_balance_accuracy_repetitions.png}
-\includegraphics[width=0.7\textwidth]{../src/img/kmeans_drybean_balance_accuracy_repetitions.png}
+% Adult - PCA e matriz de confusão
+\begin{frame}{Setup 1: KMeans -- Adult (PCA e Matriz de Confusão)}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_clusters_pca.png}\\
+        \scriptsize PCA
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_confusion_matrix_media_percent.png}\\
+        \scriptsize Matriz de Confusão
+    \end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Setup 1: KMeans -- Visualização dos Clusters (PCA)}
-\includegraphics[width=0.48\textwidth]{../src/img/kmeans_adult_balance_clusters_pca.png}
-\includegraphics[width=0.48\textwidth]{../src/img/kmeans_drybean_balance_clusters_pca.png}
+% Adult - acurácia
+\begin{frame}{Setup 1: KMeans -- Adult (Acurácia)}
+\centering
+\includegraphics[width=0.7\textwidth]{../src/img/kmeans_adult_balance_accuracy_repetitions.png}\\
+\vspace{0.5em}
+\scriptsize Média: 0,82 \quad DP: 0,02
 \end{frame}
 
-\begin{frame}{Setup 1: KMeans -- Matriz de Confusão Média (\%)}
-\includegraphics[width=0.48\textwidth]{../src/img/kmeans_adult_balance_confusion_matrix_media_percent.png}
-\includegraphics[width=0.48\textwidth]{../src/img/kmeans_drybean_balance_confusion_matrix_media_percent.png}
+% Dry Bean - PCA e matriz de confusão
+\begin{frame}{Setup 1: KMeans -- Dry Bean (PCA e Matriz de Confusão)}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_clusters_pca.png}\\
+        \scriptsize PCA
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_confusion_matrix_media_percent.png}\\
+        \scriptsize Matriz de Confusão
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - acurácia
+\begin{frame}{Setup 1: KMeans -- Dry Bean (Acurácia)}
+\centering
+\includegraphics[width=0.7\textwidth]{../src/img/kmeans_drybean_balance_accuracy_repetitions.png}\\
+\vspace{0.5em}
+\scriptsize Média: 0,72 \quad DP: 0,01
 \end{frame}
 
 % --- SETUP 2: FUZZY C-MEANS ---
-\begin{frame}{Setup 2: Fuzzy C-Means -- Acurácia e Desvio Padrão}
-\begin{itemize}
-    \item Pipeline padronizado aplicado ao Fuzzy C-Means
-    \item 30 repetições: acurácia média e desvio padrão
-\end{itemize}
-\includegraphics[width=0.7\textwidth]{../src/img/cmeans_adult_balance_accuracy_repetitions.png}
-\includegraphics[width=0.7\textwidth]{../src/img/cmeans_drybean_balance_accuracy_repetitions.png}
+% Adult - PCA e matriz de confusão
+\begin{frame}{Setup 2: Fuzzy C-Means -- Adult (PCA e Matriz de Confusão)}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/cmeans_adult_balance_clusters_pca.png}\\
+        \scriptsize PCA
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/cmeans_adult_balance_confusion_matrix_media_percent.png}\\
+        \scriptsize Matriz de Confusão
+    \end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Setup 2: Fuzzy C-Means -- Visualização dos Clusters (PCA)}
-\includegraphics[width=0.48\textwidth]{../src/img/cmeans_adult_balance_clusters_pca.png}
-\includegraphics[width=0.48\textwidth]{../src/img/cmeans_drybean_balance_clusters_pca.png}
+% Adult - acurácia
+\begin{frame}{Setup 2: Fuzzy C-Means -- Adult (Acurácia)}
+\centering
+\includegraphics[width=0.7\textwidth]{../src/img/cmeans_adult_balance_accuracy_repetitions.png}\\
+\vspace{0.5em}
+\scriptsize Média: 0,80 \quad DP: 0,03
 \end{frame}
 
-\begin{frame}{Setup 2: Fuzzy C-Means -- Matriz de Confusão Média (\%)}
-\includegraphics[width=0.48\textwidth]{../src/img/cmeans_adult_balance_confusion_matrix_media_percent.png}
-\includegraphics[width=0.48\textwidth]{../src/img/cmeans_drybean_balance_confusion_matrix_media_percent.png}
+% Dry Bean - PCA e matriz de confusão
+\begin{frame}{Setup 2: Fuzzy C-Means -- Dry Bean (PCA e Matriz de Confusão)}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/cmeans_drybean_balance_clusters_pca.png}\\
+        \scriptsize PCA
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/cmeans_drybean_balance_confusion_matrix_media_percent.png}\\
+        \scriptsize Matriz de Confusão
+    \end{column}
+\end{columns}
+\end{frame}
+
+% Dry Bean - acurácia
+\begin{frame}{Setup 2: Fuzzy C-Means -- Dry Bean (Acurácia)}
+\centering
+\includegraphics[width=0.7\textwidth]{../src/img/cmeans_drybean_balance_accuracy_repetitions.png}\\
+\vspace{0.5em}
+\scriptsize Média: 0,68 \quad DP: 0,02
 \end{frame}
 
 % --- SETUP 3: AGGLOMERATIVO ---
-\begin{frame}{Setup 3: Agglomerativo -- Acurácia e Desvio Padrão}
-\begin{itemize}
-    \item Pipeline padronizado aplicado ao Agglomerativo
-    \item 30 repetições: acurácia média e desvio padrão
-\end{itemize}
-\includegraphics[width=0.7\textwidth]{../src/img/agglo_adult_balance_accuracy_repetitions.png}
-\includegraphics[width=0.7\textwidth]{../src/img/agglo_drybean_balance_accuracy_repetitions.png}
+% Adult - PCA e matriz de confusão
+\begin{frame}{Setup 3: Agglomerativo -- Adult (PCA e Matriz de Confusão)}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/agglo_adult_balance_clusters_pca.png}\\
+        \scriptsize PCA
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/agglo_adult_balance_confusion_matrix_media_percent.png}\\
+        \scriptsize Matriz de Confusão
+    \end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Setup 3: Agglomerativo -- Visualização dos Clusters (PCA)}
-\includegraphics[width=0.48\textwidth]{../src/img/agglo_adult_balance_clusters_pca.png}
-\includegraphics[width=0.48\textwidth]{../src/img/agglo_drybean_balance_clusters_pca.png}
+% Adult - acurácia
+\begin{frame}{Setup 3: Agglomerativo -- Adult (Acurácia)}
+\centering
+\includegraphics[width=0.7\textwidth]{../src/img/agglo_adult_balance_accuracy_repetitions.png}\\
+\vspace{0.5em}
+\scriptsize Média: 0,69 \quad DP: 0,01
 \end{frame}
 
-\begin{frame}{Setup 3: Agglomerativo -- Matriz de Confusão Média (\%)}
-\includegraphics[width=0.48\textwidth]{../src/img/agglo_adult_balance_confusion_matrix_media_percent.png}
-\includegraphics[width=0.48\textwidth]{../src/img/agglo_drybean_balance_confusion_matrix_media_percent.png}
+% Dry Bean - PCA e matriz de confusão
+\begin{frame}{Setup 3: Agglomerativo -- Dry Bean (PCA e Matriz de Confusão)}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/agglo_drybean_balance_clusters_pca.png}\\
+        \scriptsize PCA
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/agglo_drybean_balance_confusion_matrix_media_percent.png}\\
+        \scriptsize Matriz de Confusão
+    \end{column}
+\end{columns}
 \end{frame}
+
+% Dry Bean - acurácia
+\begin{frame}{Setup 3: Agglomerativo -- Dry Bean (Acurácia)}
+\centering
+\includegraphics[width=0.7\textwidth]{../src/img/agglo_drybean_balance_accuracy_repetitions.png}\\
+\vspace{0.5em}
+\scriptsize Média: 0,61 \quad DP: 0,01
+\end{frame}
+
+
 
 % --- TABELA COMPARATIVA ---
 \begin{frame}{Comparação Quantitativa}
 \begin{table}[]
 \centering
-\caption{Comparação dos algoritmos nos conjuntos Adult e Dry Bean}
-\begin{tabular}{lcccc}
+\caption{Comparação dos algoritmos de agrupamento no conjunto Adult}
+\begin{tabular}{lcc}
 \toprule
-\textbf{Algoritmo} & \textbf{Adult (Acurácia)} & \textbf{Adult (DP)} & \textbf{Dry Bean (Acurácia)} & \textbf{Dry Bean (DP)} \\
+\textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} \\
 \midrule
-KMeans & 0,82 & 0,02 & 0,72 & 0,01 \\
-Fuzzy C-Means & 0,80 & 0,03 & 0,68 & 0,02 \\
-Agglomerativo & 0,69 & 0,01 & 0,61 & 0,01 \\
+KMeans & 0,7117 & 0,0160 \\
+Fuzzy C-Means & 0,7259 & 0,0034 \\
+Agglomerativo & 0,5812 & 0,1116 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{1em}
+
+\begin{table}[]
+\centering
+\caption{Comparação dos algoritmos de agrupamento no conjunto Dry Bean}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} \\
+\midrule
+KMeans & 0,7537 & 0,2840 \\
+Fuzzy C-Means & 0,8424 & 0,0205 \\
+Agglomerativo & 0,2694 & 0,1546 \\
 \bottomrule
 \end{tabular}
 \end{table}
 \end{frame}
 
-% --- CONCLUSÃO ---
-\section{Conclusão}
+% --- SLIDE DE TRANSIÇÃO: CONCLUSÃO ---
+\section{Conclus\~ao}
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{2cm}
+        {\Huge Conclusão}
+    \end{center}
+\end{frame}
 
+% --- CONCLUSÃO ---
 \begin{frame}{Conclusão}
 \begin{itemize}
-    \item KMeans apresenta desempenho consistente e robusto, especialmente em dados binários
-    \item Fuzzy C-Means é útil para sobreposição de grupos, mas sensível a ruído
-    \item Agglomerativo destaca-se em cenários hierárquicos, mas é mais sensível a outliers
-    \item A escolha do método depende do contexto dos dados e do objetivo da análise
-    \item Pipelines padronizados e repetição dos experimentos são essenciais para avaliação confiável
+    \item \textbf{Fuzzy C-Means} obteve o melhor desempenho geral, com acurácia média de 0,84 e baixo desvio padrão no Dry Bean, mostrando robustez para problemas multiclasse.
+    \item \textbf{KMeans} apresentou desempenho intermediário: acurácia de 0,71 (Adult) e 0,75 (Dry Bean), com maior estabilidade no Adult (DP = 0,016).
+    \item \textbf{Agglomerativo} teve o pior desempenho, especialmente no Dry Bean (acurácia média de 0,27 e DP = 0,15), indicando limitação para dados complexos ou com muitas classes.
+    \item O desvio padrão elevado do Agglomerativo e do KMeans no Dry Bean evidencia instabilidade e sensibilidade à estrutura dos dados.
+    \item A escolha do algoritmo deve considerar a natureza dos dados, número de classes e necessidade de robustez.
 \end{itemize}
 \end{frame}
 
