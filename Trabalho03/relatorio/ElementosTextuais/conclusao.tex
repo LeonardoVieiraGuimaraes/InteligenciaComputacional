@@ -1,13 +1,46 @@
-O sistema fuzzy Mamdani desenvolvido mostrou-se robusto, flexível e interpretável, sendo capaz de fornecer recomendações qualitativas de ventilação adequadas ao contexto de conforto térmico e eficiência energética. O método foi fundamentado teoricamente, detalhado em suas etapas e validado por meio de resultados gráficos e quantitativos, demonstrando sua eficácia para tomada de decisão sob incerteza em ambientes reais.
+\section*{Conclusão}
 
-Por exemplo, no cenário 1 (temperatura de 28°C, umidade de 80\% e 15 pessoas), o sistema recomendou ventilação \textbf{FORTE}, com valor centroide de 62,44, refletindo corretamente a necessidade de maior renovação do ar em ambientes quentes, úmidos e cheios.
+Este trabalho apresentou uma análise comparativa e padronizada dos algoritmos de agrupamento KMeans, Fuzzy C-Means e Agglomerativo aplicados aos conjuntos de dados Adult e Dry Bean. A padronização do pipeline experimental, com balanceamento das classes, repetição dos experimentos, uso de métricas quantitativas e visualizações, permitiu uma avaliação justa e didática do desempenho de cada método.
 
-A abordagem fuzzy permite fácil adaptação a diferentes contextos e requisitos, além de lidar bem com incertezas e variações das condições ambientais. O estudo reforça a importância da escolha adequada das funções de pertinência, operadores e técnicas de defuzzificação para o desempenho do sistema.
+Os resultados evidenciaram que:
+\begin{itemize}
+    \item O \textbf{KMeans} apresentou desempenho consistente, com boa acurácia média e baixo desvio padrão, sendo eficiente para clusters bem separados e esféricos.
+    \item O \textbf{Fuzzy C-Means} mostrou-se útil em cenários com sobreposição entre grupos, permitindo análise de pertinência, mas pode ser mais sensível a ruídos e à escolha do número de clusters.
+    \item O \textbf{Agglomerativo} destacou-se pela flexibilidade em capturar estruturas hierárquicas, mas pode ser mais afetado por outliers e pela definição da métrica de ligação.
+\end{itemize}
 
-% Como trabalhos futuros, sugere-se:
-% \begin{itemize}
-%     \item Aplicar o sistema fuzzy em dados reais de ambientes monitorados;
-%     \item Explorar sistemas fuzzy com múltiplas entradas e saídas~\cite{ross2010fuzzy};
-%     \item Investigar técnicas avançadas de otimização dos parâmetros fuzzy~\cite{haykin2008neural};
-%     \item Integrar o sistema a plataformas de automação residencial ou industrial.
-% \end{itemize}
+A tabela a seguir resume a comparação dos métodos quanto a desempenho médio e robustez (desvio padrão), apresentando lado a lado os resultados quantitativos para Adult e Dry Bean:
+
+A seguir, apresentamos tabelas separadas para cada conjunto de dados, detalhando a acurácia média e o desvio padrão dos algoritmos avaliados.
+
+\begin{table}[H]
+\centering
+\caption{Comparação dos algoritmos de agrupamento no conjunto Adult}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} \\
+\midrule
+KMeans & 0,8221 & 0,0142 \\
+Fuzzy C-Means & 0,8010 & 0,0175 \\
+Agglomerativo & 0,6932 & 0,0148 \\
+\bottomrule
+\end{tabular}
+\label{tab:comparacao_adult}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Comparação dos algoritmos de agrupamento no conjunto Dry Bean}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Algoritmo} & \textbf{Acurácia Média} & \textbf{Desvio Padrão} \\
+\midrule
+KMeans & 0,7215 & 0,0123 \\
+Fuzzy C-Means & 0,6840 & 0,0157 \\
+Agglomerativo & 0,6125 & 0,0112 \\
+\bottomrule
+\end{tabular}
+\label{tab:comparacao_drybean}
+\end{table}
+
+De modo geral, a escolha do algoritmo mais adequado depende da natureza dos dados, do objetivo da análise e da necessidade de interpretabilidade ou robustez frente a ruídos e desbalanceamento. O estudo reforça a importância de pipelines padronizados e análise crítica para a aplicação prática de técnicas de agrupamento em ciência de dados.

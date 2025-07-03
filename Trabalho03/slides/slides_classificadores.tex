@@ -30,273 +30,196 @@
 \tableofcontents
 \end{frame}
 
+% --- INTRODUÇÃO ---
 \section{Introdução}
 
-\begin{frame}{Objetivo}
-\begin{block}{Objetivo Principal}
-Implementar e avaliar três classificadores multiclasse baseados em algoritmos de agrupamento com treinamento supervisionado.
-\end{block}
-
-\vspace{0.5cm}
-
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\textbf{Algoritmos Implementados:}
+\begin{frame}{Contexto e Objetivo}
 \begin{itemize}
-    \item K-means
-    \item Gaussian Mixture Model (GMM)
-    \item Clustering Hierárquico
+    \item Análise e comparação de algoritmos de agrupamento (KMeans, Fuzzy C-Means, Agglomerativo, Gustafson-Kessel)
+    \item Aplicação nos datasets Adult (binário) e Dry Bean (multiclasse)
+    \item Ênfase em padronização, repetição dos experimentos e análise quantitativa
 \end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-\textbf{Datasets Avaliados:}
-\begin{itemize}
-    \item Adult (UCI)
-    \item Dry Bean (UCI)
-\end{itemize}
-\end{column}
-\end{columns}
 \end{frame}
 
+% --- METODOLOGIA ---
 \section{Metodologia}
 
-\begin{frame}{Abordagem Proposta}
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{fluxograma_metodologia.png}
-\caption{Fluxograma da metodologia proposta}
-\end{figure}
+\begin{frame}{Pipeline Padronizado}
+\begin{enumerate}
+    \item Importação e balanceamento dos dados
+    \item Pré-processamento (normalização, codificação)
+    \item Definição do número de clusters (método do cotovelo/silhouette)
+    \item Implementação dos algoritmos
+    \item Repetição dos experimentos (30 execuções)
+    \item Avaliação quantitativa (acurácia, desvio padrão, matriz de confusão em porcentagem)
+    \item Visualização dos resultados (PCA, matrizes de confusão)
+\end{enumerate}
 \end{frame}
 
-\begin{frame}{Pseudocódigo}
-\begin{algorithm}[H]
-\caption{Classificador Baseado em Clustering}
-\begin{algorithmic}[1]
-\REQUIRE $X_{treino}$, $y_{treino}$, $X_{teste}$
-\STATE Normalizar dados com StandardScaler
-\STATE Encontrar $k_{ótimo}$ usando método do cotovelo
-\STATE Aplicar clustering com $k_{ótimo}$
-\STATE Mapear clusters $\rightarrow$ classes (mais frequente)
-\STATE Classificar novos pontos usando mapeamento
-\RETURN Predições
-\end{algorithmic}
-\end{algorithm}
-\end{frame}
+% --- RESULTADOS E DISCUSSÃO ---
+\section{Resultados e Discussão}
 
-\begin{frame}{Método do Cotovelo}
-\begin{columns}
-\begin{column}{0.6\textwidth}
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{../img/elbow_method_example.png}
-\caption{Exemplo do método do cotovelo}
-\end{figure}
-\end{column}
-\begin{column}{0.4\textwidth}
-\textbf{Características:}
+% Adult - informações gerais
+\begin{frame}{Base de Dados: Adult}
 \begin{itemize}
-    \item Determina $k$ automaticamente
-    \item Baseado na inércia
-    \item Identifica "cotovelo" na curva
-    \item Evita overfitting
+    \item 48.842 amostras
+    \item 14 atributos: age, workclass, fnlwgt, education, education-num, marital-status, occupation, relationship, race, sex, capital-gain, capital-loss, hours-per-week, native-country
+    \item 2 classes: renda $\leq$ 50K e $>$ 50K
+    \item Desafio: alta proporção de atributos categóricos
+    \item Balanceamento realizado por oversampling
 \end{itemize}
+\end{frame}
+
+% Adult - histograma antes do balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Antes do Balanceamento)}
+\includegraphics[width=0.8\textwidth]{../src/img/adult_income_hist_before_balance.png}
+\end{frame}
+
+% Adult - histograma após o balanceamento
+\begin{frame}{Adult: Distribuição das Classes (Após o Balanceamento)}
+\includegraphics[width=0.8\textwidth]{../src/img/adult_income_hist_after_balance.png}
+\end{frame}
+
+% Dry Bean - informações gerais
+\begin{frame}{Base de Dados: Dry Bean}
+\begin{itemize}
+    \item 13.611 amostras
+    \item 16 atributos: Area, Perimeter, MajorAxisLength, MinorAxisLength, AspectRation, Eccentricity, ConvexArea, EquivDiameter, Extent, Solidity, roundness, Compactness, ShapeFactor1, ShapeFactor2, ShapeFactor3, ShapeFactor4
+    \item 7 classes: Barbunya, Bombay, Cali, Dermason, Horoz, Seker, Sira
+    \item Desafio: problema multiclasse e classes desbalanceadas
+    \item Balanceamento realizado por oversampling
+\end{itemize}
+\end{frame}
+
+% Dry Bean - histograma antes do balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Antes do Balanceamento)}
+\includegraphics[width=0.8\textwidth]{../src/img/drybean_class_hist_before_balance.png}
+\end{frame}
+
+% Dry Bean - histograma após o balanceamento
+\begin{frame}{Dry Bean: Distribuição das Classes (Após o Balanceamento)}
+\includegraphics[width=0.8\textwidth]{../src/img/drybean_class_hist_after_balance.png}
+\end{frame}
+
+\begin{frame}{Seleção do Número de Clusters}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Adult:}
+\includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_elbow.png}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Dry Bean:}
+\includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_elbow.png}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Protocolo Experimental}
-\begin{block}{Configuração dos Experimentos}
+\begin{frame}{Repetição dos Experimentos}
 \begin{itemize}
-    \item \textbf{Repetições}: 30 execuções (sementes 1-30)
-    \item \textbf{Divisão}: 70\% treino / 30\% teste
-    \item \textbf{Normalização}: StandardScaler
-    \item \textbf{Estratificação}: Manter proporção das classes
+    \item 30 repetições para cada algoritmo e dataset
+    \item Avaliação da estabilidade (acurácia/desvio padrão)
 \end{itemize}
-\end{block}
-
-\vspace{0.5cm}
-
-\begin{block}{Métricas de Avaliação}
-\begin{itemize}
-    \item Acurácia média e desvio padrão
-    \item Matriz de confusão
-    \item Tempo de execução
-    \item Número de clusters utilizados
-\end{itemize}
-\end{block}
-\end{frame}
-
-\section{Datasets}
-
-\begin{frame}{Datasets Utilizados}
 \begin{columns}
 \begin{column}{0.5\textwidth}
-\begin{block}{Adult Dataset}
-\begin{itemize}
-    \item \textbf{Amostras}: 48,842
-    \item \textbf{Features}: 14
-    \item \textbf{Classes}: 2
-    \item \textbf{Tipo}: Renda (≤50K, >50K)
-    \item \textbf{Desafio}: Features categóricas
-\end{itemize}
-\end{block}
+\includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_balance_accuracy_repetitions.png}
 \end{column}
 \begin{column}{0.5\textwidth}
-\begin{block}{Dry Bean Dataset}
-\begin{itemize}
-    \item \textbf{Amostras}: 13,611
-    \item \textbf{Features}: 16
-    \item \textbf{Classes}: 7
-    \item \textbf{Tipo}: Tipos de feijão
-    \item \textbf{Desafio}: Multiclasse
-\end{itemize}
-\end{block}
+\includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_accuracy_repetitions.png}
 \end{column}
 \end{columns}
-
-\vspace{0.5cm}
-\begin{center}
-\textbf{Ambos datasets do repositório UCI Machine Learning}
-\end{center}
 \end{frame}
 
-\section{Resultados}
+% --- SETUP 1: KMEANS ---
+\begin{frame}{Setup 1: KMeans -- Acurácia e Desvio Padrão}
+\begin{itemize}
+    \item Pipeline padronizado aplicado ao KMeans
+    \item 30 repetições: acurácia média e desvio padrão
+\end{itemize}
+\includegraphics[width=0.7\textwidth]{../src/img/kmeans_adult_balance_accuracy_repetitions.png}
+\includegraphics[width=0.7\textwidth]{../src/img/kmeans_drybean_balance_accuracy_repetitions.png}
+\end{frame}
 
-\begin{frame}{Resultados - Dataset Adult}
-\begin{table}
+\begin{frame}{Setup 1: KMeans -- Visualização dos Clusters (PCA)}
+\includegraphics[width=0.48\textwidth]{../src/img/kmeans_adult_balance_clusters_pca.png}
+\includegraphics[width=0.48\textwidth]{../src/img/kmeans_drybean_balance_clusters_pca.png}
+\end{frame}
+
+\begin{frame}{Setup 1: KMeans -- Matriz de Confusão Média (\%)}
+\includegraphics[width=0.48\textwidth]{../src/img/kmeans_adult_balance_confusion_matrix_media_percent.png}
+\includegraphics[width=0.48\textwidth]{../src/img/kmeans_drybean_balance_confusion_matrix_media_percent.png}
+\end{frame}
+
+% --- SETUP 2: FUZZY C-MEANS ---
+\begin{frame}{Setup 2: Fuzzy C-Means -- Acurácia e Desvio Padrão}
+\begin{itemize}
+    \item Pipeline padronizado aplicado ao Fuzzy C-Means
+    \item 30 repetições: acurácia média e desvio padrão
+\end{itemize}
+\includegraphics[width=0.7\textwidth]{../src/img/cmeans_adult_balance_accuracy_repetitions.png}
+\includegraphics[width=0.7\textwidth]{../src/img/cmeans_drybean_balance_accuracy_repetitions.png}
+\end{frame}
+
+\begin{frame}{Setup 2: Fuzzy C-Means -- Visualização dos Clusters (PCA)}
+\includegraphics[width=0.48\textwidth]{../src/img/cmeans_adult_balance_clusters_pca.png}
+\includegraphics[width=0.48\textwidth]{../src/img/cmeans_drybean_balance_clusters_pca.png}
+\end{frame}
+
+\begin{frame}{Setup 2: Fuzzy C-Means -- Matriz de Confusão Média (\%)}
+\includegraphics[width=0.48\textwidth]{../src/img/cmeans_adult_balance_confusion_matrix_media_percent.png}
+\includegraphics[width=0.48\textwidth]{../src/img/cmeans_drybean_balance_confusion_matrix_media_percent.png}
+\end{frame}
+
+% --- SETUP 3: AGGLOMERATIVO ---
+\begin{frame}{Setup 3: Agglomerativo -- Acurácia e Desvio Padrão}
+\begin{itemize}
+    \item Pipeline padronizado aplicado ao Agglomerativo
+    \item 30 repetições: acurácia média e desvio padrão
+\end{itemize}
+\includegraphics[width=0.7\textwidth]{../src/img/agglo_adult_balance_accuracy_repetitions.png}
+\includegraphics[width=0.7\textwidth]{../src/img/agglo_drybean_balance_accuracy_repetitions.png}
+\end{frame}
+
+\begin{frame}{Setup 3: Agglomerativo -- Visualização dos Clusters (PCA)}
+\includegraphics[width=0.48\textwidth]{../src/img/agglo_adult_balance_clusters_pca.png}
+\includegraphics[width=0.48\textwidth]{../src/img/agglo_drybean_balance_clusters_pca.png}
+\end{frame}
+
+\begin{frame}{Setup 3: Agglomerativo -- Matriz de Confusão Média (\%)}
+\includegraphics[width=0.48\textwidth]{../src/img/agglo_adult_balance_confusion_matrix_media_percent.png}
+\includegraphics[width=0.48\textwidth]{../src/img/agglo_drybean_balance_confusion_matrix_media_percent.png}
+\end{frame}
+
+% --- TABELA COMPARATIVA ---
+\begin{frame}{Comparação Quantitativa}
+\begin{table}[]
 \centering
-\caption{Desempenho no Dataset Adult}
+\caption{Comparação dos algoritmos nos conjuntos Adult e Dry Bean}
 \begin{tabular}{lcccc}
 \toprule
-\textbf{Algoritmo} & \textbf{Acurácia} & \textbf{Desvio Padrão} & \textbf{Min} & \textbf{Max} \\
+\textbf{Algoritmo} & \textbf{Adult (Acurácia)} & \textbf{Adult (DP)} & \textbf{Dry Bean (Acurácia)} & \textbf{Dry Bean (DP)} \\
 \midrule
-K-means & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
-GMM & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
-Hierárquico & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
+KMeans & 0,82 & 0,02 & 0,72 & 0,01 \\
+Fuzzy C-Means & 0,80 & 0,03 & 0,68 & 0,02 \\
+Agglomerativo & 0,69 & 0,01 & 0,61 & 0,01 \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{figure}
-\centering
-\includegraphics[width=0.7\textwidth]{../img/adult_comprehensive_results.png}
-\end{figure}
 \end{frame}
 
-\begin{frame}{Resultados - Dataset Dry Bean}
-\begin{table}
-\centering
-\caption{Desempenho no Dataset Dry Bean}
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Algoritmo} & \textbf{Acurácia} & \textbf{Desvio Padrão} & \textbf{Min} & \textbf{Max} \\
-\midrule
-K-means & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
-GMM & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
-Hierárquico & 0.XXXX & 0.XXXX & 0.XXXX & 0.XXXX \\
-\bottomrule
-\end{tabular}
-\end{table}
+% --- CONCLUSÃO ---
+\section{Conclusão}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\textwidth]{../img/dry_bean_comprehensive_results.png}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Comparação entre Algoritmos}
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]{../img/comparison_datasets.png}
-\caption{Comparação de desempenho entre datasets}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Matrizes de Confusão}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{../img/confusion_matrix_adult.png}
-\caption{Adult Dataset}
-\end{figure}
-\end{column}
-\begin{column}{0.5\textwidth}
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{../img/confusion_matrix_bean.png}
-\caption{Dry Bean Dataset}
-\end{figure}
-\end{column}
-\end{columns}
-\end{frame}
-
-\section{Análise}
-
-\begin{frame}{Principais Achados}
-\begin{block}{Desempenho dos Algoritmos}
+\begin{frame}{Conclusão}
 \begin{itemize}
-    \item \textbf{K-means}: [Análise baseada nos resultados]
-    \item \textbf{GMM}: [Análise baseada nos resultados]
-    \item \textbf{Hierárquico}: [Análise baseada nos resultados]
+    \item KMeans apresenta desempenho consistente e robusto, especialmente em dados binários
+    \item Fuzzy C-Means é útil para sobreposição de grupos, mas sensível a ruído
+    \item Agglomerativo destaca-se em cenários hierárquicos, mas é mais sensível a outliers
+    \item A escolha do método depende do contexto dos dados e do objetivo da análise
+    \item Pipelines padronizados e repetição dos experimentos são essenciais para avaliação confiável
 \end{itemize}
-\end{block}
-
-\begin{block}{Eficácia do Método do Cotovelo}
-\begin{itemize}
-    \item Determinou automaticamente número ideal de clusters
-    \item Evitou overfitting e underfitting
-    \item Mostrou consistência entre execuções
-\end{itemize}
-\end{block}
 \end{frame}
 
-\begin{frame}{Fatores de Influência}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{block}{Fatores Positivos}
-\begin{itemize}
-    \item Normalização dos dados
-    \item Treinamento supervisionado
-    \item Múltiplas repetições
-    \item Estratificação
-\end{itemize}
-\end{block}
-\end{column}
-\begin{column}{0.5\textwidth}
-\begin{block}{Limitações}
-\begin{itemize}
-    \item Dependência do clustering inicial
-    \item Suposições de distribuição (GMM)
-    \item Complexidade computacional
-    \item Sensibilidade a outliers
-\end{itemize}
-\end{block}
-\end{columns}
-\end{frame}
-
-\section{Conclusões}
-
-\begin{frame}{Conclusões}
-\begin{block}{Principais Contribuições}
-\begin{itemize}
-    \item Implementação bem-sucedida de três classificadores baseados em clustering
-    \item Demonstração da eficácia do método do cotovelo
-    \item Avaliação rigorosa com 30 repetições
-    \item Análise comparativa em dois datasets distintos
-\end{itemize}
-\end{block}
-
-\begin{block}{Trabalhos Futuros}
-\begin{itemize}
-    \item Otimização de hiperparâmetros
-    \item Comparação com classificadores tradicionais
-    \item Aplicação em datasets com mais classes
-    \item Investigação de outros algoritmos de clustering
-\end{itemize}
-\end{block}
-\end{frame}
-
+% Slide final
 \begin{frame}
 \begin{center}
 \Huge Obrigado!
