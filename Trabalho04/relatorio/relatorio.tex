@@ -1,44 +1,63 @@
-% Relatório do Trabalho Final - Inteligência Computacional
-% Template IEEE Conference
-
 \documentclass[conference]{IEEEtran}
-\usepackage[utf8]{inputenc}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{graphicx}  % Para \includegraphics
+\usepackage{booktabs}  % Para \toprule, \midrule, \bottomrule
 
-\title{Título do Trabalho}
-\author{Autor(es)\\Afiliação}
-
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
+
+\title{Classificação Supervisionada com Algoritmos de Agrupamento\\
+{\footnotesize \textsuperscript{*}Trabalho prático de Inteligência Computacional}
+\thanks{Trabalho desenvolvido para a disciplina de Inteligência Computacional, Programa de Pós-Graduação, CEFET-MG.}
+}
+
+\author{
+\IEEEauthorblockN{2\textsuperscript{nd} Leonardo Vieira Guimarães}
+\IEEEauthorblockA{
+\textit{Programa de Pós-Graduação em Modelagem Matemática e Computacional} \\
+\textit{CEFET-MG}\\
+Belo Horizonte, Brasil \\
+leonardovieiraxy@gmail.com}
+}
+
 \maketitle
 
+\renewcommand{\abstractname}{Resumo}
 \begin{abstract}
-Resumo do trabalho.
+\input{ElementosTextuais/resumo}
 \end{abstract}
 
+\renewcommand{\IEEEkeywordsname}{Palavras-chave}
+\begin{IEEEkeywords}
+\input{ElementosTextuais/palavraschave}
+\end{IEEEkeywords}
+
 \section{Introdução}
-% ...
+\input{ElementosTextuais/introducao.tex}
+Segundo \cite{zadeh1965fuzzy}, os conjuntos fuzzy são fundamentais para a modelagem de incertezas em ciência de dados.
 
 \section{Metodologia}
-% Fundamentos teóricos, técnicas utilizadas, pré-processamento (justificativa)
+\input{ElementosTextuais/metodologia.tex}
+O algoritmo KMeans foi proposto por Lloyd \cite{lloyd1982least} e o método Fuzzy C-Means por Bezdek \cite{bezdek1981pattern}.
 
-\section{Experimentos Computacionais}
-\subsection{Descrição dos Dados}
-\subsection{Pré-processamento}
-\subsection{Configuração dos Algoritmos}
-\subsection{Resultados e Análises}
 
-\section{Análise Crítica dos Algoritmos}
-% Desempenho, robustez, interpretabilidade
+
+\section{Resultados e Discussão}
+\input{ElementosTextuais/resultadosDiscussao.tex}
 
 \section{Conclusão}
-% ...
+\input{ElementosTextuais/conclusao.tex}
 
-\section*{Referências}
-% ...
-
-\appendix
-% Apêndice se necessário
+\renewcommand{\refname}{Referências}
+\bibliographystyle{IEEEtran}
+\bibliography{ElementosTextuais/referencias}
 
 \end{document}
