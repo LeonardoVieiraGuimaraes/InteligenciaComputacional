@@ -323,6 +323,8 @@ Técnica que reduz a dimensionalidade dos dados, projetando-os em 2D para facili
 \end{columns}
 \end{frame}
 
+
+
 \begin{frame}{Seleção do Número de Clusters}
 \begin{itemize}
     \item Método do cotovelo: avalia métrica de qualidade para diferentes $k$
@@ -331,15 +333,24 @@ Técnica que reduz a dimensionalidade dos dados, projetando-os em 2D para facili
 \end{itemize}
 \end{frame}
 
+
 % --- SLIDE DO MÉTODO DO COTOVELO ---
 \begin{frame}{Método do Cotovelo}
-\centering
-\includegraphics[width=0.8\textwidth]{../src/img/kmeans_adult_elbow.png} \\
-\textbf{Adult:} $k = 8$
-\vspace{1.5em}
-\includegraphics[width=0.8\textwidth]{../src/img/kmeans_drybean_balance_elbow.png} \\
-\textbf{Dry Bean:} $k = 7$
+
+\begin{columns}
+    \begin{column}{0.48\textwidth}
+         \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_adult_elbow.png} \\
+        \scriptsize PCA Adult: $k = 8$
+    \end{column}
+    \begin{column}{0.48\textwidth}
+         \centering
+        \includegraphics[width=0.95\textwidth]{../src/img/kmeans_drybean_balance_elbow.png} \\
+        \scriptsize Dry Bean: $k = 7$
+    \end{column}
+\end{columns}
 \end{frame}
+
 
 \begin{frame}{Repetição dos Experimentos}
 \begin{itemize}
