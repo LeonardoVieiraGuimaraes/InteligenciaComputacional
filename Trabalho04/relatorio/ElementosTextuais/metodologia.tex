@@ -1,3 +1,144 @@
-Foram utilizados três conjuntos de dados: Energy Efficiency (regressão), Wine Quality (Red) e Iris (classificação multiclasse). O pré-processamento incluiu normalização dos atributos, codificação de variáveis categóricas e divisão dos dados em treino e teste. A escolha da normalização se justifica pela diferença de escala entre os atributos, impactando algoritmos baseados em distância e gradiente.
+Esta seção apresenta detalhadamente os procedimentos metodológicos adotados para a realização dos experimentos deste trabalho. São descritos os critérios de seleção e as principais características dos conjuntos de dados utilizados, as etapas de pré-processamento aplicadas, os modelos de aprendizado de máquina avaliados e suas configurações, bem como as estratégias de balanceamento de classes empregadas nos cenários de classificação. Além disso, são abordadas as ferramentas de análise exploratória, como gráficos de dispersão e matriz de confusão, e as métricas de avaliação utilizadas para mensurar o desempenho dos algoritmos em tarefas de regressão e classificação. O objetivo é garantir transparência, reprodutibilidade e rigor científico na condução dos experimentos e na análise dos resultados.
 
-Os algoritmos avaliados foram: Regressão Linear, Random Forest, SVR e MLP para regressão; Regressão Logística, Random Forest, SVC e MLP para classificação. Cada setup foi executado com 30 repetições para algoritmos estocásticos, variando a semente de inicialização. As métricas utilizadas foram RMSE, MAE, R² para regressão e acurácia, F1-score, Kappa para classificação.
+\subsection{Conjuntos de Dados e Pré-processamento}
+
+Foram utilizados quatro conjuntos de dados: Energy Efficiency (regressão)\cite{energyefficiency}, California Housing (regressão)\cite{californiahousing}, Wine Quality (Red)\cite{winequality} e Iris (classificação multiclasse)\cite{iris}. O pré-processamento incluiu normalização dos atributos, codificação de variáveis categóricas e divisão dos dados em treino e teste, sendo a normalização fundamental devido à diferença de escala entre os atributos, o que impacta algoritmos baseados em distância e gradiente.
+
+Nos experimentos de regressão, os dados foram divididos em 80\% para treinamento e 20\% para teste. Para classificação, utilizou-se 70\% para treinamento e 30\% para teste. O balanceamento das classes por oversampling foi fundamental para avaliar o impacto dessa técnica nos resultados, especialmente em conjuntos desbalanceados como Wine Quality. Todos os experimentos foram repetidos com diferentes sementes para garantir robustez estatística e confiabilidade dos resultados.
+
+Para os experimentos de classificação, foram realizados testes tanto com os conjuntos de dados originais (desbalanceados) quanto com versões balanceadas. O balanceamento foi feito por meio de oversampling das classes minoritárias, igualando a quantidade de amostras de cada classe à da classe mais frequente. Isso foi implementado na função de pré-processamento, utilizando a técnica de amostragem com reposição (upsampling) para as classes menos representadas, conforme discutido em estudos recentes sobre o impacto de técnicas de amostragem em cenários desbalanceados\cite{dantas2024}. O objetivo foi avaliar o impacto do desbalanceamento nas métricas de desempenho dos algoritmos.
+
+\subsection{Descrição dos Conjuntos de Dados}
+
+\textbf{Energy Efficiency:} Este dataset é utilizado para tarefas de regressão e contém 768 amostras de edifícios residenciais. O objetivo é prever dois parâmetros de eficiência energética: carga de aquecimento (Y1) e carga de resfriamento (Y2). Os atributos são:
+\begin{itemize}
+    \item \textbf{X1:} Relative Compactness
+    \item \textbf{X2:} Surface Area
+    \item \textbf{X3:} Wall Area
+    \item \textbf{X4:} Roof Area
+    \item \textbf{X5:} Overall Height
+    \item \textbf{X6:} Orientation (1 a 4)
+    \item \textbf{X7:} Glazing Area
+    \item \textbf{X8:} Glazing Area Distribution (0 a 5)
+    \item \textbf{Y1:} Heating Load (alvo)
+    \item \textbf{Y2:} Cooling Load (alvo)
+\end{itemize}
+
+\textbf{California Housing:} Este conjunto de dados contém 20.640 amostras de distritos habitacionais da Califórnia, com o objetivo de prever o valor mediano das casas (MedHouseVal). Os atributos são:
+\begin{itemize}
+    \item \textbf{MedInc:} Renda média dos moradores do distrito
+    \item \textbf{HouseAge:} Idade média das casas
+    \item \textbf{AveRooms:} Média de cômodos por residência
+    \item \textbf{AveBedrms:} Média de quartos por residência
+    \item \textbf{Population:} População do distrito
+    \item \textbf{AveOccup:} Média de ocupantes por residência
+    \item \textbf{Latitude:} Latitude geográfica
+    \item \textbf{Longitude:} Longitude geográfica
+    \item \textbf{MedHouseVal:} Valor mediano das casas (alvo)
+\end{itemize}
+
+\textbf{Wine Quality (Red):} Utilizado para classificação multiclasse, este dataset reúne 1.599 amostras de vinhos tintos portugueses. O objetivo é prever a qualidade do vinho (nota de 0 a 10). Os atributos são:
+\begin{itemize}
+    \item \textbf{fixed acidity} (acidez fixa)
+    \item \textbf{volatile acidity} (acidez volátil)
+    \item \textbf{citric acid} (ácido cítrico)
+    \item \textbf{residual sugar} (açúcar residual)
+    \item \textbf{chlorides} (cloretos)
+    \item \textbf{free sulfur dioxide} (SO$_2$ livre)
+    \item \textbf{total sulfur dioxide} (SO$_2$ total)
+    \item \textbf{density} (densidade)
+    \item \textbf{pH}
+    \item \textbf{ sulphates} (sulfatos)
+    \item \textbf{alcohol} (teor alcoólico)
+    \item \textbf{quality} (qualidade, alvo)
+\end{itemize}
+
+\textbf{Iris:} Clássico para classificação multiclasse, o conjunto de dados Iris possui 150 amostras de flores de três espécies diferentes (setosa, versicolor e virginica). Os atributos são:
+\begin{itemize}
+    \item \textbf{sepal length (cm)}: comprimento da sépala
+    \item \textbf{sepal width (cm)}: largura da sépala
+    \item \textbf{petal length (cm)}: comprimento da pétala
+    \item \textbf{petal width (cm)}: largura da pétala
+    \item \textbf{target}: espécie da flor (setosa, versicolor, virginica)
+\end{itemize}
+
+
+\subsection{Modelos e Configuração Experimental}
+
+Os experimentos de regressão e classificação foram realizados com diferentes abordagens de aprendizado de máquina, abrangendo modelos lineares, ensembles, redes neurais e métodos baseados em margens. Para regressão, foram empregados: Regressão Linear (modelo linear simples, utilizado como baseline)\cite{silva2016}, Random Forest Regressor (ensemble de árvores, robusto a outliers e apto a capturar relações não-lineares)\cite{breiman2001}, MLPRegressor (rede neural multicamadas, capaz de modelar relações complexas)\cite{haykin2009} e SVR (Support Vector Regressor, eficiente em espaços de alta dimensão e robusto a outliers)\cite{cortes1995}. Para classificação, utilizaram-se: Regressão Logística (modelo linear para problemas binários e multiclasse)\cite{hosmer2013,gonzalez2018}, Random Forest Classifier\cite{breiman2001}, MLPClassifier\cite{haykin2009} e SVM Classifier (Support Vector Machine, que maximiza a margem entre as classes em espaços de alta dimensão)\cite{cortes1995}.
+
+\textbf{Regressão Linear:} Trata-se de um modelo linear simples, que busca ajustar uma reta (ou hiperplano) aos dados, assumindo relação linear entre as variáveis preditoras e a variável alvo. É utilizado como baseline devido à sua simplicidade e interpretabilidade.
+
+\textbf{Random Forest:} Algoritmo de ensemble baseado em múltiplas árvores de decisão. Para regressão, combina previsões de várias árvores para reduzir variância e melhorar a robustez, sendo eficiente para capturar relações não-lineares e lidar com outliers. Para classificação, segue o mesmo princípio, agregando o voto das árvores para definir a classe final, sendo robusto a ruídos e variáveis categóricas.
+
+\textbf{MLP (Perceptron Multicamadas):} Rede neural artificial composta por múltiplas camadas de neurônios. O MLPRegressor é utilizado para tarefas de regressão e o MLPClassifier para classificação. Ambos são capazes de modelar relações complexas e não-lineares, aprendendo representações internas dos dados por meio de camadas ocultas.
+
+\textbf{SVM/SVR (Support Vector Machine/Regressor):} O SVM é um método de classificação que busca encontrar o hiperplano que maximiza a margem entre as classes, sendo eficiente em espaços de alta dimensão. O SVR é a versão para regressão, que busca ajustar uma função dentro de uma margem de tolerância, sendo robusto a outliers e eficiente para dados complexos.
+
+\textbf{Regressão Logística:} Modelo linear para classificação, especialmente útil para problemas binários e multiclasse. Calcula a probabilidade de pertencimento a uma classe por meio da função logística, sendo simples, eficiente e interpretável.
+
+\subsection{Avaliação dos Experimentos}
+
+Cada configuração experimental foi executada com 30 repetições para garantir robustez estatística, variando a semente de inicialização dos algoritmos estocásticos. As métricas de avaliação adotadas foram: RMSE, MAE e R² para regressão; acurácia, F1-score e Kappa para classificação.
+
+A análise exploratória de dados é uma etapa essencial no processo de construção de modelos de aprendizado de máquina, pois permite compreender a estrutura, padrões e possíveis anomalias presentes nos dados. Entre as principais ferramentas utilizadas nessa fase estão os gráficos de dispersão (scatter plots), que possibilitam visualizar a relação entre variáveis, identificar tendências, padrões lineares ou não lineares, outliers e colinearidades. No contexto de regressão, os scatter plots auxiliam na avaliação da relação entre a variável alvo e os preditores, enquanto em problemas de classificação, facilitam a inspeção da separabilidade das classes e a identificação de agrupamentos ou sobreposições, contribuindo para a escolha de algoritmos e estratégias de pré-processamento\cite{asimov2024}.
+
+Além disso, para tarefas de classificação, a matriz de confusão é uma ferramenta fundamental para avaliar o desempenho dos modelos. Embora não seja uma métrica propriamente dita, ela organiza os resultados das previsões em uma tabela que evidencia acertos e erros para cada classe, permitindo visualizar quais classes são mais confundidas pelo modelo. A matriz de confusão serve de base para o cálculo de métricas como acurácia, precisão, revocação e F1-score, sendo indispensável para uma análise detalhada dos resultados\cite{mariano2021}.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Real / Previsto} & \textbf{Classe 1} & \textbf{Classe 2} & \textbf{Classe 3} \\
+\hline
+\textbf{Classe 1} & a & b & c \\
+\hline
+\textbf{Classe 2} & d & e & f \\
+\hline
+\textbf{Classe 3} & g & h & i \\
+\hline
+\end{tabular}
+\end{center}
+\vspace{0.2cm}
+\vspace{0.2cm}
+\noindent
+Onde:
+\begin{itemize}
+    \item Os elementos da diagonal (a, e, i) representam acertos do modelo para cada classe.
+    \item Os elementos fora da diagonal representam erros de classificação (ex: b = Classe 1 classificada como Classe 2).
+\end{itemize}
+
+Para avaliar o desempenho dos modelos, foram adotadas métricas consagradas na literatura para tarefas de regressão e classificação, conforme discutido em \cite{analisemacro2023}. Essas métricas permitem comparar diferentes algoritmos de forma objetiva e identificar pontos fortes e limitações de cada abordagem.
+
+\textbf{Regressão:}
+\begin{itemize}
+    \item \textbf{RMSE (Root Mean Squared Error):} Mede o erro quadrático médio entre os valores previstos e os valores reais. Valores menores indicam melhor desempenho, pois penalizam mais fortemente grandes desvios.
+    \begin{equation*}
+        RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2}
+    \end{equation*}
+    \item \textbf{MAE (Mean Absolute Error):} Representa o erro absoluto médio, sendo menos sensível a outliers do que o RMSE. Quanto menor, melhor.
+    \begin{equation*}
+        MAE = \frac{1}{n}\sum_{i=1}^n |y_i - \hat{y}_i|
+    \end{equation*}
+    \item \textbf{R² (Coeficiente de Determinação):} Indica a proporção da variância dos dados explicada pelo modelo, variando de $-\infty$ a 1. Valores próximos de 1 indicam bom ajuste, enquanto valores negativos sugerem desempenho inferior ao de uma média simples.
+    \begin{equation*}
+        R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}
+    \end{equation*}
+\end{itemize}
+
+\textbf{Classificação:}
+\begin{itemize}
+    \item \textbf{Acurácia:} Proporção de previsões corretas sobre o total de amostras. É uma métrica intuitiva, mas pode ser enganosa em cenários desbalanceados.
+    \begin{equation*}
+        \text{Acurácia} = \frac{\text{número de acertos}}{\text{total de amostras}}
+    \end{equation*}
+    \item \textbf{F1-score:} Média harmônica entre precisão e revocação, sendo especialmente útil para bases desbalanceadas. No caso multiclasse, utiliza-se a média ponderada.
+    \begin{equation*}
+        F1_k = 2 \cdot \frac{\text{precisão}_k \cdot \text{revocação}_k}{\text{precisão}_k + \text{revocação}_k}
+    \end{equation*}
+    \item \textbf{Kappa de Cohen:} Mede o grau de concordância entre as previsões do modelo e os valores reais, corrigindo o acaso. Varia de $-1$ (discordância total) a 1 (concordância perfeita), sendo útil para avaliar a robustez do classificador.
+    \begin{equation*}
+        \kappa = \frac{p_o - p_e}{1 - p_e}
+    \end{equation*}
+    onde $p_o$ é a proporção de concordância observada e $p_e$ é a concordância esperada pelo acaso.
+\end{itemize}
+

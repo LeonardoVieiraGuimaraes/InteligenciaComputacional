@@ -1,1 +1,476 @@
-Os resultados dos experimentos mostraram que, para regressão (setup Energy Efficiency), o Random Forest obteve o melhor RMSE médio, seguido por MLP e SVR. Na classificação multiclasse (setups Wine Quality e Iris), Random Forest e MLP apresentaram maior acurácia e F1-score, enquanto SVC destacou-se em cenários com classes bem separadas. Modelos lineares foram mais interpretáveis, mas menos robustos em dados não lineares. Boxplots e tabelas comparativas evidenciaram as diferenças de desempenho e robustez entre os algoritmos.
+Esta seção apresenta e discute de forma detalhada os resultados obtidos nos experimentos de regressão e classificação realizados com os diferentes conjuntos de dados. São analisados o desempenho dos algoritmos avaliados em cada base, o efeito das etapas de pré-processamento e das estratégias de balanceamento de classes, bem como as diferenças observadas entre os métodos em relação às métricas adotadas. As análises comparativas destacam os pontos fortes e limitações de cada abordagem, permitindo extrair conclusões relevantes sobre a aplicabilidade e eficiência dos modelos em diferentes cenários.
+
+\subsection{Etapas dos Experimentos}
+
+\begin{itemize}
+    \item \textbf{Energy Efficiency e California Housing:} Utilizados para regressão. O primeiro visa prever os alvos Y1 e Y2 (consumo de aquecimento e resfriamento), enquanto o segundo busca estimar o valor médio das casas na Califórnia. Para ambos, foram aplicados os métodos Linear Regression, Random Forest Regressor, MLPRegressor e SVR, com normalização dos dados. As métricas avaliadas foram RMSE, MAE e $R^2$.
+    \item \textbf{Wine Quality (Red) e Iris:} Utilizados para classificação multiclasse. Ambos os conjuntos foram avaliados com Logistic Regression, Random Forest, MLPClassifier e SVC, nos cenários original (desbalanceado) e balanceado por oversampling. As métricas analisadas foram acurácia, F1-score e Kappa.
+\end{itemize}
+
+A seguir, os resultados e discussões são apresentados individualmente para cada dataset, destacando as relações entre métodos, métricas e características dos dados.
+
+\subsection{Resultados para Energy Efficiency}
+
+O dataset Energy Efficiency foi utilizado para tarefas de regressão, com predição dos alvos Y1 (aquecimento) e Y2 (resfriamento). Os resultados mostram que métodos mais complexos, como Random Forest e MLPRegressor, superam a Linear Regression em todas as métricas, especialmente em $R^2$ e RMSE, indicando melhor ajuste e menor erro. O SVR apresentou desempenho intermediário, sensível à escolha dos hiperparâmetros. As Figuras~\ref{fig:energy_lr_y1}, \ref{fig:energy_lr_y2}, \ref{fig:energy_rf_y1}, \ref{fig:energy_rf_y2}, \ref{fig:energy_mlp_y1}, \ref{fig:energy_mlp_y2}, \ref{fig:energy_svr_y1} e \ref{fig:energy_svr_y2} ilustram os boxplots dos resíduos para cada método e alvo.
+
+\subsubsection{Linear Regression}
+
+O modelo Linear Regression serve como baseline para comparação. Apesar de simples e interpretável, apresenta limitações em capturar relações não lineares, o que se reflete nos maiores valores de RMSE e menores de $R^2$ em relação aos demais métodos. A Figura~\ref{fig:energy_lr_y1} apresenta o boxplot dos resíduos de RMSE para Y1, enquanto a Figura~\ref{fig:energy_lr_y2} mostra o mesmo para Y2.
+
+\textbf{Y1:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y1_LinearRegression.png}
+    \caption{Boxplot dos resíduos de RMSE para Y1 utilizando Linear Regression no dataset Energy Efficiency.}
+    \label{fig:energy_lr_y1}
+\end{figure}
+
+\textbf{Resultados para Y1:}
+\begin{itemize}
+    \item \textbf{RMSE:} 2.9708
+    \item \textbf{MAE:} 2.1091
+    \item \textbf{$R^2$:} 0.9128
+\end{itemize}
+
+\textbf{Y2:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y2_LinearRegression.png}
+    \caption{Boxplot dos resíduos de RMSE para Y2 utilizando Linear Regression no dataset Energy Efficiency.}
+    \label{fig:energy_lr_y2}
+\end{figure}
+
+\textbf{Resultados para Y2:}
+\begin{itemize}
+    \item \textbf{RMSE:} 3.2059
+    \item \textbf{MAE:} 2.2713
+    \item \textbf{$R^2$:} 0.8849
+\end{itemize}
+
+\subsubsection{Random Forest Regressor}
+
+O Random Forest apresentou desempenho superior ao modelo linear, especialmente em termos de RMSE e $R^2$, mostrando robustez a outliers e excelente capacidade de generalização. Os resultados para Y1 e Y2 destacam a vantagem desse método em capturar relações não lineares e reduzir o erro de predição. A Figura~\ref{fig:energy_rf_y1} apresenta o boxplot dos resíduos de RMSE para Y1, enquanto a Figura~\ref{fig:energy_rf_y2} mostra o mesmo para Y2.
+
+\textbf{Y1:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y1_RandomForestRegressor.png}
+    \caption{Boxplot dos resíduos de RMSE para Y1 utilizando Random Forest Regressor no dataset Energy Efficiency.}
+    \label{fig:energy_rf_y1}
+\end{figure}
+
+\textbf{Resultados para Y1:}
+\begin{itemize}
+    \item \textbf{RMSE:} 0.5171
+    \item \textbf{MAE:} 0.3450
+    \item \textbf{$R^2$:} 0.9973
+\end{itemize}
+
+\textbf{Y2:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y2_RandomForestRegressor.png}
+    \caption{Boxplot dos resíduos de RMSE para Y2 utilizando Random Forest Regressor no dataset Energy Efficiency.}
+    \label{fig:energy_rf_y2}
+\end{figure}
+
+\textbf{Resultados para Y2:}
+\begin{itemize}
+    \item \textbf{RMSE:} 1.7317
+    \item \textbf{MAE:} 1.0485
+    \item \textbf{$R^2$:} 0.9663
+\end{itemize}
+
+\subsubsection{MLPRegressor}
+
+O MLPRegressor, por ser uma rede neural, conseguiu capturar padrões mais complexos, apresentando desempenho competitivo com o Random Forest, embora com maior variabilidade nos resultados. Isso sugere que redes neurais podem ser vantajosas em cenários com relações não lineares, mas exigem ajuste fino dos hiperparâmetros. A Figura~\ref{fig:energy_mlp_y1} apresenta o boxplot dos resíduos de RMSE para Y1, enquanto a Figura~\ref{fig:energy_mlp_y2} mostra o mesmo para Y2.
+
+\textbf{Y1:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y1_MLPRegressor.png}
+    \caption{Boxplot dos resíduos de RMSE para Y1 utilizando MLPRegressor no dataset Energy Efficiency.}
+    \label{fig:energy_mlp_y1}
+\end{figure}
+
+\textbf{Resultados para Y1:}
+\begin{itemize}
+    \item \textbf{RMSE:} 2.6173
+    \item \textbf{MAE:} 1.8412
+    \item \textbf{$R^2$:} 0.9322
+\end{itemize}
+
+\textbf{Y2:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y2_MLPRegressor.png}
+    \caption{Boxplot dos resíduos de RMSE para Y2 utilizando MLPRegressor no dataset Energy Efficiency.}
+    \label{fig:energy_mlp_y2}
+\end{figure}
+
+\textbf{Resultados para Y2:}
+\begin{itemize}
+    \item \textbf{RMSE:} 2.9967
+    \item \textbf{MAE:} 2.1238
+    \item \textbf{$R^2$:} 0.8993
+\end{itemize}
+
+\subsubsection{SVR}
+
+O SVR apresentou desempenho intermediário, sendo sensível à escolha dos hiperparâmetros e à escala dos dados. Embora tenha superado a Linear Regression em alguns cenários, não atingiu o desempenho dos métodos baseados em árvores ou redes neurais. A Figura~\ref{fig:energy_svr_y1} apresenta o boxplot dos resíduos de RMSE para Y1, enquanto a Figura~\ref{fig:energy_svr_y2} mostra o mesmo para Y2.
+
+\textbf{Y1:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y1_SVR.png}
+    \caption{Boxplot dos resíduos de RMSE para Y1 utilizando SVR no dataset Energy Efficiency.}
+    \label{fig:energy_svr_y1}
+\end{figure}
+
+\textbf{Resultados para Y1:}
+\begin{itemize}
+    \item \textbf{RMSE:} 2.8290
+    \item \textbf{MAE:} 1.9028
+    \item \textbf{$R^2$:} 0.9210
+\end{itemize}
+
+\textbf{Y2:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_energy_efficiency_y2_SVR.png}
+    \caption{Boxplot dos resíduos de RMSE para Y2 utilizando SVR no dataset Energy Efficiency.}
+    \label{fig:energy_svr_y2}
+\end{figure}
+
+\textbf{Resultados para Y2:}
+\begin{itemize}
+    \item \textbf{RMSE:} 3.1696
+    \item \textbf{MAE:} 2.1104
+    \item \textbf{$R^2$:} 0.8875
+\end{itemize}
+
+\subsection{Resultados para California Housing}
+
+O dataset California Housing foi utilizado para regressão, visando prever o valor médio das casas em diferentes regiões da Califórnia. Os resultados mostram que Random Forest e MLPRegressor superam a Linear Regression e o SVR, especialmente em $R^2$ e RMSE. O Random Forest, em particular, apresentou o melhor desempenho, evidenciando sua robustez para dados tabulares. As Figuras~\ref{fig:california_lr}, \ref{fig:california_rf}, \ref{fig:california_mlp} e \ref{fig:california_svr} ilustram os boxplots dos resíduos para cada método.
+
+\subsubsection{Linear Regression}
+
+O modelo Linear Regression apresentou desempenho razoável, servindo como baseline, mas com limitações para capturar relações não lineares presentes nos dados. Isso se reflete nos valores mais altos de RMSE e menores de $R^2$ em comparação aos métodos mais avançados. O boxplot dos resíduos está na Figura~\ref{fig:california_lr}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_california_housing_LinearRegression.png}
+    \caption{Boxplot dos resíduos de RMSE utilizando Linear Regression no dataset California Housing.}
+    \label{fig:california_lr}
+\end{figure}
+
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{RMSE:} 0.7361
+    \item \textbf{MAE:} 0.5327
+    \item \textbf{$R^2$:} 0.5918
+\end{itemize}
+
+\subsubsection{Random Forest Regressor}
+
+O Random Forest Regressor obteve os melhores resultados em termos de RMSE e $R^2$, mostrando-se robusto e eficiente para esse tipo de dado. Sua capacidade de modelar relações complexas e lidar com outliers foi determinante para o bom desempenho. O boxplot dos resíduos está na Figura~\ref{fig:california_rf}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_california_housing_RandomForestRegressor.png}
+    \caption{Boxplot dos resíduos de RMSE utilizando Random Forest Regressor no dataset California Housing.}
+    \label{fig:california_rf}
+\end{figure}
+
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{RMSE:} 0.5071
+    \item \textbf{MAE:} 0.3312
+    \item \textbf{$R^2$:} 0.8069
+\end{itemize}
+
+\subsubsection{MLPRegressor}
+
+O MLPRegressor apresentou desempenho competitivo, conseguindo capturar padrões complexos, mas com maior variabilidade nos resultados. Isso indica que, embora redes neurais possam ser eficazes, são mais sensíveis à configuração dos hiperparâmetros. O boxplot dos resíduos está na Figura~\ref{fig:california_mlp}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_california_housing_MLPRegressor.png}
+    \caption{Boxplot dos resíduos de RMSE utilizando MLPRegressor no dataset California Housing.}
+    \label{fig:california_mlp}
+\end{figure}
+
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{RMSE:} 0.5463
+    \item \textbf{MAE:} 0.3729
+    \item \textbf{$R^2$:} 0.7757
+\end{itemize}
+
+\subsubsection{SVR}
+
+O SVR teve desempenho inferior aos métodos anteriores, sendo mais sensível à escolha dos hiperparâmetros e à escala dos dados. Sua limitação em capturar relações não lineares complexas ficou evidente nos resultados. O boxplot dos resíduos está na Figura~\ref{fig:california_svr}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_california_housing_SVR.png}
+    \caption{Boxplot dos resíduos de RMSE utilizando SVR no dataset California Housing.}
+    \label{fig:california_svr}
+\end{figure}
+
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{RMSE:} 0.5925
+    \item \textbf{MAE:} 0.3955
+    \item \textbf{$R^2$:} 0.7363
+\end{itemize}
+
+\subsection{Resultados para Wine Quality (Red)}
+
+O dataset Wine Quality (Red) foi utilizado para classificação multiclasse, avaliando os métodos Logistic Regression, Random Forest, MLPClassifier e SVC. Os resultados são apresentados separadamente para os cenários sem e com balanceamento das classes. Observa-se que o balanceamento das classes impactou significativamente as métricas, principalmente para Random Forest e MLPClassifier, que apresentaram ganhos expressivos em acurácia e F1-score. As Figuras~\ref{fig:wine_lr}, \ref{fig:wine_rf}, \ref{fig:wine_mlp} e \ref{fig:wine_svm} ilustram os boxplots dos resultados para cada método.
+
+\subsubsection*{Sem balanceamento}
+
+\textit{A Figura~\ref{fig:wine_lr} mostra o boxplot dos resultados para Logistic Regression, \ref{fig:wine_rf} para Random Forest, \ref{fig:wine_mlp} para MLPClassifier e \ref{fig:wine_svm} para SVC, todos sem balanceamento.}
+
+\textbf{Logistic Regression}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_LogisticRegression.png}
+    \caption{Boxplot dos resultados para Logistic Regression sem balanceamento no dataset Wine Quality.}
+    \label{fig:wine_lr}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.5893
+    \item \textbf{F1-score:} 0.5544
+    \item \textbf{Kappa:} 0.3096
+\end{itemize}
+
+\textbf{Random Forest}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_RandomForestClassifier.png}
+    \caption{Boxplot dos resultados para Random Forest sem balanceamento no dataset Wine Quality.}
+    \label{fig:wine_rf}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.6995
+    \item \textbf{F1-score:} 0.6821
+    \item \textbf{Kappa:} 0.5096
+\end{itemize}
+
+\textbf{MLPClassifier}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_MLPClassifier.png}
+    \caption{Boxplot dos resultados para MLPClassifier sem balanceamento no dataset Wine Quality.}
+    \label{fig:wine_mlp}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.6120
+    \item \textbf{F1-score:} 0.5935
+    \item \textbf{Kappa:} 0.3646
+\end{itemize}
+
+\textbf{SVC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_SVC.png}
+    \caption{Boxplot dos resultados para SVC sem balanceamento no dataset Wine Quality.}
+    \label{fig:wine_svm}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.6088
+    \item \textbf{F1-score:} 0.5805
+    \item \textbf{Kappa:} 0.3452
+\end{itemize}
+
+\subsubsection*{Com balanceamento}
+
+\textit{A Figura~\ref{fig:wine_lr_bal} mostra o boxplot dos resultados para Logistic Regression, \ref{fig:wine_rf_bal} para Random Forest, \ref{fig:wine_mlp_bal} para MLPClassifier e \ref{fig:wine_svm_bal} para SVC, todos com balanceamento.}
+
+\textbf{Logistic Regression}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_balanced_LogisticRegression.png}
+    \caption{Boxplot dos resultados para Logistic Regression com balanceamento no dataset Wine Quality.}
+    \label{fig:wine_lr_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.5174
+    \item \textbf{F1-score:} 0.5055
+    \item \textbf{Kappa:} 0.4210
+\end{itemize}
+
+\textbf{Random Forest}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_balanced_RandomForestClassifier.png}
+    \caption{Boxplot dos resultados para Random Forest com balanceamento no dataset Wine Quality.}
+    \label{fig:wine_rf_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9480
+    \item \textbf{F1-score:} 0.9474
+    \item \textbf{Kappa:} 0.9375
+\end{itemize}
+
+\textbf{MLPClassifier}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_balanced_MLPClassifier.png}
+    \caption{Boxplot dos resultados para MLPClassifier com balanceamento no dataset Wine Quality.}
+    \label{fig:wine_mlp_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.7515
+    \item \textbf{F1-score:} 0.7443
+    \item \textbf{Kappa:} 0.7017
+\end{itemize}
+
+\textbf{SVC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_wine_quality_balanced_SVC.png}
+    \caption{Boxplot dos resultados para SVC com balanceamento no dataset Wine Quality.}
+    \label{fig:wine_svm_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.6088
+    \item \textbf{F1-score:} 0.5805
+    \item \textbf{Kappa:} 0.3452
+\end{itemize}
+
+\subsection{Resultados para Iris}
+
+O dataset Iris foi utilizado para classificação multiclasse, avaliando os métodos Logistic Regression, Random Forest, MLPClassifier e SVC. Os resultados mostram que todos os métodos apresentaram desempenho elevado, com acurácia e F1-score acima de 0.91 mesmo sem balanceamento, refletindo a natureza bem comportada e balanceada do dataset. O balanceamento não trouxe ganhos significativos, indicando que o conjunto já era adequado para as tarefas propostas. As Figuras~\ref{fig:iris_lr}, \ref{fig:iris_rf}, \ref{fig:iris_mlp} e \ref{fig:iris_svm} ilustram os boxplots dos resultados para cada método.
+
+\textit{A Figura~\ref{fig:iris_lr} mostra o boxplot dos resultados para Logistic Regression, \ref{fig:iris_rf} para Random Forest, \ref{fig:iris_mlp} para MLPClassifier e \ref{fig:iris_svm} para SVC, todos sem balanceamento.}
+
+\textit{A Figura~\ref{fig:iris_lr_bal} mostra o boxplot dos resultados para Logistic Regression, \ref{fig:iris_rf_bal} para Random Forest, \ref{fig:iris_mlp_bal} para MLPClassifier e \ref{fig:iris_svm_bal} para SVC, todos com balanceamento.}
+
+\subsubsection*{Sem balanceamento}
+
+\textbf{Logistic Regression}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_LogisticRegression.png}
+    \caption{Boxplot dos resultados para Logistic Regression sem balanceamento no dataset Iris.}
+    \label{fig:iris_lr}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9189
+    \item \textbf{F1-score:} 0.9188
+    \item \textbf{Kappa:} 0.8761
+\end{itemize}
+
+\textbf{Random Forest}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_RandomForestClassifier.png}
+    \caption{Boxplot dos resultados para Random Forest sem balanceamento no dataset Iris.}
+    \label{fig:iris_rf}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9467
+    \item \textbf{F1-score:} 0.9465
+    \item \textbf{Kappa:} 0.9180
+\end{itemize}
+
+\textbf{MLPClassifier}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_MLPClassifier.png}
+    \caption{Boxplot dos resultados para MLPClassifier sem balanceamento no dataset Iris.}
+    \label{fig:iris_mlp}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9522
+    \item \textbf{F1-score:} 0.9521
+    \item \textbf{Kappa:} 0.9259
+\end{itemize}
+
+\textbf{SVC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_SVC.png}
+    \caption{Boxplot dos resultados para SVC sem balanceamento no dataset Iris.}
+    \label{fig:iris_svm}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9522
+    \item \textbf{F1-score:} 0.9521
+    \item \textbf{Kappa:} 0.9265
+\end{itemize}
+
+\subsubsection*{Com balanceamento}
+
+\textbf{Logistic Regression}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_balanced_LogisticRegression.png}
+    \caption{Boxplot dos resultados para Logistic Regression com balanceamento no dataset Iris.}
+    \label{fig:iris_lr_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9189
+    \item \textbf{F1-score:} 0.9188
+    \item \textbf{Kappa:} 0.8761
+\end{itemize}
+
+\textbf{Random Forest}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_balanced_RandomForestClassifier.png}
+    \caption{Boxplot dos resultados para Random Forest com balanceamento no dataset Iris.}
+    \label{fig:iris_rf_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9467
+    \item \textbf{F1-score:} 0.9465
+    \item \textbf{Kappa:} 0.9180
+\end{itemize}
+
+\textbf{MLPClassifier}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_balanced_MLPClassifier.png}
+    \caption{Boxplot dos resultados para MLPClassifier com balanceamento no dataset Iris.}
+    \label{fig:iris_mlp_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9533
+    \item \textbf{F1-score:} 0.9532
+    \item \textbf{Kappa:} 0.9274
+\end{itemize}
+
+\textbf{SVC}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{../graficos/exp_iris_balanced_SVC.png}
+    \caption{Boxplot dos resultados para SVC com balanceamento no dataset Iris.}
+    \label{fig:iris_svm_bal}
+\end{figure}
+\textbf{Resultados:}
+\begin{itemize}
+    \item \textbf{Acurácia:} 0.9522
+    \item \textbf{F1-score:} 0.9521
+    \item \textbf{Kappa:} 0.9265
+\end{itemize}
+
+

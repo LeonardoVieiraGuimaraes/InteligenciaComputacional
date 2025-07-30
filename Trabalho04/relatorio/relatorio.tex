@@ -9,18 +9,19 @@
 \usepackage{float}
 \usepackage{graphicx}  % Para \includegraphics
 \usepackage{booktabs}  % Para \toprule, \midrule, \bottomrule
-
+\usepackage{placeins}
+\usepackage{hyperref}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Classificação Supervisionada com Algoritmos de Agrupamento\\
+\title{Classificação e Regressão Supervisionadas com Algoritmos de Aprendizado de Máquina\\
 {\footnotesize \textsuperscript{*}Trabalho prático de Inteligência Computacional}
 \thanks{Trabalho desenvolvido para a disciplina de Inteligência Computacional, Programa de Pós-Graduação, CEFET-MG.}
 }
 
 \author{
-\IEEEauthorblockN{2\textsuperscript{nd} Leonardo Vieira Guimarães}
+\IEEEauthorblockN{Leonardo Vieira Guimarães}
 \IEEEauthorblockA{
 \textit{Programa de Pós-Graduação em Modelagem Matemática e Computacional} \\
 \textit{CEFET-MG}\\
@@ -42,13 +43,10 @@ leonardovieiraxy@gmail.com}
 
 \section{Introdução}
 \input{ElementosTextuais/introducao.tex}
-Segundo \cite{zadeh1965fuzzy}, os conjuntos fuzzy são fundamentais para a modelagem de incertezas em ciência de dados.
+
 
 \section{Metodologia}
 \input{ElementosTextuais/metodologia.tex}
-O algoritmo KMeans foi proposto por Lloyd \cite{lloyd1982least} e o método Fuzzy C-Means por Bezdek \cite{bezdek1981pattern}.
-
-
 
 \section{Resultados e Discussão}
 \input{ElementosTextuais/resultadosDiscussao.tex}
