@@ -4,10 +4,11 @@
 \documentclass{beamer}
 \usetheme{Madrid}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 
-\title{Título do Trabalho}
-\author{Autor(es)\\Afiliação}
-\date{15 de julho de 2025}
+\title{Classificação e Regressão Supervisionadas com Algoritmos de Aprendizado de Máquina}
+\author{Leonardo Vieira Guimarães \\ Programa de Pós-Graduação em Modelagem Matemática e Computacional, CEFET-MG}
+\date{29 de julho de 2025}
 
 \begin{document}
 
@@ -16,23 +17,80 @@
 \end{frame}
 
 \begin{frame}{Motivação e Objetivo}
-  % ...
+  \begin{itemize}
+    \item Inteligência Computacional é fundamental para resolver problemas complexos em ciência de dados, engenharia e saúde.
+    \item Necessidade de modelos preditivos robustos e confiáveis diante do aumento de dados.
+    \item Objetivo: comparar técnicas de regressão e classificação multiclasse em bases públicas (Energy Efficiency, California Housing, Wine Quality, Iris).
+    \item Avaliar modelos lineares, ensembles, redes neurais e métodos baseados em margens, considerando diferentes estratégias de pré-processamento.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Metodologia}
-  % ...
+  \begin{itemize}
+    \item Bases utilizadas: Energy Efficiency, California Housing, Wine Quality (Red), Iris.
+    \item Pré-processamento: normalização, codificação de variáveis categóricas, divisão estratificada em treino e teste.
+    \item Modelos avaliados: Linear Regression, Random Forest, MLP, SVM/SVR, Logistic Regression.
+    \item Técnicas de balanceamento aplicadas em bases desbalanceadas.
+    \item Métricas: RMSE, MAE, $R^2$ (regressão); acurácia, F1-score, Kappa (classificação).
+    \item 30 execuções para robustez estatística.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Principais Resultados}
-  % ...
+  \begin{itemize}
+    \item Random Forest foi o melhor em cenários complexos ou desbalanceados.
+    \item MLP e SVM se destacaram em bases bem comportadas (Iris).
+    \item Logistic Regression teve desempenho inferior em cenários desafiadores, mas competitivo em bases balanceadas.
+    \item Técnicas de balanceamento melhoraram F1-score e Kappa em bases desbalanceadas.
+  \end{itemize}
+  \vspace{0.3cm}
+  \begin{columns}
+    \column{0.5\textwidth}
+      \includegraphics[width=0.95\linewidth]{../graficos/comparacao_rmse_energy.png}
+      \scriptsize{\centering RMSE Energy Efficiency}
+    \column{0.5\textwidth}
+      \includegraphics[width=0.95\linewidth]{../graficos/comparacao_acuracia_wine_com_balanceamento.png}
+      \scriptsize{\centering Acurácia Wine Quality (balanceado)}
+  \end{columns}
+\end{frame}
+
+% Slides de resultados detalhados
+\begin{frame}{Energy Efficiency: RMSE por Algoritmo}
+  \begin{itemize}
+    \item O Random Forest apresentou o menor RMSE, indicando maior precisão na predição dos alvos Y1 e Y2.
+    \item Modelos lineares tiveram desempenho inferior, com maiores erros médios.
+  \end{itemize}
+  \vspace{0.2cm}
+  \centering
+  \includegraphics[width=0.7\linewidth]{../graficos/comparacao_rmse_energy.png}
+\end{frame}
+
+\begin{frame}{Wine Quality (Balanceado): Acurácia por Algoritmo}
+  \begin{itemize}
+    \item O Random Forest obteve a maior acurácia após o balanceamento das classes.
+    \item O balanceamento impactou positivamente o desempenho dos modelos, especialmente em cenários originalmente desbalanceados.
+  \end{itemize}
+  \vspace{0.2cm}
+  \centering
+  \includegraphics[width=0.7\linewidth]{../graficos/comparacao_acuracia_wine_com_balanceamento.png}
 \end{frame}
 
 \begin{frame}{Análise Crítica}
-  % ...
+  \begin{itemize}
+    \item Não existe algoritmo universalmente superior: desempenho depende do contexto e das características dos dados.
+    \item O uso de múltiplas métricas é essencial para avaliação completa.
+    \item Balanceamento de classes é fundamental para cenários desbalanceados.
+    \item Importância de experimentação rigorosa e análise contextualizada.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Conclusão}
-  % ...
+  \begin{itemize}
+    \item Random Forest mostrou-se robusto e eficiente na maioria dos cenários.
+    \item MLP e SVM são boas opções para bases bem comportadas.
+    \item Logistic Regression é simples e interpretável, mas menos eficaz em cenários complexos.
+    \item A escolha do modelo deve considerar o objetivo, a natureza dos dados e as métricas de interesse.
+  \end{itemize}
 \end{frame}
 
 \end{document}
