@@ -1,20 +1,35 @@
 % Slides do Trabalho Final - Inteligência Computacional
 % Sugestão: usar pacote beamer ou similar
 
-\documentclass{beamer}
-\usetheme{Madrid}
+\documentclass[aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+
+% Tema moderno para Beamer
+\usepackage{lmodern}
+\usetheme{metropolis}
 
 \title{Classificação e Regressão Supervisionadas com Algoritmos de Aprendizado de Máquina}
 \author{Leonardo Vieira Guimarães \\ Programa de Pós-Graduação em Modelagem Matemática e Computacional, CEFET-MG}
 \date{29 de julho de 2025}
 
+
 \begin{document}
 
-\begin{frame}
-  \titlepage
-\end{frame}
+% Capa customizada
+{
+  \begin{frame}[plain]
+    \vspace{0.5cm}
+    \centering
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\Huge\textbf{Classificação e Regressão Supervisionadas}}\\[0.5em]
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\Large\textit{com Algoritmos de Aprendizado de Máquina}}\\[1.5em]
+    \vspace{0.5cm}
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\large Leonardo Vieira Guimarães}\\[0.5em]
+    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\normalsize Programa de Pós-Graduação em Modelagem Matemática e Computacional, CEFET-MG}\\[1em]
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\normalsize 29 de julho de 2025}
+    \vfill
+  \end{frame}
+}
 
 \begin{frame}{Motivação e Objetivo}
   \begin{itemize}
