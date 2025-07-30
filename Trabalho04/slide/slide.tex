@@ -4,7 +4,7 @@
 \documentclass[aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
-
+\usepackage{booktabs}
 % Tema moderno para Beamer
 \usepackage{lmodern}
 \usetheme{metropolis}
@@ -516,72 +516,114 @@
   \end{columns}
 \end{frame}
 
-
-
-% --- Slide 3: Avaliação dos Resultados ---
-\begin{frame}{Avaliação dos Resultados}
-  \begin{itemize}
-    % Adicione seus itens aqui, por exemplo:
-    \item Comparação de métricas entre modelos.
-    \item Análise de desempenho em diferentes bases de dados.
-    \item Visualização com boxplots e gráficos de barras.
-  \end{itemize}
-\end{frame}
-\begin{frame}{Principais Resultados}
-  \begin{itemize}
-    \item Random Forest foi o melhor em cenários complexos ou desbalanceados.
-    \item MLP e SVM se destacaram em bases bem comportadas (Iris).
-    \item Logistic Regression teve desempenho inferior em cenários desafiadores, mas competitivo em bases balanceadas.
-    \item Técnicas de balanceamento melhoraram F1-score e Kappa em bases desbalanceadas.
-  \end{itemize}
-  \vspace{0.3cm}
-  \begin{columns}
-    \column{0.5\textwidth}
-      \includegraphics[width=0.95\linewidth]{../graficos/comparacao_rmse_energy.png}
-      \scriptsize{\centering RMSE Energy Efficiency}
-    \column{0.5\textwidth}
-      \includegraphics[width=0.95\linewidth]{../graficos/comparacao_acuracia_wine_com_balanceamento.png}
-      \scriptsize{\centering Acurácia Wine Quality (balanceado)}
-  \end{columns}
-\end{frame}
-
-% Slides de resultados detalhados
-\begin{frame}{Energy Efficiency: RMSE por Algoritmo}
-  \begin{itemize}
-    \item O Random Forest apresentou o menor RMSE, indicando maior precisão na predição dos alvos Y1 e Y2.
-    \item Modelos lineares tiveram desempenho inferior, com maiores erros médios.
-  \end{itemize}
-  \vspace{0.2cm}
+% --- Slide: Síntese dos Resultados (Regressão) - Tabela ---
+\begin{frame}{Síntese dos Resultados: Regressão (Tabela)}
   \centering
-  \includegraphics[width=0.7\linewidth]{../graficos/comparacao_rmse_energy.png}
+  \scriptsize
+  \textbf{Resultados dos algoritmos de regressão}
+  \vspace{0.5em}
+
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Dataset} & \textbf{Algoritmo} & \textbf{RMSE} & \textbf{MAE} & $\mathbf{R^2}$ \\
+    \midrule
+    Energy (Y1) & Linear Regression & 2.9708 & 2.1091 & 0.9128 \\
+    Energy (Y1) & Random Forest & 0.5187 & 0.3462 & 0.9973 \\
+    Energy (Y1) & MLP & 2.6125 & 1.8421 & 0.9324 \\
+    Energy (Y1) & SVR & 2.8290 & 1.9028 & 0.9210 \\
+    Energy (Y2) & Linear Regression & 3.2059 & 2.2713 & 0.8849 \\
+    Energy (Y2) & Random Forest & 1.7285 & 1.0459 & 0.9664 \\
+    Energy (Y2) & MLP & 3.0091 & 2.1409 & 0.8985 \\
+    Energy (Y2) & SVR & 3.1696 & 2.1104 & 0.8875 \\
+    California & Linear Regression & 0.7361 & 0.5327 & 0.5918 \\
+    California & Random Forest & 0.5062 & 0.3309 & 0.8075 \\
+    California & MLP & 0.5447 & 0.3728 & 0.7771 \\
+    California & SVR & 0.5925 & 0.3955 & 0.7363 \\
+    \bottomrule
+  \end{tabular}
 \end{frame}
 
-\begin{frame}{Wine Quality (Balanceado): Acurácia por Algoritmo}
+% --- Slide: Síntese dos Resultados (Regressão) - Análise ---
+\begin{frame}{Síntese dos Resultados: Regressão (Análise)}
   \begin{itemize}
-    \item O Random Forest obteve a maior acurácia após o balanceamento das classes.
-    \item O balanceamento impactou positivamente o desempenho dos modelos, especialmente em cenários originalmente desbalanceados.
+    \item O Random Forest foi o modelo mais eficiente para ambos os conjuntos de regressão, apresentando os menores valores de RMSE e MAE, além do maior $R^2$.
+    \item Linear Regression obteve os maiores erros e menor poder explicativo, especialmente para Y2 no Energy Efficiency.
+    \item MLP e SVR tiveram desempenho intermediário, com MLP superando o modelo linear em ambos os conjuntos.
   \end{itemize}
-  \vspace{0.2cm}
+\end{frame}
+
+
+% --- Slide: Síntese dos Resultados: Classificação (Sem Balanceamento) ---
+\begin{frame}{Síntese dos Resultados: Classificação (Sem Balanceamento)}
   \centering
-  \includegraphics[width=0.7\linewidth]{../graficos/comparacao_acuracia_wine_com_balanceamento.png}
+  \scriptsize
+  \textbf{Resultados dos algoritmos de classificação (sem balanceamento)}
+  \vspace{0.5em}
+
+  \begin{tabular}{llccc}
+    \toprule
+    \textbf{Dataset} & \textbf{Algoritmo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
+    \midrule
+    Wine & Logistic Regression & 0.5893 & 0.5544 & 0.3096 \\
+    Wine & Random Forest & 0.6948 & 0.6769 & 0.5014 \\
+    Wine & MLP & 0.6139 & 0.5950 & 0.3676 \\
+    Wine & SVM & 0.6088 & 0.5805 & 0.3452 \\
+    Iris & Logistic Regression & 0.9189 & 0.9188 & 0.8761 \\
+    Iris & Random Forest & 0.9500 & 0.9497 & 0.9230 \\
+    Iris & MLP & 0.9522 & 0.9521 & 0.9256 \\
+    Iris & SVM & 0.9522 & 0.9521 & 0.9265 \\
+    \bottomrule
+  \end{tabular}
 \end{frame}
 
-\begin{frame}{Análise Crítica}
+% --- Slide: Síntese dos Resultados: Classificação (Com Balanceamento) ---
+\begin{frame}{Síntese dos Resultados: Classificação (Com Balanceamento)}
+  \centering
+  \scriptsize
+  \textbf{Resultados dos algoritmos de classificação (com balanceamento)}
+  \vspace{0.5em}
+
+  \begin{tabular}{llccc}
+    \toprule
+    \textbf{Dataset} & \textbf{Algoritmo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
+    \midrule
+    Wine & Logistic Regression & 0.5167 & 0.5045 & 0.4201 \\
+    Wine & Random Forest & 0.9478 & 0.9473 & 0.9374 \\
+    Wine & MLP & 0.7583 & 0.7507 & 0.7098 \\
+    Wine & SVM & 0.6088 & 0.5805 & 0.3452 \\
+    Iris & Logistic Regression & 0.9189 & 0.9188 & 0.8761 \\
+    Iris & Random Forest & 0.9456 & 0.9454 & 0.9161 \\
+    Iris & MLP & 0.9544 & 0.9543 & 0.9294 \\
+    Iris & SVM & 0.9522 & 0.9521 & 0.9265 \\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+% --- Slide: Síntese dos Resultados: Classificação (Análise) ---
+\begin{frame}{Síntese dos Resultados: Classificação (Análise)}
   \begin{itemize}
-    \item Não existe algoritmo universalmente superior: desempenho depende do contexto e das características dos dados.
-    \item O uso de múltiplas métricas é essencial para avaliação completa.
-    \item Balanceamento de classes é fundamental para cenários desbalanceados.
-    \item Importância de experimentação rigorosa e análise contextualizada.
+    \item O Random Forest foi o algoritmo mais robusto e eficiente, especialmente em cenários complexos ou desbalanceados.
+    \item MLP e SVM se destacaram em bases bem comportadas, como a Iris.
+    \item Logistic Regression, apesar de simples e interpretável, teve desempenho inferior nos cenários mais desafiadores, mas foi competitivo em bases balanceadas.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Conclusão}
+% --- Slide: Conclusão Geral ---
+\begin{frame}{Conclusão Geral}
   \begin{itemize}
-    \item Random Forest mostrou-se robusto e eficiente na maioria dos cenários.
-    \item MLP e SVM são boas opções para bases bem comportadas.
-    \item Logistic Regression é simples e interpretável, mas menos eficaz em cenários complexos.
-    \item A escolha do modelo deve considerar o objetivo, a natureza dos dados e as métricas de interesse.
+    \item O Random Forest demonstrou ser o algoritmo mais robusto e eficiente para tarefas de regressão e classificação, especialmente em cenários complexos ou desbalanceados.
+    \item MLP e SVM também apresentaram excelente desempenho, principalmente em bases bem comportadas, como a Iris.
+    \item Logistic Regression, apesar de sua simplicidade e interpretabilidade, mostrou desempenho inferior nos cenários mais desafiadores, mas manteve-se competitivo em conjuntos de dados balanceados e de menor complexidade.
   \end{itemize}
+\end{frame}
+
+% --- Slide: Encerramento ---
+\begin{frame}[standout]
+  \vspace{2em}
+  \Huge\textbf{Obrigado!}
+  \vspace{1em}
+
+  \Large Perguntas?
 \end{frame}
 
 \end{document}
