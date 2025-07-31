@@ -7,10 +7,13 @@
 \usepackage{booktabs}
 % Tema moderno para Beamer
 \usepackage{lmodern}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
 \usetheme{metropolis}
+\BeforeBeginEnvironment{frame}{\justifying}
 
 \title{Classificação e Regressão Supervisionadas com Algoritmos de Aprendizado de Máquina}
-\author{Leonardo Vieira Guimarães \\ Programa de Pós-Graduação em Modelagem Matemática e Computacional, CEFET-MG}
+\author{Leonardo Vieira Guimarães, Programa de Pós-Graduação em Modelagem Matemática e Computacional, CEFET-MG}
 \date{29 de julho de 2025}
 
 
@@ -36,12 +39,19 @@
     \item Inteligência Computacional é fundamental para resolver problemas complexos em ciência de dados, engenharia e saúde.
     \item Necessidade de modelos preditivos robustos e confiáveis diante do aumento de dados.
     \item Objetivo: comparar técnicas de regressão e classificação multiclasse em bases públicas (Energy Efficiency, California Housing, Wine Quality, Iris).
-    \item Avaliar modelos lineares, ensembles, redes neurais e métodos baseados em margens, considerando diferentes estratégias de pré-processamento.
+    \item Avaliar diferentes modelos de aprendizado de máquina, considerando estratégias de pré-processamento:
+    \begin{itemize}
+      \item \textbf{Modelos Lineares:} Regressão Linear, Regressão Logística
+      \item \textbf{Ensembles:} Random Forest
+      \item \textbf{Redes Neurais:} MLP (Perceptron Multicamadas)
+      \item \textbf{Métodos Baseados em Margens:} SVM (Support Vector Machine), SVR (Support Vector Regressor)
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 % --- Slide 1: Processamento dos Dados ---
 \begin{frame}{Processamento dos Dados}
+  \justifying
   \begin{itemize}
    \item Datasets utilizados:
     \begin{itemize}
