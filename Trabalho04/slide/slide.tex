@@ -65,9 +65,8 @@
 % --- Slide: Energy Efficiency Dataset ---
 \begin{frame}{Energy Efficiency Dataset}
   \begin{itemize}
-    \item \textbf{Tipo:} Regressão
     \item \textbf{Amostras:} 768
-    \item \textbf{Atributos:} 8 variáveis de entrada (ex: área, orientação, compactação, etc.)
+    \item \textbf{Atributos:} 8 variáveis de entrada: área relativa, compacidade, razão de área de superfície, área total de paredes, área total de telhado, orientação, superfície de envidraçamento, área de envidraçamento distribuída.
     \item \textbf{Alvos:} Y1 (Heating Load), Y2 (Cooling Load)
     \item \textbf{Descrição:} Dados de edifícios simulados para prever consumo de energia para aquecimento e resfriamento.
     \item \textbf{Fonte:} UCI Machine Learning Repository
@@ -77,9 +76,8 @@
 % --- Slide: California Housing Dataset ---
 \begin{frame}{California Housing Dataset}
   \begin{itemize}
-    \item \textbf{Tipo:} Regressão
     \item \textbf{Amostras:} 20.640
-    \item \textbf{Atributos:} 8 variáveis de entrada (ex: média de quartos, população, latitude, longitude, etc.)
+    \item \textbf{Atributos:} 8 variáveis de entrada: longitude, latitude, número médio de quartos, número médio de dormitórios, população, número médio de ocupantes por residência, renda mediana, idade mediana das casas.
     \item \textbf{Alvo:} MedHouseVal (valor mediano das casas em milhares de dólares)
     \item \textbf{Descrição:} Dados do censo da Califórnia para prever o valor das casas por região.
     \item \textbf{Fonte:} StatLib, UCI Machine Learning Repository
@@ -89,9 +87,8 @@
 % --- Slide: Wine Quality (Red) Dataset ---
 \begin{frame}{Wine Quality (Red) Dataset}
   \begin{itemize}
-    \item \textbf{Tipo:} Classificação multiclasse
     \item \textbf{Amostras:} 1.599
-    \item \textbf{Atributos:} 11 variáveis físico-químicas (ex: acidez, açúcar, pH, álcool, etc.)
+    \item \textbf{Atributos:} 11 variáveis físico-químicas: acidez fixa, acidez volátil, ácido cítrico, açúcares residuais, cloretos, dióxido de enxofre livre, dióxido de enxofre total, densidade, pH, sulfatos, álcool.
     \item \textbf{Alvo:} Qualidade do vinho (nota de 3 a 8)
     \item \textbf{Descrição:} Avaliação da qualidade de vinhos tintos portugueses com base em características químicas.
     \item \textbf{Fonte:} UCI Machine Learning Repository
@@ -101,9 +98,8 @@
 % --- Slide: Iris Dataset ---
 \begin{frame}{Iris Dataset}
   \begin{itemize}
-    \item \textbf{Tipo:} Classificação multiclasse
     \item \textbf{Amostras:} 150
-    \item \textbf{Atributos:} 4 variáveis (comprimento e largura das sépalas e pétalas)
+    \item \textbf{Atributos:} 4 variáveis: comprimento da sépala, largura da sépala, comprimento da pétala, largura da pétala.
     \item \textbf{Alvo:} Espécie da flor (Setosa, Versicolor, Virginica)
     \item \textbf{Descrição:} Clássico conjunto de dados para classificação de espécies de íris.
     \item \textbf{Fonte:} UCI Machine Learning Repository
@@ -122,84 +118,62 @@
   \end{itemize}
 \end{frame}
 
-% --- Slide: Modelos Lineares ---
-\begin{frame}{Modelos Lineares}
-  \begin{itemize}
-    \item \textbf{O que são?} Modelos que assumem uma relação linear entre as variáveis de entrada e a saída.
-    \item \textbf{Exemplos:} Regressão Linear (para prever valores contínuos) e Regressão Logística (para classificação).
-    \item \textbf{Características:}
-      \begin{itemize}
-        \item Simples, rápidos e fáceis de interpretar.
-        \item Funcionam bem quando a relação entre as variáveis é aproximadamente linear.
-        \item Limitados para problemas com relações não-lineares complexas.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+  % --- Slide: Modelos Lineares ---
+  \begin{frame}{Modelos Lineares}
+    \begin{itemize}
+    \item Modelos que assumem uma relação linear entre as variáveis de entrada e a saída.
+    \item Regressão Linear: método que busca uma relação linear entre as variáveis de entrada e a saída, ajustando uma reta para prever valores contínuos.
+    \item Regressão Logística: usada para classificação, estima a probabilidade de uma amostra pertencer a uma classe.
+    \item São métodos simples, rápidos e interpretáveis, mas não capturam padrões não-lineares complexos.
+    \end{itemize}
+  \end{frame}
 
-% --- Slide: Ensembles (Random Forest) ---
-\begin{frame}{Ensembles: Random Forest}
-  \begin{itemize}
-    \item \textbf{O que são?} Técnicas que combinam vários modelos simples (como árvores de decisão) para formar um modelo mais robusto.
-    \item \textbf{Exemplo:} Random Forest, que constrói diversas árvores de decisão e faz a média (regressão) ou votação (classificação) dos resultados.
-    \item \textbf{Características:}
-      \begin{itemize}
-        \item Reduzem o risco de overfitting.
-        \item Lidam bem com dados ruidosos e desbalanceados.
-        \item Geralmente apresentam alta precisão em problemas reais.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+  % --- Slide: Ensembles (Random Forest) ---
+  \begin{frame}{Ensembles: Random Forest}
+    \begin{itemize}
+    \item Técnicas que combinam vários modelos simples (como árvores de decisão) para formar um modelo mais robusto.
+    \item Random Forest: método de ensemble que constrói várias árvores de decisão independentes e combina seus resultados para melhorar a precisão e reduzir o risco de overfitting.
+    \item É robusto a ruídos e desbalanceamento, mas pode ser menos interpretável que modelos lineares.
+    \end{itemize}
+  \end{frame}
 
-% --- Slide: Redes Neurais (MLP) ---
-\begin{frame}{Redes Neurais: MLP}
-  \begin{itemize}
-    \item \textbf{O que são?} Modelos inspirados no cérebro humano, compostos por camadas de neurônios artificiais.
-    \item \textbf{Exemplo:} MLP (Perceptron Multicamadas), com múltiplas camadas ocultas entre entrada e saída.
-    \item \textbf{Características:}
-      \begin{itemize}
-        \item Capazes de aprender relações não-lineares complexas.
-        \item Requerem mais dados e processamento.
-        \item Muito flexíveis, mas podem ser difíceis de interpretar.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+  % --- Slide: Redes Neurais (MLP) ---
+  \begin{frame}{Redes Neurais: MLP}
+    \begin{itemize}
+    \item Modelos inspirados no cérebro humano, compostos por camadas de neurônios artificiais.
+    \item MLP (Perceptron Multicamadas): rede neural artificial composta por camadas de neurônios conectados, capaz de aprender padrões não-lineares complexos.
+    \item Muito flexível, mas exige mais dados, processamento e pode ser difícil de interpretar.
+    \end{itemize}
+  \end{frame}
 
-% --- Slide: Métodos Baseados em Margens (SVM/SVR) ---
-\begin{frame}{Métodos Baseados em Margens: SVM/SVR}
-  \begin{itemize}
-    \item \textbf{O que são?} Algoritmos que buscam separar as classes (ou ajustar uma faixa para regressão) maximizando a margem entre os dados.
-    \item \textbf{Exemplo:} SVM (Support Vector Machine) para classificação e SVR (Support Vector Regressor) para regressão.
-    \item \textbf{Características:}
-      \begin{itemize}
-        \item Eficazes para dados com fronteiras complexas.
-        \item Sensíveis à escolha dos parâmetros e à normalização dos dados.
-        \item Podem alcançar alta precisão em problemas bem definidos.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
+  % --- Slide: Métodos Baseados em Margens (SVM/SVR) ---
+  \begin{frame}{Métodos Baseados em Margens: SVM/SVR}
+    \begin{itemize}
+    \item Algoritmos que buscam separar as classes (ou ajustar uma faixa para regressão) maximizando a margem entre os dados.
+    \item SVM (Support Vector Machine): método que busca o hiperplano que melhor separa as classes, maximizando a margem entre elas. SVR (Support Vector Regressor) aplica o mesmo princípio para regressão.
+    \item São eficazes para dados com fronteiras complexas, mas sensíveis à escolha de parâmetros e à normalização.
+    \end{itemize}
+  \end{frame}
 
 
 % --- Slide: Acurácia e F1-score ---
 \begin{frame}{Métricas de Avaliação: Classificação}
   \begin{itemize}
-    \item \textbf{Acurácia:}
-      \begin{itemize}
-        \item Proporção de acertos sobre o total de previsões.
-        \item Fórmula: $\text{Acurácia} = \frac{TP + TN}{TP + TN + FP + FN}$
-      \end{itemize}
-    \item \textbf{F1-score:}
-      \begin{itemize}
-        \item Média harmônica entre precisão e revocação.
-        \item Fórmula: $F_1 = 2 \cdot \frac{\text{Precis\~ao} \cdot \text{Revoca\c{c}\~ao}}{\text{Precis\~ao} + \text{Revoca\c{c}\~ao}}$
-        \item Útil para bases desbalanceadas.
-      \end{itemize}
-      \item \textbf{Kappa:}
-      \begin{itemize}
-        \item Mede o acordo entre as previsões do modelo e os valores reais, corrigido pelo acaso.
-        \item Fórmula: $Kappa = \frac{p_o - p_e}{1 - p_e}$
-        \item $p_o$ = acurácia observada, $p_e$ = acurácia esperada pelo acaso.
-      \end{itemize}
+    \item \textbf{Acurácia:} Mede a proporção de acertos totais (positivos e negativos). Próxima de 1 indica ótimo desempenho geral, mas pode mascarar erros em classes minoritárias. Útil para bases balanceadas.
+    \item \textbf{F1-score:} Resume o equilíbrio entre precisão (acertos entre os positivos previstos) e revocação (acertos entre os positivos reais). Valor alto mostra que o modelo acerta bem ambas as classes, sendo ideal para bases desbalanceadas.
+    \item \textbf{Kappa:} Mede o quanto o modelo supera o acaso, considerando a distribuição das classes. Próximo de 1: excelente concordância; próximo de 0: desempenho similar ao acaso. Importante para cenários com desbalanceamento.
   \end{itemize}
+  \vspace{0.5em}
+  \begin{block}{Fórmulas}
+    \begin{center}
+      \large
+      \begin{tabular}{ccc}
+        $\text{Acurácia} = \frac{TP + TN}{TP + TN + FP + FN}$ &
+        $F_1 = 2 \cdot \frac{\text{Precis\~ao} \cdot \text{Revoca\c{c}\~ao}}{\text{Precis\~ao} + \text{Revoca\c{c}\~ao}}$ &
+        $Kappa = \frac{p_o - p_e}{1 - p_e}$
+      \end{tabular}
+    \end{center}
+  \end{block}
 \end{frame}
 
 % --- Slide: Matriz de Confusão ---
@@ -231,25 +205,21 @@
 % --- Slide: Métricas de Regressão ---
 \begin{frame}{Métricas de Avaliação: Regressão}
   \begin{itemize}
-    \item \textbf{RMSE (Root Mean Squared Error):}
-      \begin{itemize}
-        \item Mede o erro quadrático médio entre valores previstos e reais.
-        \item Fórmula: $RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}$
-        \item Valores menores indicam melhor desempenho.
-      \end{itemize}
-    \item \textbf{MAE (Mean Absolute Error):}
-      \begin{itemize}
-        \item Média dos valores absolutos dos erros.
-        \item Fórmula: $MAE = \frac{1}{n} \sum_{i=1}^n |y_i - \hat{y}_i|$
-        \item Fácil de interpretar, menos sensível a outliers que o RMSE.
-      \end{itemize}
-    \item \textbf{$R^2$ (Coeficiente de Determinação):}
-      \begin{itemize}
-        \item Mede a proporção da variância explicada pelo modelo.
-        \item Fórmula: $R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}$
-        \item Valores próximos de 1 indicam bom ajuste.
-      \end{itemize}
+    \item \textbf{RMSE:} Erro quadrático médio. Valores menores indicam previsões mais próximas dos reais. Sensível a grandes erros.
+    \item \textbf{MAE:} Média dos erros absolutos. Fácil de interpretar, menos afetado por outliers que o RMSE.
+    \item \textbf{$R^2$:} Mede quanto da variação dos dados é explicada pelo modelo. Próximo de 1 indica ótimo ajuste.
   \end{itemize}
+  \vspace{0.5em}
+  \begin{block}{Fórmulas}
+    \begin{center}
+      \large
+      \begin{tabular}{ccc}
+        $RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2}$ &
+        $MAE = \frac{1}{n} \sum_{i=1}^n |y_i - \hat{y}_i|$ &
+        $R^2 = 1 - \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{\sum_{i=1}^n (y_i - \bar{y})^2}$
+      \end{tabular}
+    \end{center}
+  \end{block}
 \end{frame}
 
 % --- Slide: Scatter Plot (Regressão) ---
@@ -270,14 +240,21 @@
 \begin{frame}{Energy Efficiency: Regressão (Y1) - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Linear Regression, Random Forest Regressor, MLPRegressor, SVR
-    \item \textbf{Resultados para Y1:}
-      \begin{itemize}
-        \item \textbf{Linear Regression:} RMSE = 2.9708, MAE = 2.1091, $R^2$ = 0.9128
-        \item \textbf{Random Forest:} RMSE = 0.5171, MAE = 0.3450, $R^2$ = 0.9973
-        \item \textbf{MLPRegressor:} RMSE = 2.6173, MAE = 1.8412, $R^2$ = 0.9322
-        \item \textbf{SVR:} RMSE = 2.8290, MAE = 1.9028, $R^2$ = 0.9210
-      \end{itemize}
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Modelo} & \textbf{RMSE} & \textbf{MAE} & $\mathbf{R^2}$ \\
+    \midrule
+    Random Forest & 0.5171 & 0.3450 & 0.9973 \\
+    MLPRegressor & 2.6173 & 1.8412 & 0.9322 \\
+    SVR & 2.8290 & 1.9028 & 0.9210 \\
+    Linear Regression & 2.9708 & 2.1091 & 0.9128 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \textbf{Análise:} Random Forest apresentou o melhor desempenho geral, com menor RMSE e MAE, e maior $R^2$.
 \end{frame}
 
 % --- Slide: Energy Efficiency - Regressão Y1 (Gráficos de Dispersão) ---
@@ -305,14 +282,21 @@
 \begin{frame}{Energy Efficiency: Regressão (Y2) - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Linear Regression, Random Forest Regressor, MLPRegressor, SVR
-    \item \textbf{Resultados para Y2:}
-      \begin{itemize}
-        \item \textbf{Linear Regression:} RMSE = 3.2059, MAE = 2.2713, $R^2$ = 0.8849
-        \item \textbf{Random Forest:} RMSE = 1.7317, MAE = 1.0485, $R^2$ = 0.9663
-        \item \textbf{MLPRegressor:} RMSE = 2.9967, MAE = 2.1238, $R^2$ = 0.8993
-        \item \textbf{SVR:} RMSE = 3.1696, MAE = 2.1104, $R^2$ = 0.8875
-      \end{itemize}
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Modelo} & \textbf{RMSE} & \textbf{MAE} & $\mathbf{R^2}$ \\
+    \midrule
+    Random Forest & 1.7317 & 1.0485 & 0.9663 \\
+    MLPRegressor & 2.9967 & 2.1238 & 0.8993 \\
+    SVR & 3.1696 & 2.1104 & 0.8875 \\
+    Linear Regression & 3.2059 & 2.2713 & 0.8849 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \textbf{Análise:} Random Forest novamente apresentou o melhor desempenho, com menor RMSE e MAE, e maior $R^2$.
 \end{frame}
 
 % --- Slide: Energy Efficiency - Regressão Y2 (Gráficos de Dispersão) ---
@@ -340,14 +324,21 @@
 \begin{frame}{California Housing: Regressão - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Linear Regression, Random Forest Regressor, MLPRegressor, SVR
-    \item \textbf{Resultados:}
-      \begin{itemize}
-        \item \textbf{Linear Regression:} RMSE = 0.7361, MAE = 0.5327, $R^2$ = 0.5918
-        \item \textbf{Random Forest:} RMSE = 0.5071, MAE = 0.3312, $R^2$ = 0.8069
-        \item \textbf{MLPRegressor:} RMSE = 0.5463, MAE = 0.3729, $R^2$ = 0.7757
-        \item \textbf{SVR:} RMSE = 0.5925, MAE = 0.3955, $R^2$ = 0.7363
-      \end{itemize}
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Modelo} & \textbf{RMSE} & \textbf{MAE} & $\mathbf{R^2}$ \\
+    \midrule
+    Random Forest & 0.5071 & 0.3312 & 0.8069 \\
+    MLPRegressor & 0.5463 & 0.3729 & 0.7757 \\
+    SVR & 0.5925 & 0.3955 & 0.7363 \\
+    Linear Regression & 0.7361 & 0.5327 & 0.5918 \\
+    \bottomrule
+  \end{tabular}
+  \end{center}
+  \textbf{Análise:} Random Forest apresentou o melhor desempenho geral, com menor RMSE e MAE, e maior $R^2$.
 \end{frame}
 
 % --- Slide: California Housing - Regressão (Gráficos de Dispersão) ---
@@ -376,15 +367,22 @@
 \begin{frame}{Wine Quality (Red): Classificação - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Logistic Regression, Random Forest Classifier, MLPClassifier, SVM
-    \item \textbf{Resultados:}
-      \begin{itemize}
-        \item \textbf{Logistic Regression:} Acurácia = 0.62, F1-score = 0.59, Kappa = 0.47
-        \item \textbf{Random Forest:} Acurácia = 0.71, F1-score = 0.70, Kappa = 0.60
-        \item \textbf{MLPClassifier:} Acurácia = 0.66, F1-score = 0.64, Kappa = 0.53
-        \item \textbf{SVM:} Acurácia = 0.64, F1-score = 0.62, Kappa = 0.50
-      \end{itemize}
-    \item \textbf{Análise:} Random Forest apresentou o melhor desempenho geral.
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+    \begin{tabular}{lccc}
+      \toprule
+      \textbf{Modelo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
+      \midrule
+      Random Forest & 0.71 & 0.70 & 0.60 \\
+      MLPClassifier & 0.66 & 0.64 & 0.53 \\
+      SVM & 0.64 & 0.62 & 0.50 \\
+      Logistic Regression & 0.62 & 0.59 & 0.47 \\
+      \bottomrule
+    \end{tabular}
+    \vspace{0.5em}
+  \end{center}
+  \textbf{Análise:} Random Forest apresentou o melhor desempenho geral.
 \end{frame}
 
 % --- Slide: Wine Quality (Red) - Classificação (Matrizes de Confusão) ---
@@ -412,15 +410,23 @@
 \begin{frame}{Wine Quality (Red): Classificação (Com Balanceamento) - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Logistic Regression, Random Forest Classifier, MLPClassifier, SVM
-    \item \textbf{Resultados após balanceamento:}
-      \begin{itemize}
-        \item \textbf{Logistic Regression:} Acurácia = 0.66, F1-score = 0.64, Kappa = 0.54
-        \item \textbf{Random Forest:} Acurácia = 0.74, F1-score = 0.73, Kappa = 0.65
-        \item \textbf{MLPClassifier:} Acurácia = 0.69, F1-score = 0.68, Kappa = 0.58
-        \item \textbf{SVM:} Acurácia = 0.67, F1-score = 0.66, Kappa = 0.56
-      \end{itemize}
-    \item \textbf{Análise:} O balanceamento das classes melhorou o desempenho de todos os modelos, especialmente Random Forest.
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+    \begin{tabular}{lccc}
+      \toprule
+      \textbf{Modelo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
+      \midrule
+      Random Forest & 0.74 & 0.73 & 0.65 \\
+      MLPClassifier & 0.69 & 0.68 & 0.58 \\
+      SVM & 0.67 & 0.66 & 0.56 \\
+      Logistic Regression & 0.66 & 0.64 & 0.54 \\
+      \bottomrule
+    \end{tabular}
+    \vspace{0.5em}
+   
+  \end{center}
+   \textbf{Análise:} O balanceamento das classes melhorou o desempenho de todos os modelos, especialmente Random Forest.
 \end{frame}
 
 % --- Slide: Wine Quality (Red) - Classificação (Balanceado) (Matrizes de Confusão) ---
@@ -448,15 +454,22 @@
 \begin{frame}{Iris: Classificação - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Logistic Regression, Random Forest Classifier, MLPClassifier, SVM
-    \item \textbf{Resultados:}
-      \begin{itemize}
-        \item \textbf{Logistic Regression:} Acurácia = 0.97, F1-score = 0.97, Kappa = 0.95
-        \item \textbf{Random Forest:} Acurácia = 0.97, F1-score = 0.97, Kappa = 0.95
-        \item \textbf{MLPClassifier:} Acurácia = 0.96, F1-score = 0.96, Kappa = 0.94
-        \item \textbf{SVM:} Acurácia = 0.97, F1-score = 0.97, Kappa = 0.95
-      \end{itemize}
-    \item \textbf{Análise:} Todos os modelos apresentaram desempenho excelente, com destaque para Random Forest e SVM.
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+    \begin{tabular}{lccc}
+      \toprule
+      \textbf{Modelo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
+      \midrule
+      Random Forest & 0.97 & 0.97 & 0.95 \\
+      SVM & 0.97 & 0.97 & 0.95 \\
+      Logistic Regression & 0.97 & 0.97 & 0.95 \\
+      MLPClassifier & 0.96 & 0.96 & 0.94 \\
+      \bottomrule
+    \end{tabular}
+    \vspace{0.5em}
+  \end{center}
+  \textbf{Análise:} Todos os modelos apresentaram desempenho excelente, com destaque para Random Forest e SVM.
 \end{frame}
 
 % --- Slide: Iris - Classificação (Matrizes de Confusão) ---
@@ -484,15 +497,22 @@
 \begin{frame}{Iris: Classificação (Com Balanceamento) - Resultados}
   \begin{itemize}
     \item \textbf{Modelos avaliados:} Logistic Regression, Random Forest Classifier, MLPClassifier, SVM
-    \item \textbf{Resultados após balanceamento:}
-      \begin{itemize}
-        \item \textbf{Logistic Regression:} Acurácia = 0.97, F1-score = 0.97, Kappa = 0.95
-        \item \textbf{Random Forest:} Acurácia = 0.97, F1-score = 0.97, Kappa = 0.95
-        \item \textbf{MLPClassifier:} Acurácia = 0.96, F1-score = 0.96, Kappa = 0.94
-        \item \textbf{SVM:} Acurácia = 0.97, F1-score = 0.97, Kappa = 0.95
-      \end{itemize}
-    \item \textbf{Análise:} O balanceamento manteve o excelente desempenho dos modelos, com todos apresentando alta acurácia e F1-score.
   \end{itemize}
+  \vspace{0.5em}
+  \begin{center}
+    \begin{tabular}{lccc}
+      \toprule
+      \textbf{Modelo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
+      \midrule
+      Random Forest & 0.97 & 0.97 & 0.95 \\
+      SVM & 0.97 & 0.97 & 0.95 \\
+      Logistic Regression & 0.97 & 0.97 & 0.95 \\
+      MLPClassifier & 0.96 & 0.96 & 0.94 \\
+      \bottomrule
+    \end{tabular}
+    \vspace{0.5em}
+  \end{center}
+  \textbf{Análise:} O balanceamento manteve o excelente desempenho dos modelos, com todos apresentando alta acurácia e F1-score.
 \end{frame}
 
 % --- Slide: Iris - Classificação (Balanceado) (Matrizes de Confusão) ---
@@ -527,18 +547,18 @@
     \toprule
     \textbf{Dataset} & \textbf{Algoritmo} & \textbf{RMSE} & \textbf{MAE} & $\mathbf{R^2}$ \\
     \midrule
-    Energy (Y1) & Linear Regression & 2.9708 & 2.1091 & 0.9128 \\
     Energy (Y1) & Random Forest & 0.5187 & 0.3462 & 0.9973 \\
     Energy (Y1) & MLP & 2.6125 & 1.8421 & 0.9324 \\
     Energy (Y1) & SVR & 2.8290 & 1.9028 & 0.9210 \\
-    Energy (Y2) & Linear Regression & 3.2059 & 2.2713 & 0.8849 \\
+    Energy (Y1) & Linear Regression & 2.9708 & 2.1091 & 0.9128 \\
     Energy (Y2) & Random Forest & 1.7285 & 1.0459 & 0.9664 \\
     Energy (Y2) & MLP & 3.0091 & 2.1409 & 0.8985 \\
     Energy (Y2) & SVR & 3.1696 & 2.1104 & 0.8875 \\
-    California & Linear Regression & 0.7361 & 0.5327 & 0.5918 \\
+    Energy (Y2) & Linear Regression & 3.2059 & 2.2713 & 0.8849 \\
     California & Random Forest & 0.5062 & 0.3309 & 0.8075 \\
     California & MLP & 0.5447 & 0.3728 & 0.7771 \\
     California & SVR & 0.5925 & 0.3955 & 0.7363 \\
+    California & Linear Regression & 0.7361 & 0.5327 & 0.5918 \\
     \bottomrule
   \end{tabular}
 \end{frame}
@@ -564,14 +584,14 @@
     \toprule
     \textbf{Dataset} & \textbf{Algoritmo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
     \midrule
-    Wine & Logistic Regression & 0.5893 & 0.5544 & 0.3096 \\
     Wine & Random Forest & 0.6948 & 0.6769 & 0.5014 \\
     Wine & MLP & 0.6139 & 0.5950 & 0.3676 \\
     Wine & SVM & 0.6088 & 0.5805 & 0.3452 \\
-    Iris & Logistic Regression & 0.9189 & 0.9188 & 0.8761 \\
-    Iris & Random Forest & 0.9500 & 0.9497 & 0.9230 \\
+    Wine & Logistic Regression & 0.5893 & 0.5544 & 0.3096 \\
     Iris & MLP & 0.9522 & 0.9521 & 0.9256 \\
     Iris & SVM & 0.9522 & 0.9521 & 0.9265 \\
+    Iris & Random Forest & 0.9500 & 0.9497 & 0.9230 \\
+    Iris & Logistic Regression & 0.9189 & 0.9188 & 0.8761 \\
     \bottomrule
   \end{tabular}
 \end{frame}
@@ -587,14 +607,14 @@
     \toprule
     \textbf{Dataset} & \textbf{Algoritmo} & \textbf{Acurácia} & \textbf{F1-score} & \textbf{Kappa} \\
     \midrule
-    Wine & Logistic Regression & 0.5167 & 0.5045 & 0.4201 \\
     Wine & Random Forest & 0.9478 & 0.9473 & 0.9374 \\
     Wine & MLP & 0.7583 & 0.7507 & 0.7098 \\
+    Wine & Logistic Regression & 0.5167 & 0.5045 & 0.4201 \\
     Wine & SVM & 0.6088 & 0.5805 & 0.3452 \\
-    Iris & Logistic Regression & 0.9189 & 0.9188 & 0.8761 \\
-    Iris & Random Forest & 0.9456 & 0.9454 & 0.9161 \\
     Iris & MLP & 0.9544 & 0.9543 & 0.9294 \\
     Iris & SVM & 0.9522 & 0.9521 & 0.9265 \\
+    Iris & Random Forest & 0.9456 & 0.9454 & 0.9161 \\
+    Iris & Logistic Regression & 0.9189 & 0.9188 & 0.8761 \\
     \bottomrule
   \end{tabular}
 \end{frame}
@@ -619,11 +639,24 @@
 
 % --- Slide: Encerramento ---
 \begin{frame}[standout]
-  \vspace{2em}
-  \Huge\textbf{Obrigado!}
   \vspace{1em}
-
-  \Large Perguntas?
+  \begin{center}
+    \Huge\textbf{Obrigado!}\\[1em]
+    \Large Perguntas?\\[2em]
+    \begin{minipage}[b]{0.35\textwidth}
+      \centering
+      \vspace{-1em}
+      \includegraphics[height=3.2cm]{../img/qrcodeportifolio.png}\\[-0.2em]
+      {\footnotesize \href{https://leoproti.com.br}{\texttt{leoproti.com.br}}}
+    \end{minipage}
+    \hspace{2cm}
+    \begin{minipage}[b]{0.35\textwidth}
+      \centering
+      \vspace{-1em}
+      \includegraphics[height=3.2cm]{../img/qrdocegit.png}\\[-0.2em]
+      {\footnotesize \href{https://github.com/LeonardoVieiraGuimaraes}{\texttt{github.com/LeonardoVieiraGuimaraes}}}
+    \end{minipage}
+  \end{center}
 \end{frame}
 
 \end{document}
